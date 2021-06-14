@@ -1,8 +1,9 @@
 # FS-App-Template
 
-tyring to create a branch..
+trying to create a branch..
 
 ## Setup
+
 ## Setup now
 
 To use this as boilerplate, you'll need to take the following steps:
