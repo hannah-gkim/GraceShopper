@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
 import AllProducts from "./components/AllProducts";
+import CheckoutCart from "./components/CheckoutCart";
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/checkout-cart" component={CheckoutCart} />
           </Switch>
         )}
       </div>
