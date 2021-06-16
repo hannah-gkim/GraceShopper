@@ -23,6 +23,17 @@ async function seed() {
     }),
   ]);
 
+
+  // Creating Products
+  // const users = await Promise.all([
+  //   User.create({ name: "cody", descripton: "123", email: "cody@gmail.com" }),
+  //   User.create({
+  //     username: "murphy",
+  //     password: "123",
+  //     email: "murphy@gmail.com",
+  //   }),
+  // ]);
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
   return {
