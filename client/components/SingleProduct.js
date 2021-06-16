@@ -3,32 +3,37 @@ import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
 
 class SingleProduct extends Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    // this.props.loadProduct(this.props.match.params.id);
-  }
-  render() {
-    // const product = this.props.product;
-    return (
-      <div>
-        <h1>Single Product Page</h1>
-      </div>
-    );
-  }
+    // constructor() {
+    //     super();
+    // }
+    componentDidMount() {
+        this.props.loadProduct(this.props.match.params.id);
+    }
+    // componentWillUnmount() {
+    //     this.props.student.id = undefined;
+    // }
+    render() {
+        const product = this.props.product || {};
+        console.log(this.props.product);
+        return (
+            <div>
+                <h1>Single Product Page</h1>
+                <h3>name: {product.name}</h3>
+            </div>
+        );
+    }
 }
 
-const mapState = (state) => {
-  return {
-    product: state.product,
-  };
+const mapState = ({ product }) => {
+    return { product };
 };
 
 const mapDispatch = (dispatch) => {
-  loadProduct: (id) => {
-    dispatch(fetchSingleProduct(id));
-  };
+    return {
+        loadProduct: (id) => {
+            dispatch(fetchSingleProduct(id));
+        },
+    };
 };
 
 export default connect(mapState, mapDispatch)(SingleProduct);

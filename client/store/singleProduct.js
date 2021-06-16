@@ -23,7 +23,8 @@ export const fetchSingleProduct = (id) => {
 
 //reducer
 const initialState = {};
-export default function singleProductReducer(state = initialState, action) {
+
+export default function singleProduct(state = initialState, action) {
     switch (action.type) {
         case GET_SINGLE_PRODUCT:
             return action.product;
