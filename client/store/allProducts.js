@@ -1,12 +1,12 @@
 import axios from "axios";
 
 //ACTION NAME
-const GET_PRODUCTS = "GET_PRODUCTS";
+const GOT_PRODUCTS = "GOT_PRODUCTS";
 
 //ACTION CREATORS
-const _getProducts = (products) => {
+const gotProducts = (products) => {
   return {
-    type: GET_PRODUCTS,
+    type: GOT_PRODUCTS,
     products,
   };
 };
@@ -16,20 +16,21 @@ export const getProducts = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("/api/products");
-      dispatch(_getProducts(data));
+      console.log("this is the data --->", data);
+      dispatch(gotProducts(data));
     } catch (error) {
       // return error
     }
   };
 };
 
+const intialState = [];
 //REDUCER
-export default (state = [], action) => {
+export default function allProductsReducer(state = intialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS:
-      return [...state, action.products];
-
+    case GOT_PRODUCTS:
+      return action.products;
     default:
       return state;
   }
-};
+}

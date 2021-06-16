@@ -1,32 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import { getProducts } from "../store/allProducts";
 
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products: [] };
+    // this.state = { products: [] };
   }
 
   componentDidMount() {
-    this.props.getProducts();
+    this.props.loadAllProducts();
   }
 
-  componentDidUpdate(prevProps) {
-    //conditions
-    if (prevProps !== this.props) {
-      this.setState(this.props);
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   //conditions
+  //   if (prevProps !== this.props) {
+  //     this.setState(this.props);
+  //   }
+  // }
   render() {
-    const { products } = this.state;
-
+    console.log(this.props);
+    const { products } = this.props;
     return (
       <div>
         <ul>
           {products
             ? products.map((product) => {
-                return <li> product.name</li>;
+                return <li key={product.id}> {product.name}</li>;
               })
             : "no products"}
         </ul>
@@ -43,9 +43,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getProducts: () => {
-      getProducts();
-    },
+    loadAllProducts: () => dispatch(getProducts()),
   };
 };
 
