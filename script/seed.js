@@ -1,10 +1,10 @@
 "use strict";
 const products = require("./ProductsSeed");
-const users = require("./UserSeed");
+const Product = require("../server/db/models/product");
 
 const {
     db,
-    models: { User, Product },
+    models: { User },
 } = require("../server/db");
 
 /**
@@ -22,32 +22,18 @@ async function seed() {
         })
     );
 
-    //TODO: Assign a cart to a user
-    await Promise.all(
-        users.map((user) => {
-            const newUser = User.create(user);
-            return newUser;
-        })
-        // users.map((user) => {
-        //     Cart.createCart({
-        //         total: 0,
-        //         userId: user.userId,
-        //     });
-        // })
-    );
-
-    // const users = await Promise.all([
-    //     User.create({
-    //         username: "cody",
-    //         password: "123",
-    //         email: "cody@gmail.com",
-    //     }),
-    //     User.create({
-    //         username: "murphy",
-    //         password: "123",
-    //         email: "murphy@gmail.com",
-    //     }),
-    // ]);
+    const users = await Promise.all([
+        User.create({
+            username: "cody",
+            password: "123",
+            email: "cody@gmail.com",
+        }),
+        User.create({
+            username: "murphy",
+            password: "123",
+            email: "murphy@gmail.com",
+        }),
+    ]);
 
     console.log(`seeded ${users.length} users`);
     console.log(`seeded successfully`);
