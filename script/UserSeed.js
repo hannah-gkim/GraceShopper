@@ -1,15 +1,16 @@
-// var faker = require('faker');
-// const products = [];
+var faker = require("faker");
+const users = [];
 
 // // name, description, price, quantity, imageUrl
-// for (let i = 0; i < 200; i++) {
-//     let newProduct = {
-//         name: faker.commerce.productName(),
-//         description: faker.commerce.productDescription(),
-//         price: faker.commerce.price(),
-//         quantity: Math.random(0, 1) * 200,
-//         imageUrl: faker.image.food(),
-//     };
-//     products.push(newProduct);
-// }
-// module.exports = products;
+for (let i = 0; i < 50; i++) {
+    let newUser = {
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        //TODO: Give everyone a faker password
+        // password: faker.internet.password(),
+        password: "123",
+    };
+    users.push(newUser);
+}
+
+module.exports = users;
