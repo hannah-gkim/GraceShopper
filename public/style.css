@@ -19,3 +19,47 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* CheckoutCart style */
+.title {
+  text-align: left;
+}
+
+.checkout-div {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border: solid yellow;
+}
+
+.checkout-items-box {
+  border: solid cyan;
+  width: 65%;
+  height: auto;
+}
+
+.checkout-box {
+  border: solid blue;
+  width: 25%;
+}
+
+.singeitem-image {
+  border: solid pink;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.singeitem-image img {
+  width: 100px;
+  height: auto;
+
+  display: flex;
+}
+
+.detail {
+  border: solid pink;
+}
+
+.somebox {
+  border: solid green;
+}
