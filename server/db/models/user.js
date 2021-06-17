@@ -24,6 +24,7 @@ const User = db.define("user", {
             notEmpty: true,
         },
     },
+    //admin property
     isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: "false",
