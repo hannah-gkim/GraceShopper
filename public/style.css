@@ -34,13 +34,13 @@ form div {
 
 .checkout-items-box {
   border: solid cyan;
-  width: 73%;
+  width: 50%%;
   height: auto;
 }
 
 .checkout-box {
   border: solid blue;
-  width: 25%;
+  width: 50%;
 }
 
 .singeitem-image {
