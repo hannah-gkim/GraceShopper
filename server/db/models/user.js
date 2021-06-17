@@ -81,12 +81,12 @@ const hashPassword = async (user) => {
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
-User.afterCreate(
-  /*
-  TODO Create a cart for every new user
-  Order.create({
-    userId,
-    total:0
-  })
-  */
-)
+// User.afterCreate(
+//   /*
+//   TODO Create a cart for every new user
+//   Order.create({
+//     userId,
+//     total:0
+//   })
+//   */
+// )
