@@ -34,7 +34,7 @@ form div {
 
 .checkout-items-box {
   border: solid cyan;
-  width: 65%;
+  width: 73%;
   height: auto;
 }
 
@@ -44,7 +44,8 @@ form div {
 }
 
 .singeitem-image {
-  border: solid pink;
+  border: solid red;
+  justify-content: space-around;
   display: flex;
   flex-wrap: wrap;
 }
@@ -58,8 +59,4 @@ form div {
 
 .detail {
   border: solid pink;
-}
-
-.somebox {
-  border: solid green;
 }

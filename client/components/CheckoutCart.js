@@ -9,13 +9,12 @@ class CheckoutCart extends Component {
         <box className="checkout-div">
           <div className="checkout-items-box">
             <h1 className="title">Shopping Cart</h1>
-            <div className="somebox">
-              <div className="singeitem-image">
-                <img src="https://blog.williams-sonoma.com/wp-content/uploads/2018/06/jun-23-Vanilla-Ombre-Layer-Cake.jpg" />
-                <div className="detail">
-                  <h2>name</h2>
-                  <h2>price</h2>
-                </div>
+
+            <div className="singeitem-image">
+              <img src="https://blog.williams-sonoma.com/wp-content/uploads/2018/06/jun-23-Vanilla-Ombre-Layer-Cake.jpg" />
+              <div className="detail">
+                <h2>name</h2>
+                <h2>price</h2>
               </div>
             </div>
 
