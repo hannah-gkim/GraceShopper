@@ -5,7 +5,7 @@ const users = require("./UserSeed");
 // const Product = require("../server/db/models/product");
 const {
     db,
-    models: { User, Product },
+    models: { User, Product, Order },
 } = require("../server/db");
 
 /**
@@ -23,8 +23,22 @@ async function seed() {
         })
     );
     await Promise.all(
-        users.map((user) => {
-            const newUser = User.create(user);
+        users.map(async (user) => {
+            const newUser = await User.create(user);
+            // console.log(newUser.id);
+            const order = await Order.create({ userId: newUser.id });
+            // for(let i = 0; i < 5; i++){
+            //   const rand = Math.round(Math.random(0,1))
+            //   if(rand){
+            //     const productId = Math.floor(Math.random(0,50));
+            //     // await order.addCartItem({
+            //     //   productId: productId,
+            //     //   orderId: order.id,
+            //     //   quantity: Math.floor(Math.random(1,4))
+
+            //     // })
+              // }
+            // }
             return newUser;
         })
         // users.map((user) => {
