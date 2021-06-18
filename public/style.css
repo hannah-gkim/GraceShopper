@@ -19,3 +19,52 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* CheckoutCart style */
+.title {
+  text-align: left;
+}
+.checkout-div {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* border: solid yellow; */
+}
+.checkout-items-box {
+  /* border: solid cyan; */
+  /* flex-grow: 2; */
+  min-width: 70%;
+  /* width: 50%%;
+  height: auto; */
+}
+.checkout-box {
+  /* border: solid blue; */
+  min-width: 25%;
+  /* flex-grow: 1; */
+  /* width: 50%; */
+}
+.singeitem-div {
+  /* border: solid red; */
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+}
+.singeitem-div img {
+  width: 100px;
+  height: auto;
+  display: flex;
+}
+.detail {
+  /* border: solid pink; */
+  min-width: 50%;
+}
+.addorremove {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkout {
+  display: flex;
+  justify-content: center;
+  min-width: 70%;
+}
