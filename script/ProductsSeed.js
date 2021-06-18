@@ -7,7 +7,7 @@ for (let i = 0; i < 50; i++) {
     let newProduct = {
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
-        price: faker.commerce.price(),
+        price: Math.floor(faker.commerce.price()*100),
         quantity: Math.floor(Math.random(0, 200) * 200),
         imageUrl: faker.image.food(),
     };
