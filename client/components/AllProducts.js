@@ -40,7 +40,7 @@ class AllProducts extends React.Component {
                       height="auto"
                     />
                     <h4>{product.description} </h4>
-                    <h4>{product.price} </h4>
+                    <h4>${product.price} </h4>
                   </div>
                 );
               })

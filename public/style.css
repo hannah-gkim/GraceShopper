@@ -31,6 +31,7 @@ form div {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  width: 400px;
   margin: 2rem;
 }
 
