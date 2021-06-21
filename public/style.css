@@ -19,3 +19,20 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: inherit;
+}
+
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.product-desctiption {
+}
