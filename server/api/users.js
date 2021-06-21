@@ -8,7 +8,7 @@ module.exports = router;
 router.get("/", requireToken, async (req, res, next) => {
     try {
         //TODO Only show all users IF req.user is an admin
-        console.log(req.user.isAdmin);
+        // console.log("am i an admin?", req.user.isAdmin);
         if (req.user.isAdmin) {
             const users = await User.findAll({
                 // explicitly select only the id and username fields - even though
@@ -31,14 +31,14 @@ router.get("/:id", async (req, res, next) => {});
 router.get("/:id/viewCart", requireToken, async (req, res, next) => {
     const { id } = req.params;
     try {
-        console.log("req.user.id", typeof req.user.id);
-        console.log("/:id", typeof id);
+        console.log("req.user.id", req.user.id);
+        console.log("/:id", id);
 
         if (req.user.id == id) {
             const order = await Order.findAll({
                 where: {
                     userId: id,
-                    isFulfilled: false,
+                    isFulfilled: true,
                 },
             });
             console.log(order);
