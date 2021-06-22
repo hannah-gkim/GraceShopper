@@ -24,6 +24,11 @@ const User = db.define("user", {
             notEmpty: true,
         },
     },
+    //admin property
+    isAdmin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: "false",
+    },
 });
 
 module.exports = User;
@@ -39,10 +44,10 @@ User.prototype.correctPassword = function (candidatePwd) {
 User.prototype.generateToken = function () {
     return jwt.sign({ id: this.id }, process.env.JWT);
 };
+
 /**
  * classMethods
  */
-
 User.authenticate = async function ({ username, password }) {
     const user = await this.findOne({ where: { username } });
     if (!user || !(await user.correctPassword(password))) {
@@ -56,6 +61,12 @@ User.authenticate = async function ({ username, password }) {
 User.findByToken = async function (token) {
     try {
         const { id } = await jwt.verify(token, process.env.JWT);
+        // const user = User.findAll({
+        //   where:{
+        //     id:id
+        //   },
+        //   attributes:["id", "username", "isAdmin"]
+        // })
         const user = User.findByPk(id);
         if (!user) {
             throw "nooo";
@@ -81,12 +92,3 @@ const hashPassword = async (user) => {
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
-// User.afterCreate(
-//   /*
-//   TODO Create a cart for every new user
-//   Order.create({
-//     userId,
-//     total:0
-//   })
-//   */
-// )
