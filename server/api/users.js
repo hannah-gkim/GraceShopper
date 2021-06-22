@@ -56,18 +56,19 @@ router.get("/:id", async (req, res, next) => {});
 router.get("/:id/viewCart", requireToken, async (req, res, next) => {
     const { id } = req.params;
     try {
-        console.log("req.user.id", req.user.id);
-        console.log("/:id", id);
-
         if (req.user.id == id) {
-            const order = await Order.findAll({
+            const order = await Order.findOne({
                 where: {
                     userId: id,
-                    isFulfilled: true,
+                    isFulfilled: false,
                 },
             });
-            console.log(order);
-            res.json(order);
+            const items = await CartItem.findAll({
+                where: {
+                    orderId: order.id,
+                },
+            });
+            res.json(items);
         } else {
             res.json("incorrect id");
         }
