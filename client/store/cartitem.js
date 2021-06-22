@@ -17,6 +17,7 @@ export const getNewCartItem = (userId, newCartItem) => {
     return async (dispatch) => {
         try {
             const {data} = await axios.post(`/api/users/${userId}/cart`, newCartItem)
+            console.log('redux store')
             dispatch(gotNewCartItem(data))
         } catch (error) {
             console.log(error)

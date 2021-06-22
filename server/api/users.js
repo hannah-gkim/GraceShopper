@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, CartItem, Order },
+  models: { User, CartItem, Order, Product },
 } = require("../db");
 
 const { requireToken } = require("./gatekeepingMiddleware");
@@ -10,30 +10,34 @@ module.exports = router;
 router.post("/:id/cart", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const prodcut = Product.findOne({
-      //??
-    });
+    //const product=?
+    
     const user = await User.findByPk(id);
     let order = await Order.findAll({
       where: { userId: id, isFulfilled: false },
     });
+
+    const product = await Product.findOne({
+      where: {
+        id: req.body.cartitem
+      }
+    })
     // console.log("got the order-->", order);
     // console.log("got orderId-->", order[0].id);
     // console.log("got order.isFulfilled", order[0].isFulfilled);
     //TODO: still need to figure out adding product detail
     const cartItem = await CartItem.create({
-      quantity: 1, //TODO need to fix this
-      pastPrice: product.price,
-      currentPrice: product.price,
+      quantity: product.quantity,
+      pastPrice: product.pastPrice,
+      currentPrice: product.currentPrice,
       orderId: order[0].id,
-      productId: product.id,
+      productId: product.id
     });
     res.status(200).json(cartItem);
   } catch (error) {
     next(error);
   }
 });
-
 router.get("/", requireToken, async (req, res, next) => {
   try {
     //TODO Only show all users IF req.user is an admin

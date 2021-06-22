@@ -18,10 +18,10 @@ class SingleProduct extends Component {
     const quantity = this.props.singleProduct.quantity;
     // does cartitem need product id only or more?
     const cartitem = this.props.match.params.id; //productID
-    // console.log("this.props--->", this.props);
+    const userId = this.props.user.id
     console.log(
-      "window.localStorate--->",
-      window.localStorage.getItem("token")
+      "this is the user ID",
+      this.props.user.id
     );
 
     return (
@@ -49,8 +49,8 @@ class SingleProduct extends Component {
   }
 }
 
-const mapState = ({ singleProduct }) => {
-  return { singleProduct,  state.auth.id };
+const mapState = (state) => {
+  return { singleProduct: state.singleProduct, user: state.auth };
 };
 
 const mapDispatch = (dispatch) => {
