@@ -31,22 +31,34 @@ class CheckoutCart extends Component {
 
                         {cart.length
                             ? cart.map((item) => {
+                                  console.log(item);
                                   return (
-                                      <div className="singeitem-div">
-                                          <img src="https://blog.williams-sonoma.com/wp-content/uploads/2018/06/jun-23-Vanilla-Ombre-Layer-Cake.jpg" />
-                                          <div className="detail">
-                                              <h2>name</h2>
-                                              <h2>price</h2>
+                                      <div key={item.productId}>
+                                          <div className="singeitem-div">
+                                              <img src="https://blog.williams-sonoma.com/wp-content/uploads/2018/06/jun-23-Vanilla-Ombre-Layer-Cake.jpg" />
+                                              <div className="detail">
+                                                  <h2>name</h2>
+                                                  <h2>price</h2>
+                                              </div>
+                                              <div className="addorremove">
+                                                  <select value="" onChange="">
+                                                      <option value="">
+                                                          1
+                                                      </option>
+                                                      <option value="">
+                                                          2
+                                                      </option>
+                                                      <option value="">
+                                                          3
+                                                      </option>
+                                                      <option value="">
+                                                          4
+                                                      </option>
+                                                  </select>
+                                                  <button>delete</button>
+                                              </div>
                                           </div>
-                                          <div className="addorremove">
-                                              <select value="" onChange="">
-                                                  <option value="">1</option>
-                                                  <option value="">2</option>
-                                                  <option value="">3</option>
-                                                  <option value="">4</option>
-                                              </select>
-                                              <button>delete</button>
-                                          </div>
+                                          <br />
                                       </div>
                                   );
                               })
