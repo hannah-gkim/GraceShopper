@@ -53,9 +53,42 @@ router.get("/", requireToken, async (req, res, next) => {
 //Show User Profile
 router.get("/:id", async (req, res, next) => {});
 
-router.get("/:id/viewCart", requireToken, async (req, res, next) => {
-    const { id } = req.params;
+router.delete("/:id/:productId", requireToken, async(req,res,next)=>{
+  try {
+
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put("/:id/viewCart", requireToken, async (req, res, next) => {
     try {
+        const { id } = req.params;
+        if (req.user.id == id) {
+            console.log(req.body);
+            await CartItem.update(
+                {
+                    currentPrice: req.body.currentPrice,
+                    quantity: req.body.quantity,
+                    pastPrice: req.body.pastPrice,
+                },
+                {
+                    where: {
+                        orderId: req.body.orderId,
+                        productId: req.body.productId,
+                    },
+                }
+            );
+            res.sendStatus(200);
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get("/:id/viewCart", requireToken, async (req, res, next) => {
+    try {
+        const { id } = req.params;
         if (req.user.id == id) {
             const order = await Order.findOne({
                 where: {
