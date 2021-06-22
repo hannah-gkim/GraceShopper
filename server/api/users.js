@@ -38,7 +38,7 @@ router.get("/:id/viewCart", requireToken, async (req, res, next) => {
             const order = await Order.findAll({
                 where: {
                     userId: id,
-                    isFulfilled: true,
+                    isFulfilled: false,
                 },
             });
             console.log(order);
