@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
+import { getNewCartItem } from "../store/cartitem";
 
 class SingleProduct extends Component {
-  // constructor() {
-  //     super();
-  // }
+  constructor() {
+      super();
+  }
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.id);
   }
@@ -15,6 +16,8 @@ class SingleProduct extends Component {
   render() {
     const product = this.props.singleProduct || {};
     const quantity = this.props.singleProduct.quantity;
+    // does cartitem need product id only or more?
+    const cartitem = this.props.match.params.id
 
     return (
       <div>
@@ -30,7 +33,7 @@ class SingleProduct extends Component {
           <option value="">3</option>
           <option value="">4</option>
         </select>
-        <button>add to cart</button>
+        <button type="button" onClick={()=> this.props.createCartItem(userId, cartitem)}>add to cart</button>
       </div>
     );
   }
@@ -45,6 +48,7 @@ const mapDispatch = (dispatch) => {
     loadProduct: (id) => {
       dispatch(fetchSingleProduct(id));
     },
+    createCartItem: (userId, cartitem) => {dispatch(getNewCartItem(userId, cartitem))}
   };
 };
 
