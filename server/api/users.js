@@ -49,25 +49,66 @@ router.get("/", requireToken, async (req, res, next) => {
         next(err);
     }
 });
-
-//Show User Profile
-router.get("/:id", async (req, res, next) => {});
-
-router.get("/:id/viewCart", requireToken, async (req, res, next) => {
-    const { id } = req.params;
+//TODO: Proctect against user error
+router.delete("/:id/viewCart", requireToken, async (req, res, next) => {
+    console.log(req.body);
     try {
-        console.log("req.user.id", req.user.id);
-        console.log("/:id", id);
-
-        if (req.user.id == id) {
-            const order = await Order.findAll({
+        if (req.user.id == req.params.id) {
+            await CartItem.destroy({
                 where: {
-                    userId: id,
-                    isFulfilled: true,
+                    orderId: req.body.orderId,
+                    productId: req.body.productId,
                 },
             });
-            console.log(order);
-            res.json(order);
+            res.json("hello");
+        }
+        res.json("world");
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.put("/:id/viewCart", requireToken, async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        if (req.user.id == id) {
+            console.log(req.body);
+            await CartItem.update(
+                {
+                    currentPrice: req.body.currentPrice,
+                    quantity: req.body.quantity,
+                    pastPrice: req.body.pastPrice,
+                },
+                {
+                    where: {
+                        orderId: req.body.orderId,
+                        productId: req.body.productId,
+                    },
+                }
+            );
+            res.sendStatus(200);
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get("/:id/viewCart", requireToken, async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        if (req.user.id == id) {
+            const order = await Order.findOne({
+                where: {
+                    userId: id,
+                    isFulfilled: false,
+                },
+            });
+            const items = await CartItem.findAll({
+                where: {
+                    orderId: order.id,
+                },
+            });
+            res.json(items);
         } else {
             res.json("incorrect id");
         }
