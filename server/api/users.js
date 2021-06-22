@@ -31,6 +31,7 @@ router.post("/:id/cart", async (req, res, next) => {
     console.log("got orderId-->", order[0].id);
     console.log("got order.isFulfilled", order[0].isFulfilled);
 
+    //TODO: still need to figure out adding product detail
     if (order[0].isFulfilled === false) {
       const cartItem = await CartItem.create({
         quantity: 1,
