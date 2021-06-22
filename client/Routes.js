@@ -32,7 +32,7 @@ class Routes extends Component {
                         <Route exact path="/products" component={AllProducts} />
                         <Route
                             exact
-                            path="/viewCart/:id"
+                            path="/viewCart"
                             component={CheckoutCart}
                         />
                         <Redirect to="/home" />

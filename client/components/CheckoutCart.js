@@ -9,7 +9,8 @@ class CheckoutCart extends Component {
     }
 
     componentDidMount() {
-        this.props.loadCart(this.props.match.params.id);
+        // this.props.loadCart(this.props.match.params.id);
+        this.props.loadCart(this.props.userId);
     }
 
     componentDidUpdate(prevProps) {
@@ -93,6 +94,7 @@ const mapDispatch = (dispatch) => {
 
 const mapState = (state) => {
     return {
+        userId: state.auth.id,
         cart: state.cart,
     };
 };
