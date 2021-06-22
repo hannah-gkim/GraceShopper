@@ -29,7 +29,7 @@ class CheckoutCart extends Component {
                         <h1 className="title">Shopping Cart</h1>
                         <hr />
 
-                        {!cart.length
+                        {cart.length
                             ? cart.map((item) => {
                                   return (
                                       <div className="singeitem-div">

@@ -96,7 +96,6 @@ router.put("/:id/viewCart", requireToken, async (req, res, next) => {
 router.get("/:id/viewCart", requireToken, async (req, res, next) => {
     try {
         const { id } = req.params;
-        console.log(id);
         if (req.user.id == id) {
             const order = await Order.findOne({
                 where: {

@@ -6,6 +6,7 @@ const requireToken = async (req, res, next) => {
         // if (token == localStorage.getItem("token")) {
         //     console.log("correct token");
         // }
+        console.log(token);
         const user = await User.findByToken(token);
         req.user = user;
         // console.log(user);

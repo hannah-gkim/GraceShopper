@@ -14,8 +14,13 @@ const gotCart = (cart) => {
 //THUNK ACTIONS
 export const getCart = (id) => {
     return async (dispatch) => {
+        const token = window.localStorage.getItem("token");
         try {
-            const { data } = await axios.get(`/api/users/${id}/viewCart`);
+            const { data } = await axios.get(`/api/users/${id}/viewCart`, {
+                headers: {
+                    authorization: token,
+                },
+            });
             console.log("this is the data --->", data);
             dispatch(gotCart(data));
         } catch (error) {
