@@ -24,9 +24,8 @@ class AllProducts extends React.Component {
         this.props.deleteUser(event.target.value);
         this.setState(this.props);
       }
-      
+
     render() {
-        console.log(this.props);
         const { products } = this.props;
         return (
             <div>
