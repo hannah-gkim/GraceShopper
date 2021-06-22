@@ -7,11 +7,13 @@ import auth from "./auth";
 //import reducers
 import singleProduct from "./singleProduct";
 import allProductsReducer from "./allProducts";
+import cartReducer from "./cart";
 
 const reducer = combineReducers({
   auth,
   singleProduct: singleProduct,
   products: allProductsReducer,
+  cart: cartReducer
 });
 
 const middleware = composeWithDevTools(
