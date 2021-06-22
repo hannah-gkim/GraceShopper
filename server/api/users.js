@@ -8,28 +8,28 @@ module.exports = router;
 
 //api/users/:id/cart
 router.post("/:id/cart", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findByPk(id);
-    let order = await Order.findAll({
-      where: { userId: id, isFulfilled: false },
-    });
-    // console.log("got the order-->", order);
-    // console.log("got orderId-->", order[0].id);
-    // console.log("got order.isFulfilled", order[0].isFulfilled);
-    //TODO: still need to figure out adding product detail
-    const cartItem = await CartItem.create({
-      quantity: 1,
-      pastPrice: 300,
-      currentPrice: 300,
-      orderId: order[0].id,
-      productId: 2,
-    });
-    res.status(200).json(cartItem);
-  } catch (error) {
-    next(error);
-  }
-
+    try {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
+        let order = await Order.findAll({
+            where: { userId: id, isFulfilled: false },
+        });
+        // console.log("got the order-->", order);
+        // console.log("got orderId-->", order[0].id);
+        // console.log("got order.isFulfilled", order[0].isFulfilled);
+        //TODO: still need to figure out adding product detail
+        const cartItem = await CartItem.create({
+            quantity: 1,
+            pastPrice: 300,
+            currentPrice: 300,
+            orderId: order[0].id,
+            productId: 2,
+        });
+        res.status(200).json(cartItem);
+    } catch (error) {
+        next(error);
+    }
+});
 router.get("/", requireToken, async (req, res, next) => {
     try {
         //TODO Only show all users IF req.user is an admin
