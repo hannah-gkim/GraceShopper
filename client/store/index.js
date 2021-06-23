@@ -8,12 +8,14 @@ import auth from "./auth";
 import singleProduct from "./singleProduct";
 import allProductsReducer from "./allProducts";
 import cartitemReducer from "./cartitem";
+import cartReducer from "./cart";
 
 const reducer = combineReducers({
   auth,
   singleProduct: singleProduct,
   products: allProductsReducer,
-  cartitem: cartitemReducer
+  cartitem: cartitemReducer,
+  cart: cartReducer
 });
 
 const middleware = composeWithDevTools(
