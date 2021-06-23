@@ -3,6 +3,7 @@ const {
   models: { Product, CartItem, User },
 } = require("../db");
 module.exports = router;
+const { requireToken } = require("./gatekeepingMiddleware");
 
 // GET /products
 router.get("/", async (req, res, next) => {
@@ -22,6 +23,26 @@ router.get("/:id", async (req, res, next) => {
     res.json(product);
   } catch (error) {
     next(error);
+  }
+});
+
+router.post("/", requireToken, async (req, res, next) => {
+  try {
+      //TODO Only show all users IF req.user is an admin
+      // console.log("am i an admin?", req.user.isAdmin);
+      if (req.user.isAdmin) {
+          const users = await User.findAll({
+              // explicitly select only the id and username fields - even though
+              // users' passwords are encrypted, it won't help if we just
+              // send everything to anyone who asks!
+              attributes: ["id", "username"],
+          });
+          res.json(users);
+      } else {
+          res.status(403).send("You are not an admin");
+      }
+  } catch (err) {
+      next(err);
   }
 });
 
