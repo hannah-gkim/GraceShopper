@@ -32,13 +32,14 @@ class AllProducts extends React.Component {
                   <div key={product.id} className="product">
                     <Link to={`/products/${product.id}`}>
                       <li> {product.name}</li>
+
+                      <img
+                        src={product.imageUrl}
+                        alt={product.id}
+                        width="400"
+                        height="auto"
+                      />
                     </Link>
-                    <img
-                      src={product.imageUrl}
-                      alt={product.id}
-                      width="400"
-                      height="auto"
-                    />
                     <h4>{product.description} </h4>
                     <h4>${product.price} </h4>
                   </div>
