@@ -163,3 +163,35 @@ router.get("/:id/viewCart", requireToken, async (req, res, next) => {
         next(error);
     }
 });
+
+//api/users/:id/confirmation
+router.put("/:id/confirmation", requireToken, async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      if (req.user.id == id) {
+        const order = await Order.findOne({
+          where: {
+            userId: id,
+            isFulfilled: false,
+          },
+        });
+  
+        if (order) {
+          await Order.update(
+            { isFulfilled: true },
+  
+            {
+              where: {
+                userId: id,
+                isFulfilled: false,
+              },
+            }
+          );
+          res.sendStatus(200);
+        }
+      }
+    } catch (error) {
+      next(error);
+    }
+  });
+  
