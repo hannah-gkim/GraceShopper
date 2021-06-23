@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import { getCart } from "../store/cart";
+import { getCart, removeItem } from "../store/cart";
+import { getProducts } from "../store/allProducts";
 import { connect } from "react-redux";
 
 class CheckoutCart extends Component {
     constructor(props) {
         super(props);
-        this.state = { cart: [], id: "" };
+        this.state = { items: [], id: "", products: [] };
+        this.findProduct = this.findProduct.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
-        this.props.loadCart(this.props.match.params.id);
+        // this.props.loadCart(this.props.match.params.id);
+        this.props.loadCart(this.props.userId);
+        this.props.loadAllProducts();
     }
 
     componentDidUpdate(prevProps) {
@@ -18,27 +23,73 @@ class CheckoutCart extends Component {
         }
     }
 
+    handleDelete(id, orderId, productId) {
+        //Deletes an item from the cart
+        this.props.deleteItem(id, orderId, productId);
+        //generate new array to store into state
+        const updatedItemsList = this.state.items.filter((item) => {
+            if (item.productId !== productId) {
+                return item;
+            }
+        });
+        const updatedProductsList = this.state.products.filter((product) => {
+            if (product.id !== productId) {
+                return product;
+            }
+        });
+
+        //set state
+        this.setState({
+            ...this.state,
+            items: updatedItemsList,
+            products: updatedProductsList,
+        });
+    }
+
+    findProduct(productId) {
+        const product = this.state.products.filter(
+            (item) => item.id == productId
+        )[0];
+        // console.log("hello", product);
+        return product;
+    }
+
     render() {
-        const { cart } = this.state;
+        const { items, products } = this.state;
+        const { findProduct } = this;
+        console.log("products-->", products);
+
         return (
             <div>
                 {/* need to be able to see all items, so map it! */}
 
                 <box className="checkout-div">
                     <div className="checkout-items-box">
-                        <h1 className="title">Shopping Cart</h1>
+                        <h1 className="title">Shopping items</h1>
                         <hr />
 
-                        {cart.length
-                            ? cart.map((item) => {
-                                  console.log(item);
+                        {items.length
+                            ? items.map((item) => {
+                                  let disProduct = findProduct(item.productId);
+                                  let price =
+                                      (disProduct.price * item.quantity) / 100;
+                                  var formatter = new Intl.NumberFormat(
+                                      "en-US",
+                                      {
+                                          style: "currency",
+                                          currency: "USD",
+                                      }
+                                  );
+
+                                  price =
+                                      formatter.format(price); /* $2,500.00 */
                                   return (
                                       <div key={item.productId}>
                                           <div className="singeitem-div">
-                                              <img src="https://blog.williams-sonoma.com/wp-content/uploads/2018/06/jun-23-Vanilla-Ombre-Layer-Cake.jpg" />
+                                              <img src={disProduct.imageUrl} />
                                               <div className="detail">
-                                                  <h2>name</h2>
-                                                  <h2>price</h2>
+                                                  <h2>{disProduct.name}</h2>
+                                                  <h2>{`${price}`}</h2>
                                               </div>
                                               <div className="addorremove">
                                                   <select value="" onChange="">
@@ -55,7 +106,17 @@ class CheckoutCart extends Component {
                                                           4
                                                       </option>
                                                   </select>
-                                                  <button>delete</button>
+                                                  <button
+                                                      onClick={() => {
+                                                          this.handleDelete(
+                                                              this.props.userId,
+                                                              item.orderId,
+                                                              item.productId
+                                                          );
+                                                      }}
+                                                  >
+                                                      delete
+                                                  </button>
                                               </div>
                                           </div>
                                           <br />
@@ -88,12 +149,17 @@ class CheckoutCart extends Component {
 const mapDispatch = (dispatch) => {
     return {
         loadCart: (id) => dispatch(getCart(id)),
+        loadAllProducts: () => dispatch(getProducts()),
+        deleteItem: (id, orderId, productId) =>
+            dispatch(removeItem(id, orderId, productId)),
     };
 };
 
 const mapState = (state) => {
     return {
-        cart: state.cart,
+        userId: state.auth.id,
+        items: state.cart.items,
+        products: state.cart.products,
     };
 };
 

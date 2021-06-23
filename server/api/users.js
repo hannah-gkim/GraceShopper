@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-    models: { User, CartItem, Order },
+    models: { User, CartItem, Order, Product },
 } = require("../db");
 
 const { requireToken } = require("./gatekeepingMiddleware");
@@ -51,18 +51,18 @@ router.get("/", requireToken, async (req, res, next) => {
 });
 //TODO: Proctect against user error
 router.delete("/:id/viewCart", requireToken, async (req, res, next) => {
-    console.log(req.body);
     try {
         if (req.user.id == req.params.id) {
-            await CartItem.destroy({
+            const removedItem = await CartItem.destroy({
                 where: {
                     orderId: req.body.orderId,
                     productId: req.body.productId,
                 },
             });
-            res.json("hello");
+            res.json(removedItem);
+        } else {
+            res.json("Can't delete item");
         }
-        res.json("world");
     } catch (error) {
         next(error);
     }
@@ -72,7 +72,6 @@ router.put("/:id/viewCart", requireToken, async (req, res, next) => {
     try {
         const { id } = req.params;
         if (req.user.id == id) {
-            console.log(req.body);
             await CartItem.update(
                 {
                     currentPrice: req.body.currentPrice,
@@ -102,13 +101,21 @@ router.get("/:id/viewCart", requireToken, async (req, res, next) => {
                     userId: id,
                     isFulfilled: false,
                 },
+                include: [
+                    {
+                        model: Product,
+                    },
+                ],
             });
+
             const items = await CartItem.findAll({
                 where: {
                     orderId: order.id,
                 },
             });
-            res.json(items);
+
+            const bulk = { items: items, products: order.products };
+            res.json(bulk);
         } else {
             res.json("incorrect id");
         }
