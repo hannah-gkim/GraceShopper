@@ -7,12 +7,14 @@ import auth from "./auth";
 //import reducers
 import singleProduct from "./singleProduct";
 import allProductsReducer from "./allProducts";
+import cartitemReducer from "./cartitem";
 import cartReducer from "./cart";
 
 const reducer = combineReducers({
   auth,
   singleProduct: singleProduct,
   products: allProductsReducer,
+  cartitem: cartitemReducer,
   cart: cartReducer
 });
 

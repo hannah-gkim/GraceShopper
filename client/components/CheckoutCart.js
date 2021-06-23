@@ -63,7 +63,7 @@ class CheckoutCart extends Component {
             <div>
                 {/* need to be able to see all items, so map it! */}
 
-                <box className="checkout-div">
+                <div className="checkout-div">
                     <div className="checkout-items-box">
                         <h1 className="title">Shopping items</h1>
                         <hr />
@@ -140,7 +140,7 @@ class CheckoutCart extends Component {
                             <h3>Total $100</h3>
                         </div>
                     </div>
-                </box>
+                </div>
             </div>
         );
     }
