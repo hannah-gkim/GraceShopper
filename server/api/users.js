@@ -1,61 +1,60 @@
 const router = require("express").Router();
 const {
-  models: { User, CartItem, Order, Product },
+    models: { User, CartItem, Order, Product },
 } = require("../db");
 
 const { requireToken } = require("./gatekeepingMiddleware");
 module.exports = router;
 
 //api/users/:id/cart
-router.post("/:id/cart", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    //const product=?
-    const user = await User.findByPk(id);
-    let order = await Order.findAll({
-      where: { userId: id, isFulfilled: false },
-    });
-    
-    console.log("this is req.body", req.body)
-    const product = await Product.findOne({
-      where: {
-        id: req.body.productId
-      }
-    })
-    // console.log("got the order-->", order);
-    // console.log("got orderId-->", order[0].id);
-    // console.log("got order.isFulfilled", order[0].isFulfilled);
-    //TODO: still need to figure out adding product detail
-    const cartItem = await CartItem.create({
-      quantity: req.body.quantity,
-      pastPrice: product.price,
-      currentPrice: product.price,
-      orderId: order[0].id,
-      productId: product.id
-    });
-    res.status(200).json(cartItem);
-  } catch (error) {
-    next(error);
-  }
+router.post("/:id/cart", requireToken, async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        if (req.user.id == id) {
+            const user = await User.findByPk(id);
+            let order = await Order.findAll({
+                where: { userId: id, isFulfilled: false },
+            });
+            const product = await Product.findOne({
+                where: {
+                    id: req.body.newCartItem.productId,
+                },
+            });
+            // console.log("got the order-->", order);
+            // console.log("got orderId-->", order[0].id);
+            // console.log("got order.isFulfilled", order[0].isFulfilled);
+            //TODO: still need to figure out adding product detail
+            const cartItem = await CartItem.create({
+                quantity: req.body.quantity,
+                pastPrice: product.price,
+                currentPrice: product.price,
+                orderId: order[0].id,
+                productId: product.id,
+            });
+            res.status(200).json(cartItem);
+        }
+    } catch (error) {
+        next(error);
+    }
 });
 router.get("/", requireToken, async (req, res, next) => {
-  try {
-    //TODO Only show all users IF req.user is an admin
-    // console.log("am i an admin?", req.user.isAdmin);
-    if (req.user.isAdmin) {
-      const users = await User.findAll({
-        // explicitly select only the id and username fields - even though
-        // users' passwords are encrypted, it won't help if we just
-        // send everything to anyone who asks!
-        attributes: ["id", "username"],
-      });
-      res.json(users);
-    } else {
-      res.status(403).send("You are not an admin");
+    try {
+        //TODO Only show all users IF req.user is an admin
+        // console.log("am i an admin?", req.user.isAdmin);
+        if (req.user.isAdmin) {
+            const users = await User.findAll({
+                // explicitly select only the id and username fields - even though
+                // users' passwords are encrypted, it won't help if we just
+                // send everything to anyone who asks!
+                attributes: ["id", "username"],
+            });
+            res.json(users);
+        } else {
+            res.status(403).send("You are not an admin");
+        }
+    } catch (err) {
+        next(err);
     }
-  } catch (err) {
-    next(err);
-  }
 });
 //TODO: Proctect against user error
 router.delete("/:id/viewCart", requireToken, async (req, res, next) => {

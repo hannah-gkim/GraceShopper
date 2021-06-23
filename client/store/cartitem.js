@@ -1,37 +1,63 @@
-import axios from "axios"
+import axios from "axios";
 
-//action constants 
-const GOT_NEW_CARTITEM = "GOT_NEW_CARTITEM"
+//action constants
+const GOT_NEW_CART_ITEM = "GOT_NEW_CARTITEM";
+const UPDATED_CART_ITEM = "UPDATED_CART_ITEM";
 
 //action creators
 export const gotNewCartItem = (newCartItem) => {
     return {
-        type: "GOT_NEW_CARTITEM",
-        newCartItem
-    }
-}
+        type: GOT_NEW_CART_ITEM,
+        newCartItem,
+    };
+};
+export const updatedCartItem = (updatedCartItem) => {
+    return {
+        type: GOT_NEW_CART_ITEM,
+        updatedCartItem,
+    };
+};
 
-//thunks 
+//thunks
 // IS it even possible to send two arguments in this function below
 export const getNewCartItem = (userId, newCartItem) => {
     return async (dispatch) => {
+        const token = window.localStorage.getItem("token");
         try {
-            console.log('redux store', newCartItem )
-            const {data} = await axios.post(`/api/users/${userId}/cart`, newCartItem)
-            dispatch(gotNewCartItem(data))
+            console.log("redux store", newCartItem);
+            // Does the item exist? If yes, PUT, if no, POST
+            // const {data} = await axios.get(`api/users/`)
+            // if(/*Item exists */){
+            // dispatch(updatedCartItem(data))
+            // } else {
+            const { data } = await axios.post(
+                `/api/users/${userId}/cart`,
+                {
+                    newCartItem,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            dispatch(gotNewCartItem(data));
+            // }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
-}
+    };
+};
 
-const intialState = {}
+const intialState = {};
 //reducer
-export default function cartitemReducer (state = intialState, action) {
+export default function cartitemReducer(state = intialState, action) {
     switch (action.type) {
-        case GOT_NEW_CARTITEM: 
+        case GOT_NEW_CART_ITEM:
             return action.newCartItem; // check this again
-        default: 
+        case UPDATED_CART_ITEM:
+            return action.updatedCartItem; // check this again
+        default:
             return state;
     }
 }
