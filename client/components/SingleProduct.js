@@ -26,16 +26,16 @@ class SingleProduct extends Component {
    const cartitem = {
      productId: this.props.match.params.id, //productID
      productQty: this.state.quantity
-    }
+    } 
+    const userId = this.props.user.id
     this.props.createCartItem(userId, cartitem)
     
   }
   render() {
-    console.log("this is props", this.props)
     const product = this.props.singleProduct || {};
-    const quantity = this.props.singleProduct.quantity;
+    // const quantity = this.props.singleProduct.quantity;
     // does cartitem need product id only or more?
-    const userId = this.props.user.id
+   
 
     return (
       <div>
