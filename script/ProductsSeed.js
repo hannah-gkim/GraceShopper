@@ -1,13 +1,12 @@
-var faker = require('faker');
+var faker = require("faker");
 const products = [];
 
 // name, description, price, quantity, imageUrl
 for (let i = 0; i < 50; i++) {
-
     let newProduct = {
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
-        price: Math.floor(faker.commerce.price()*100),
+        price: Math.floor(faker.commerce.price() * 100),
         quantity: Math.floor(Math.random(0, 200) * 200),
         imageUrl: faker.image.food(),
     };

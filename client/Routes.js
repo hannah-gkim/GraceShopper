@@ -50,7 +50,7 @@ class Routes extends Component {
                         <Route exact path="/products" component={AllProducts} />
                         <Route
                             exact
-                            path="/checkout-cart"
+                            path="/viewCart"
                             component={CheckoutCart}
                         />
                     </Switch>
