@@ -11,15 +11,15 @@ router.post("/:id/cart", async (req, res, next) => {
   try {
     const { id } = req.params;
     //const product=?
-    
     const user = await User.findByPk(id);
     let order = await Order.findAll({
       where: { userId: id, isFulfilled: false },
     });
-
+    
+    console.log("this is req.body", req.body)
     const product = await Product.findOne({
       where: {
-        id: req.body.cartitem
+        id: req.body.productId
       }
     })
     // console.log("got the order-->", order);
@@ -27,9 +27,9 @@ router.post("/:id/cart", async (req, res, next) => {
     // console.log("got order.isFulfilled", order[0].isFulfilled);
     //TODO: still need to figure out adding product detail
     const cartItem = await CartItem.create({
-      quantity: product.quantity,
-      pastPrice: product.pastPrice,
-      currentPrice: product.currentPrice,
+      quantity: req.body.quantity,
+      pastPrice: product.price,
+      currentPrice: product.price,
       orderId: order[0].id,
       productId: product.id
     });

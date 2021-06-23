@@ -16,8 +16,8 @@ export const gotNewCartItem = (newCartItem) => {
 export const getNewCartItem = (userId, newCartItem) => {
     return async (dispatch) => {
         try {
+            console.log('redux store', newCartItem )
             const {data} = await axios.post(`/api/users/${userId}/cart`, newCartItem)
-            console.log('redux store')
             dispatch(gotNewCartItem(data))
         } catch (error) {
             console.log(error)
@@ -30,7 +30,7 @@ const intialState = {}
 export default function cartitemReducer (state = intialState, action) {
     switch (action.type) {
         case GOT_NEW_CARTITEM: 
-            return action.newCartItem;
+            return action.newCartItem; // check this again
         default: 
             return state;
     }
