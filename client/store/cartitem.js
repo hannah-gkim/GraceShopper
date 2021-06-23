@@ -24,12 +24,6 @@ export const getNewCartItem = (userId, newCartItem) => {
     return async (dispatch) => {
         const token = window.localStorage.getItem("token");
         try {
-            console.log("redux store", newCartItem);
-            // Does the item exist? If yes, PUT, if no, POST
-            // const {data} = await axios.get(`api/users/`)
-            // if(/*Item exists */){
-            // dispatch(updatedCartItem(data))
-            // } else {
             const { data } = await axios.post(
                 `/api/users/${userId}/cart`,
                 {

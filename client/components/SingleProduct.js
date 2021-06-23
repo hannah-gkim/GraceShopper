@@ -6,7 +6,7 @@ import { getNewCartItem } from "../store/cartitem";
 class SingleProduct extends Component {
     constructor(props) {
         super(props);
-        this.state = { quantity: 0 };
+        this.state = { quantity: 1 };
         this.handleChange = this.handleChange.bind(this);
         this.handleAddToCart = this.handleAddToCart.bind(this);
     }
@@ -19,7 +19,7 @@ class SingleProduct extends Component {
     handleChange(event) {
         event.preventDefault();
         console.log("this is quantity", event.target.value);
-        const quantity = event.target.value || 0;
+        const quantity = event.target.value || 1;
         this.setState({ quantity });
     }
 
@@ -64,7 +64,11 @@ class SingleProduct extends Component {
 }
 
 const mapState = (state) => {
-    return { singleProduct: state.singleProduct, user: state.auth };
+    return {
+        singleProduct: state.singleProduct,
+        isLoggedIn: !!state.auth.id,
+        user: state.auth,
+    };
 };
 
 const mapDispatch = (dispatch) => {
