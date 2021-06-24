@@ -2,7 +2,7 @@ var faker = require("faker");
 const products = [];
 
 // name, description, price, quantity, imageUrl
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 100; i++) {
     let newProduct = {
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),

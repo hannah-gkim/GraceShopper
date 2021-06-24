@@ -5,31 +5,31 @@ const GOT_PRODUCTS = "GOT_PRODUCTS";
 
 //ACTION CREATORS
 const gotProducts = (products) => {
-  return {
-    type: GOT_PRODUCTS,
-    products,
-  };
+    return {
+        type: GOT_PRODUCTS,
+        products,
+    };
 };
 
 //THUNK ACTIONS
 export const getProducts = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get("/api/products");
-      dispatch(gotProducts(data));
-    } catch (error) {
-      // return error
-    }
-  };
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get("/api/products");
+            dispatch(gotProducts(data));
+        } catch (error) {
+            // return error
+        }
+    };
 };
 
 const intialState = [];
 //REDUCER
 export default function allProductsReducer(state = intialState, action) {
-  switch (action.type) {
-    case GOT_PRODUCTS:
-      return action.products;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case GOT_PRODUCTS:
+            return action.products;
+        default:
+            return state;
+    }
 }

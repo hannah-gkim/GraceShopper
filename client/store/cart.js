@@ -45,17 +45,23 @@ export const removeItem = (id, orderId, productId) => {
     };
 };
 
-export const getCart = (id) => {
+export const getCart = (id, auth) => {
     return async (dispatch) => {
         const token = window.localStorage.getItem("token");
         try {
-            const { data } = await axios.get(`/api/users/${id}/viewCart`, {
-                headers: {
-                    authorization: token,
-                },
-            });
-            console.log("this is the data --->", data);
-            dispatch(gotCart(data.items, data.products));
+            if (auth) {
+                const { data } = await axios.get(`/api/users/${id}/viewCart`, {
+                    headers: {
+                        authorization: token,
+                    },
+                });
+                dispatch(gotCart(data.items, data.products));
+            } else {
+                const { data } = await axios.get(`/api/products`);
+                const items = JSON.parse(window.localStorage.getItem("cart"));
+                console.log("this is the items --->", items);
+                dispatch(gotCart(items, data));
+            }
         } catch (error) {
             // return error
             console.error(error);
