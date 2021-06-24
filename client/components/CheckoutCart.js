@@ -23,25 +23,18 @@ class CheckoutCart extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log("component did update");
     if (prevProps !== this.props) {
       this.setState(this.props);
     }
   }
   async handleCheckout() {
-    console.log("these items-->", this.state.items);
-
-    //fire checkout thunk??..
     const id = this.state.userId;
-    // console.log("ist id there??-->", id);
-    // console.log("this.props--->", this.props);
-
     const token = window.localStorage.getItem("token");
     console.log(token);
     //axios.put('endoint', req.body, {header: autorization})
     await axios.put(
       `/api/users/${id}/confirmation`,
-      {},
+      { total: this.state.total },
       {
         headers: {
           authorization: token,
@@ -55,20 +48,16 @@ class CheckoutCart extends Component {
       return value.currentPrice * value.quantity + total;
     }, 0);
 
-    total /= 100;
-
+    let displayTotal = (total /= 100);
     var formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     });
-
-    total = formatter.format(total);
-
+    displayTotal = formatter.format(displayTotal);
     if (total !== prevTotal) {
-      console.log("prevState does not equal this.state");
       this.setState({ total });
     }
-    return total;
+    return displayTotal;
   }
 
   handleQuantityUpdate(event) {
@@ -76,8 +65,6 @@ class CheckoutCart extends Component {
     const item = this.state.items.filter(
       (item) => item.productId == event.target.name
     )[0];
-    console.log(item);
-
     let newItems = this.state.items.map((item) => {
       if (item.productId == event.target.name) {
         item.quantity = Number(event.target.value);
@@ -86,10 +73,7 @@ class CheckoutCart extends Component {
       return item;
     });
 
-    console.log(newItems);
     this.setState({ items: newItems });
-
-    console.log("calling this.handletotal");
     this.handleTotal(this.state.total);
   }
   handleDelete(id, orderId, productId) {
@@ -119,17 +103,13 @@ class CheckoutCart extends Component {
     const product = this.state.products.filter(
       (item) => item.id == productId
     )[0];
-    // console.log("hello", product);
+
     return product;
   }
 
   render() {
-    console.log("component did render");
     const { items, products, total } = this.state;
     const { findProduct, handleTotal } = this;
-
-    console.log("products-->", products);
-    console.log("items-->", items);
 
     return (
       <div>
