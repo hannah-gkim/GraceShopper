@@ -16,6 +16,7 @@ class CheckoutCart extends Component {
         };
         this.findProduct = this.findProduct.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.calculateTaxes = this.calculateTaxes.bind(this);
         this.handleCheckout = this.handleCheckout.bind(this);
         this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
         this.handleTotal = this.handleTotal.bind(this);
@@ -124,16 +125,7 @@ class CheckoutCart extends Component {
                 }, 0);
         }
 
-        let displayTotal = (total /= 100);
-        var formatter = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-        });
-        displayTotal = formatter.format(displayTotal);
-        // if (total !== prevTotal && this.state.receivedState) {
-        //     this.setState({ total });
-        // }
-        return displayTotal;
+        return total / 100;
     }
 
     handleQuantityUpdate(event) {
@@ -166,12 +158,40 @@ class CheckoutCart extends Component {
             })[0];
         }
     }
+    calculateTaxes(subtotal) {
+        let displayTotal = (subtotal * 0.04) / 100;
 
+        // if (total !== prevTotal && this.state.receivedState) {
+        //     this.setState({ total });
+        // }
+        return displayTotal;
+    }
     render() {
         let { items, products, total } = this.state;
-        const { findProduct, handleTotal } = this;
+        const { findProduct, handleTotal, calculateTaxes } = this;
         // const { products } = this.props;
         // const items = [];
+
+        var formatter = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+        // formatter.format(subtotal)
+        let subtotal = handleTotal(total);
+        let formattedSubtotal = formatter.format(subtotal);
+        let taxes = calculateTaxes(subtotal);
+        let formattedTaxes = formatter.format(taxes);
+        let formattedTotal = formatter.format(subtotal + taxes);
+
+        let isShippingFree = false;
+
+        if (subtotal > 100) {
+            isShippingFree = true;
+        }
+        console.log(isShippingFree);
+
+        // let displaySubTotal = formatter.format();
+        console.log(subtotal);
         if (!this.props.isLoggedIn) {
             // items = this.props.items || [];
             products = this.props.products || [];
@@ -207,7 +227,7 @@ class CheckoutCart extends Component {
                                                   <h2>{`${price}`}</h2>
                                               </div>
                                               <div className="addorremove">
-                                                  <div>
+                                                  <div className="qty">
                                                       <label htmlFor="quantity">
                                                           {" "}
                                                           quantity
@@ -242,23 +262,25 @@ class CheckoutCart extends Component {
                               })
                             : "no item in cart"}
                         <hr />
-                        <div className="checkout">
-                            <Link to="/confirmation">
-                                <button onClick={this.handleCheckout}>
-                                    CONTINUE TO CHECKOUT
-                                </button>
-                            </Link>
-                        </div>
                     </div>
                     <div className="checkout-box">
                         <h1 className="title">Summary</h1>
                         <hr />
                         <div className="total">
-                            <h3>SUBTOTAL $95</h3>
-                            <h3>SHIPPING FREE</h3>
-                            <h3>TAXES $10</h3>
+                            <h3>SUBTOTAL: {formattedSubtotal}</h3>
+                            <h3>
+                                SHIPPING: {!isShippingFree ? `$20` : "FREE"}
+                            </h3>
+                            <h3>TAXES (4%): {formattedTaxes}</h3>
                             <hr />
-                            <h3>Total {handleTotal(total)}</h3>
+                            <h3>Total: {formattedTotal}</h3>
+                            <div className="checkout">
+                                <Link to="/confirmation">
+                                    <button onClick={this.handleCheckout}>
+                                        CONTINUE TO CHECKOUT
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
