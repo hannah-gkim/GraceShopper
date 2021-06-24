@@ -35,6 +35,7 @@ form div {
   margin: 2rem;
 }
 
+
 /* CheckoutCart style */
 .title {
   text-align: left;
@@ -82,4 +83,11 @@ form div {
   display: flex;
   justify-content: center;
   min-width: 70%;
+}
+
+/* confirmation page */
+.confirmation-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

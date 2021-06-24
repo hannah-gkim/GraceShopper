@@ -2,13 +2,23 @@ import React, { Component } from "react";
 import { getCart, removeItem } from "../store/cart";
 import { getProducts } from "../store/allProducts";
 import { connect } from "react-redux";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 class CheckoutCart extends Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], id: "", products: [] };
+        this.state = {
+            items: [],
+            id: "",
+            products: [],
+            total: 0,
+        };
         this.findProduct = this.findProduct.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleCheckout = this.handleCheckout.bind(this);
+        this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
+        this.handleTotal = this.handleTotal.bind(this);
     }
 
     componentDidMount() {
@@ -39,42 +49,109 @@ class CheckoutCart extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("in componenentDidUpdate");
         if (prevProps !== this.props) {
             this.setState(this.props);
         }
     }
 
+    async handleCheckout() {
+        if (this.props.isLoggedIn) {
+            const id = this.state.userId;
+            const token = window.localStorage.getItem("token");
+            //axios.put('endoint', req.body, {header: autorization})
+            await axios.put(
+                `/api/users/${id}/confirmation`,
+                { total: this.state.total },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+        } else {
+            window.localStorage.removeItem("cart");
+        }
+    }
+
     handleDelete(id, orderId, productId) {
         //Deletes an item from the cart
-        if (this.props.isLoggedIn)
+        if (this.props.isLoggedIn) {
             this.props.deleteItem(id, orderId, productId);
-        else {
+            //generate new array to store into state
+            const updatedItemsList = this.state.items.filter((item) => {
+                if (item.productId !== productId) {
+                    return item;
+                }
+            });
+            const updatedProductsList = this.state.products.filter(
+                (product) => {
+                    if (product.id !== productId) {
+                        return product;
+                    }
+                }
+            );
+
+            //set state
+            this.setState({
+                ...this.state,
+                items: updatedItemsList,
+                products: updatedProductsList,
+            });
+        } else {
             let cart = JSON.parse(window.localStorage.getItem("cart")).filter(
                 (item) => {
                     if (item.productId !== productId) return item;
                 }
             );
             window.localStorage.setItem("cart", JSON.stringify(cart));
+            console.log(this.state.items);
+            console.log(cart);
+            this.setState({ items: cart });
         }
-        //generate new array to store into state
-        const updatedItemsList = this.state.items.filter((item) => {
-            if (item.productId !== productId) {
+    }
+    handleTotal(prevTotal) {
+        let total = 0;
+        if (this.props.isLoggedIn) {
+            if (this.state.items) {
+                total = this.state.items.reduce((total, value) => {
+                    return value.currentPrice * value.quantity + total;
+                }, 0);
+            }
+        } else {
+            if (this.state.items)
+                total = this.state.items.reduce((total, value) => {
+                    return value.price * value.quantity + total;
+                }, 0);
+        }
+
+        let displayTotal = (total /= 100);
+        var formatter = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+        displayTotal = formatter.format(displayTotal);
+        // if (total !== prevTotal && this.state.receivedState) {
+        //     this.setState({ total });
+        // }
+        return displayTotal;
+    }
+
+    handleQuantityUpdate(event) {
+        event.preventDefault();
+
+        // const item = this.state.items.filter(
+        //     (item) => item.productId == event.target.name
+        // )[0];
+
+        let newItems = this.state.items.map((item) => {
+            if (item.productId == event.target.name) {
+                item.quantity = Number(event.target.value);
                 return item;
             }
+            return item;
         });
-        const updatedProductsList = this.state.products.filter((product) => {
-            if (product.id !== productId) {
-                return product;
-            }
-        });
-
-        //set state
-        this.setState({
-            ...this.state,
-            items: updatedItemsList,
-            products: updatedProductsList,
-        });
+        this.setState({ items: newItems });
+        this.handleTotal(this.state.total);
     }
 
     findProduct(productId) {
@@ -83,32 +160,24 @@ class CheckoutCart extends Component {
                 (item) => item.id == parseInt(productId)
             )[0];
         } else {
-            console.log("checking props products,", this.props.products);
+            // console.log("checking props products,", this.props.products);
             return this.props.products.filter((item) => {
-                console.log("thisitem", item);
                 return item.id == parseInt(productId);
             })[0];
         }
-        return product;
     }
 
     render() {
-        console.log("checking to see loggedin", this.props.isLoggedIn);
-        console.log(this.props.products);
-        let { items, products } = this.state;
+        let { items, products, total } = this.state;
+        const { findProduct, handleTotal } = this;
         // const { products } = this.props;
-        const { findProduct } = this;
         // const items = [];
         if (!this.props.isLoggedIn) {
-            items = this.props.items || [];
+            // items = this.props.items || [];
             products = this.props.products || [];
-            console.log("items---->", items);
-            console.log("products-->", products);
         }
         return (
             <div>
-                {/* need to be able to see all items, so map it! */}
-
                 <div className="checkout-div">
                     <div className="checkout-items-box">
                         <h1 className="title">Shopping items</h1>
@@ -116,7 +185,6 @@ class CheckoutCart extends Component {
 
                         {items.length
                             ? items.map((item) => {
-                                  console.log("mapping item", item);
                                   let disProduct = findProduct(item.productId);
                                   let price =
                                       (disProduct.price * item.quantity) / 100;
@@ -139,20 +207,22 @@ class CheckoutCart extends Component {
                                                   <h2>{`${price}`}</h2>
                                               </div>
                                               <div className="addorremove">
-                                                  <select value="" onChange="">
-                                                      <option value="">
-                                                          1
-                                                      </option>
-                                                      <option value="">
-                                                          2
-                                                      </option>
-                                                      <option value="">
-                                                          3
-                                                      </option>
-                                                      <option value="">
-                                                          4
-                                                      </option>
-                                                  </select>
+                                                  <div>
+                                                      <label htmlFor="quantity">
+                                                          {" "}
+                                                          quantity
+                                                      </label>
+                                                      <input
+                                                          type="number"
+                                                          name={item.productId}
+                                                          value={item.quantity}
+                                                          onChange={
+                                                              this
+                                                                  .handleQuantityUpdate
+                                                          }
+                                                      />
+                                                  </div>
+
                                                   <button
                                                       onClick={() => {
                                                           this.handleDelete(
@@ -173,7 +243,11 @@ class CheckoutCart extends Component {
                             : "no item in cart"}
                         <hr />
                         <div className="checkout">
-                            <button>CONTINUE TO CHECKOUT</button>
+                            <Link to="/confirmation">
+                                <button onClick={this.handleCheckout}>
+                                    CONTINUE TO CHECKOUT
+                                </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="checkout-box">
@@ -184,7 +258,7 @@ class CheckoutCart extends Component {
                             <h3>SHIPPING FREE</h3>
                             <h3>TAXES $10</h3>
                             <hr />
-                            <h3>Total $100</h3>
+                            <h3>Total {handleTotal(total)}</h3>
                         </div>
                     </div>
                 </div>
