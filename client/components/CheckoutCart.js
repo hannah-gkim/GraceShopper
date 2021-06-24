@@ -46,7 +46,7 @@ class CheckoutCart extends Component {
                 }
             );
         } else {
-            window.localStorage.removeItem("cart");
+            window.localStorage.setItem("cart", JSON.stringify([]));
         }
     }
 
