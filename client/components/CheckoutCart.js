@@ -23,30 +23,7 @@ class CheckoutCart extends Component {
     }
 
     componentDidMount() {
-        // this.props.loadCart(this.props.match.params.id);
-
         this.props.loadCart(this.props.userId, this.props.isLoggedIn);
-        // if (!this.props.isLoggedIn) {
-        //     this.setState({
-        //         ...this.state,
-        //         items: this.props.items,
-        //         products: this.props.products,
-        //     });
-        // }
-        // this.setState({
-        //     ...state,
-        //     items: this.props.items,
-        //     products: this.props.products,
-        // });
-        // } else {
-        //     this.setState({
-        //         items: JSON.parse(window.localStorage.getItem("cart")),
-        //         products: this.props.products,
-        //     });
-        // }
-        // this.props.loadAllProducts();
-        // this.setState({ ...this.state, products: this.props.products });
-        // console.log("in componenentDidMount");
     }
 
     componentDidUpdate(prevProps) {
@@ -59,7 +36,6 @@ class CheckoutCart extends Component {
         if (this.props.isLoggedIn) {
             const id = this.state.userId;
             const token = window.localStorage.getItem("token");
-            //axios.put('endoint', req.body, {header: autorization})
             await axios.put(
                 `/api/users/${id}/confirmation`,
                 { total: this.state.total },
@@ -131,10 +107,6 @@ class CheckoutCart extends Component {
     handleQuantityUpdate(event) {
         event.preventDefault();
 
-        // const item = this.state.items.filter(
-        //     (item) => item.productId == event.target.name
-        // )[0];
-
         let newItems = this.state.items.map((item) => {
             if (item.productId == event.target.name) {
                 item.quantity = Number(event.target.value);
@@ -152,7 +124,6 @@ class CheckoutCart extends Component {
                 (item) => item.id == parseInt(productId)
             )[0];
         } else {
-            // console.log("checking props products,", this.props.products);
             return this.props.products.filter((item) => {
                 return item.id == parseInt(productId);
             })[0];
@@ -161,16 +132,11 @@ class CheckoutCart extends Component {
     calculateTaxes(subtotal) {
         let displayTotal = (subtotal * 0.04) / 100;
 
-        // if (total !== prevTotal && this.state.receivedState) {
-        //     this.setState({ total });
-        // }
         return displayTotal;
     }
     render() {
         let { items, products, total } = this.state;
         const { findProduct, handleTotal, calculateTaxes } = this;
-        // const { products } = this.props;
-        // const items = [];
 
         var formatter = new Intl.NumberFormat("en-US", {
             style: "currency",
