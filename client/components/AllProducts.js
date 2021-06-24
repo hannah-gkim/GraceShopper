@@ -23,6 +23,17 @@ class AllProducts extends React.Component {
   render() {
     console.log(this.props);
     const { products } = this.props;
+
+    const convert = (pric) => {
+      let price = (pric /= 100);
+      var formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
+      price = formatter.format(price);
+      return price;
+    };
+
     return (
       <ul>
         <div className="products-container">
@@ -41,7 +52,7 @@ class AllProducts extends React.Component {
                       />
                     </Link>
                     <h4>{product.description} </h4>
-                    <h4>${product.price} </h4>
+                    <h4>{convert(product.price)} </h4>
                   </div>
                 );
               })

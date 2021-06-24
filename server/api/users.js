@@ -178,7 +178,8 @@ router.put("/:id/confirmation", requireToken, async (req, res, next) => {
   
         if (order) {
           await Order.update(
-            { isFulfilled: true },
+            { isFulfilled: true,
+            total: req.body.total },
   
             {
               where: {

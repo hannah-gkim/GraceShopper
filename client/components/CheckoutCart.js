@@ -8,10 +8,12 @@ import { Link } from "react-router-dom";
 class CheckoutCart extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], id: "", products: [] };
+    this.state = { items: [], id: "", products: [], total: 0 };
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
+    this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
+    this.handleTotal = this.handleTotal.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +23,14 @@ class CheckoutCart extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log("component did update");
     if (prevProps !== this.props) {
       this.setState(this.props);
     }
   }
   async handleCheckout() {
+    console.log("these items-->", this.state.items);
+
     //fire checkout thunk??..
     const id = this.state.userId;
     // console.log("ist id there??-->", id);
@@ -45,6 +50,48 @@ class CheckoutCart extends Component {
     );
   }
 
+  handleTotal(prevTotal) {
+    let total = this.state.items.reduce((total, value) => {
+      return value.currentPrice * value.quantity + total;
+    }, 0);
+
+    total /= 100;
+
+    var formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+
+    total = formatter.format(total);
+
+    if (total !== prevTotal) {
+      console.log("prevState does not equal this.state");
+      this.setState({ total });
+    }
+    return total;
+  }
+
+  handleQuantityUpdate(event) {
+    event.preventDefault();
+    const item = this.state.items.filter(
+      (item) => item.productId == event.target.name
+    )[0];
+    console.log(item);
+
+    let newItems = this.state.items.map((item) => {
+      if (item.productId == event.target.name) {
+        item.quantity = Number(event.target.value);
+        return item;
+      }
+      return item;
+    });
+
+    console.log(newItems);
+    this.setState({ items: newItems });
+
+    console.log("calling this.handletotal");
+    this.handleTotal(this.state.total);
+  }
   handleDelete(id, orderId, productId) {
     //Deletes an item from the cart
     this.props.deleteItem(id, orderId, productId);
@@ -77,9 +124,12 @@ class CheckoutCart extends Component {
   }
 
   render() {
-    const { items, products } = this.state;
-    const { findProduct } = this;
+    console.log("component did render");
+    const { items, products, total } = this.state;
+    const { findProduct, handleTotal } = this;
+
     console.log("products-->", products);
+    console.log("items-->", items);
 
     return (
       <div>
@@ -109,12 +159,16 @@ class CheckoutCart extends Component {
                           <h2>{`${price}`}</h2>
                         </div>
                         <div className="addorremove">
-                          <select value="" onChange="">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                          </select>
+                          <div>
+                            <label htmlFor="quantity"> quantity</label>
+                            <input
+                              type="number"
+                              name={item.productId}
+                              value={item.quantity}
+                              onChange={this.handleQuantityUpdate}
+                            />
+                          </div>
+
                           <button
                             onClick={() => {
                               this.handleDelete(
@@ -150,7 +204,7 @@ class CheckoutCart extends Component {
               <h3>SHIPPING FREE</h3>
               <h3>TAXES $10</h3>
               <hr />
-              <h3>Total $100</h3>
+              <h3>Total {handleTotal(total)}</h3>
             </div>
           </div>
         </div>
@@ -169,6 +223,7 @@ const mapDispatch = (dispatch) => {
 };
 
 const mapState = (state) => {
+  console.log("mapping state");
   return {
     userId: state.auth.id,
     items: state.cart.items,
