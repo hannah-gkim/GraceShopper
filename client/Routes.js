@@ -7,7 +7,11 @@ import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
 import AllProducts from "./components/AllProducts";
 import CheckoutCart from "./components/CheckoutCart";
+<<<<<<< HEAD
 import Confirmation from "./components/Confirmation";
+=======
+import AddedToCart from "./components/AddedToCart";
+>>>>>>> 6e6d2db453f7235553b166d7aac33dc0a5cbc310
 
 /**
  * COMPONENT
@@ -29,6 +33,7 @@ class Routes extends Component {
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/viewCart" component={CheckoutCart} />
             <Route exact path="/confirmation" component={Confirmation} />
+            <AddedToCart path="/addedToCart" />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -41,6 +46,7 @@ class Routes extends Component {
             <Route exact path="/viewCart" component={CheckoutCart} />
             <Route exact path="/checkout-cart" component={CheckoutCart} />
             <Route exact path="/confirmation" component={Confirmation} />
+            <AddedToCart path="/addedToCart" />
           </Switch>
         )}
       </div>
