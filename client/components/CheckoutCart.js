@@ -57,8 +57,9 @@ class CheckoutCart extends Component {
     render() {
         const { items, products } = this.state;
         const { findProduct } = this;
+        console.log(this.props);
         console.log("products-->", products);
-
+        console.log("items---->", items);
         return (
             <div>
                 {/* need to be able to see all items, so map it! */}
@@ -158,6 +159,7 @@ const mapDispatch = (dispatch) => {
 const mapState = (state) => {
     return {
         userId: state.auth.id,
+        isLoggedIn: !!state.auth.id,
         items: state.cart.items,
         products: state.cart.products,
     };
