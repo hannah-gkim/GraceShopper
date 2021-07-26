@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Product, CartItem, User },
+  models: { Product },
 } = require("../db");
 module.exports = router;
 const { requireToken } = require("./gatekeepingMiddleware");
@@ -29,10 +29,7 @@ router.get("/:id", async (req, res, next) => {
 // POST api/products/
 router.post("/", requireToken, async (req, res, next) => {
   try {
-    //TODO Only show all users IF req.user is an admin
-    // console.log("am i an admin?", req.user.isAdmin);
     if (req.user.isAdmin) {
-      //Form used for post request should validate for all fields
       const product = await Product.create(req.body);
       res.json(product);
     } else {
@@ -46,8 +43,6 @@ router.post("/", requireToken, async (req, res, next) => {
 // DELETE /products/id
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
-    //TODO Only show all users IF req.user is an admin
-    // console.log("am i an admin?", req.user.isAdmin);
     if (req.user.isAdmin) {
       const product = await Product.findByPk(req.params.id);
       if (!product) return res.sendStatus(404);
@@ -64,8 +59,6 @@ router.delete("/:id", requireToken, async (req, res, next) => {
 // PUT /products/id
 router.put("/:id", requireToken, async (req, res, next) => {
   try {
-    //TODO Only show all users IF req.user is an admin
-    // console.log("am i an admin?", req.user.isAdmin);
     if (req.user.isAdmin) {
       const product = await Product.findByPk(req.params.id);
       if (!product) return res.sendStatus(404);

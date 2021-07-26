@@ -55,7 +55,7 @@ router.post("/:id/cart", requireToken, async (req, res, next) => {
         console.log("i dont have this item");
         const cartItem = await CartItem.create({
           quantity: req.body.newCartItem.quantity,
-          pastPrice: product.price,
+          
           currentPrice: product.price,
           orderId: order.id,
           productId: product.id,
@@ -113,7 +113,7 @@ router.put("/:id/viewCart", requireToken, async (req, res, next) => {
         {
           currentPrice: req.body.currentPrice,
           quantity: req.body.quantity,
-          pastPrice: req.body.pastPrice,
+        
         },
         {
           where: {
