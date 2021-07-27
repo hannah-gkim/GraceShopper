@@ -1,4 +1,4 @@
-# FS-App-Template
+# FS-App-Template+
 
 ## Setup
 
