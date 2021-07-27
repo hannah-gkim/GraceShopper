@@ -1,6 +1,4 @@
-//var faker = require("faker");
-
-const productsData = [
+ const productsData = [
   {
     name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
     price: 109.95,
@@ -147,27 +145,3 @@ const productsData = [
     imageUrl: "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
   },
 ];
-
-
-const products = [];
-productsData.forEach((product) => {
-  let newProduct = {
-    name: product.name,
-    description: product.description,
-    price: Math.floor(product.price * 100),
-    imageUrl: product.imageUrl,
-  };
-  products.push(newProduct);
-});
-// for (let i = 0; i < 100; i++) {
-//   let newProduct = {
-//     name: faker.commerce.productName(),
-//     description: faker.commerce.productDescription(),
-//     price: Math.floor(faker.commerce.price() * 100),
-//     // quantity: Math.floor(Math.random(0, 200) * 200),
-//     imageUrl: faker.image.food(),
-//   };
-//   products.push(newProduct);
-// }
-
-module.exports = products;

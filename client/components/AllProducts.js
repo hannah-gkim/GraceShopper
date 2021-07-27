@@ -2,6 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../store/allProducts";
 import { Link } from "react-router-dom";
+import {
+  Grid,
+  CartButton,
+  Wrapper,
+  Text,
+  GridContainer,
+  SmallText,
+  CenterContainer,
+  AdminButton,
+} from "./style";
 
 class AllProducts extends React.Component {
   constructor(props) {
@@ -35,30 +45,32 @@ class AllProducts extends React.Component {
     };
 
     return (
-      <ul>
-        <div className="products-container">
+      <div>
+        <Grid>
           {products
             ? products.map((product) => {
                 return (
-                  <div key={product.id} className="product">
+                  <Wrapper key={product.id}>
                     <Link to={`/products/${product.id}`}>
-                      <li> {product.name}</li>
-
                       <img
                         src={product.imageUrl}
-                        alt={product.id}
-                        width="400"
-                        height="auto"
+                        alt={product.name}
+                        width="230"
+                        height="230"
                       />
                     </Link>
-                    <h4>{product.description} </h4>
-                    <h4>{convert(product.price)} </h4>
-                  </div>
+                    <Link to={`/products/${product.id}`}>
+                      <GridContainer>
+                        <Text> {product.name}</Text>
+                        <Text>{convert(product.price)} </Text>
+                      </GridContainer>
+                    </Link>
+                  </Wrapper>
                 );
               })
             : "no products"}
-        </div>
-      </ul>
+        </Grid>
+      </div>
     );
   }
 }
