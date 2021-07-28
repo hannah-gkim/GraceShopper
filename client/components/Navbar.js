@@ -2,11 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import { Nav, Logo, NavItems, NavItemsRed } from "./style";
-const Navbar = ({ handleClick, isLoggedIn, userId }) => (
+import { Nav, Logo, NavItems, NavItemsRed } from "../style";
+
+//  state,  thunk
+const Navbar = ({ handleClick, isLoggedIn }) => (
   <Nav>
     <Logo>
-      <Link to="/">Grayce-Shoppa</Link>
+      <Link to="/">Les Choses de La Vie</Link>
     </Logo>
 
     {isLoggedIn ? (
@@ -43,9 +45,7 @@ const Navbar = ({ handleClick, isLoggedIn, userId }) => (
   </Nav>
 );
 
-/**
- * CONTAINER
- */
+/* CONTAINER */
 const mapState = (state) => {
   return {
     userId: state.auth.id,

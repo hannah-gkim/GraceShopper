@@ -1,17 +1,54 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-//CSS STYLES
-
+/* Home.js */
+export const Img = styled.div`
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+`;
+/* App.js */
 export const FixedHeightContainer = styled.div`
   height: 100vh;
-  box-sizing: border-box;
-  border: 20px solid darkslategrey;
   min-width: 500px;
+  box-sizing: border-box;
+`;
+export const Content = styled.div`
+  height: 90vh;
+  overflow: auto;
+`;
+/* Navbar.js */
+export const Logo = styled.span`
+  font-family: Arial, sans-serif;
+  letter-spacing: 3px;
+  font-size: 2rem;
+  color: black;
+  padding: 0.5rem 5rem 0.5rem 1.5rem;
 `;
 
-export const Content = styled.div`
-  height: 75vh;
-  overflow: auto;
+export const Nav = styled.div`
+  font-size: small;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-around;
+  margin: 1rem;
+`;
+
+export const NavItems = styled.span`
+  padding: 0.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+`;
+
+export const NavItemsRed = styled.span`
+  padding: 0.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: darkred;
 `;
 
 export const Container = styled.div`
@@ -135,7 +172,7 @@ export const AdminControls = styled.div`
 `;
 
 export const LargeText = styled.span`
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 3rem;
@@ -155,7 +192,7 @@ export const BoldText = styled.span`
 `;
 
 export const Text = styled.span`
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1rem;
@@ -231,48 +268,4 @@ export const CartButton = styled.button`
     border: 2px solid white;
     color: white;
   }
-`;
-/* height: 20%;
-width: 80%; */
-//change text to "+" when media is too small
-//css content, after element "::after ::before"
-
-export const Img = styled.div`
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 2rem;
-`;
-
-export const Nav = styled.div`
-  font-size: small;
-  color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: space-around;
-  margin: 1rem;
-`;
-
-export const Logo = styled.span`
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 3px;
-  font-size: 2rem;
-  color: black;
-  padding: 0.5rem;
-`;
-
-export const NavItems = styled.span`
-  padding: 0.5rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-`;
-
-export const NavItemsRed = styled.span`
-  padding: 0.5rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: darkred;
 `;

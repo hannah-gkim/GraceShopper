@@ -17,7 +17,6 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
-
   render() {
     const { isLoggedIn } = this.props;
 
@@ -25,7 +24,6 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route path="/home" component={Home} />
-
           <Route
             path="/login"
             render={() => (isLoggedIn ? <Redirect to="/" /> : <Login />)}
@@ -34,10 +32,10 @@ class Routes extends Component {
             path="/signup"
             render={() => (isLoggedIn ? <Redirect to="/" /> : <Signup />)}
           />
-
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/products" component={AllProducts} />
-          <Route exact path="/viewCart" component={CheckoutCart} />
+          {/* <Route exact path="/viewCart" component={CheckoutCart} /> */}
+          <Route exact path="/viewCart" render={() => <CheckoutCart />} />
           <Route exact path="/confirmation" component={Confirmation} />
           <AddedToCart path="/addedToCart" />
           <Redirect to="/home" />

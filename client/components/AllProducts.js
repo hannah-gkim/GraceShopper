@@ -11,7 +11,7 @@ import {
   SmallText,
   CenterContainer,
   AdminButton,
-} from "./style";
+} from "../style";
 
 class AllProducts extends React.Component {
   constructor(props) {

@@ -1,14 +1,22 @@
 import React from "react";
-
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
-
+import { FixedHeightContainer, Content } from "./style";
 const App = () => {
   return (
-    <div>
+    <FixedHeightContainer>
+      <div className="navbar-top">
+        <p>
+          FREE shipping on orders $75+ | Register for FREE Shipping on Your 1st
+          Order
+        </p>
+      </div>
       <Navbar />
-      <Routes />
-    </div>
+      <hr></hr>
+      <Content>
+        <Routes />
+      </Content>
+    </FixedHeightContainer>
   );
 };
 
