@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
-import { getNewCartItem } from "../store/cartitem";
+import { getNewCartItem } from "../store/addToCart";
 import { Link } from "react-router-dom";
 
 class SingleProduct extends Component {

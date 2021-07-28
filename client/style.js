@@ -26,6 +26,30 @@ export const Logo = styled.span`
   padding: 0.5rem 5rem 0.5rem 1.5rem;
 `;
 
+/* CheckoutCart.js */
+export const LargeText = styled.span`
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 2rem;
+`;
+export const List = styled.div`
+  padding: 1rem;
+  margin-left: 3rem;
+  display: flex;
+`;
+export const LeftColumn = styled.div`
+  width: 60%;
+  position: relative;
+`;
+export const RightColumn = styled.div`
+  width: 40%;
+  margin-left: 3rem;
+`;
+
+/******** */
+
+
 export const Nav = styled.div`
   font-size: small;
   color: black;
@@ -116,21 +140,7 @@ export const UserList = styled.div`
   padding: 1rem 4rem 1rem 4rem;
 `;
 
-export const List = styled.div`
-  padding: 1rem;
-  margin-left: 3rem;
-  display: flex;
-`;
 
-export const LeftColumn = styled.div`
-  width: 60%;
-  position: relative;
-`;
-
-export const RightColumn = styled.div`
-  width: 40%;
-  margin-left: 3rem;
-`;
 
 export const ContainerSingle = styled.div`
   max-width: 1200px;
@@ -169,13 +179,6 @@ export const AdminControls = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-right: 1rem;
-`;
-
-export const LargeText = styled.span`
-  font-family: "Bebas Neue", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 3rem;
 `;
 
 export const SmallText = styled.span`
