@@ -15,6 +15,7 @@ export const FixedHeightContainer = styled.div`
 `;
 export const Content = styled.div`
   height: 90vh;
+
   overflow: auto;
 `;
 /* Navbar.js */
@@ -27,11 +28,17 @@ export const Logo = styled.span`
 `;
 
 /* CheckoutCart.js */
+export const CartContainer = styled.div`
+  width: 100%;
+  padding: 1rem 4rem 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+`;
 export const LargeText = styled.span`
   font-family: Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 export const List = styled.div`
   padding: 1rem;
@@ -39,16 +46,42 @@ export const List = styled.div`
   display: flex;
 `;
 export const LeftColumn = styled.div`
-  width: 60%;
+  width: 40%;
   position: relative;
 `;
 export const RightColumn = styled.div`
-  width: 40%;
+  width: 50%;
+  margin-left: 3rem;
+`;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 9rem;
+`;
+
+/* SingleProduct.js */
+export const ContainerSingle = styled.div`
+  max-width: 100%
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const LeftColumnSingle = styled.div`
+  width: 60%;
+  position: relative;
+  padding: 1rem;
+  margin-top: 2rem;
   margin-left: 3rem;
 `;
 
+export const RightColumnSingle = styled.div`
+  width: 60%;
+  margin-top: 4rem;
+  margin-right: 3rem
+  padding: 1rem;
+`;
 /******** */
-
 
 export const Nav = styled.div`
   font-size: small;
@@ -87,18 +120,6 @@ export const GridContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 5px 0 5px 0;
-`;
-
-export const CartContainer = styled.div`
-  width: 75%;
-  padding: 1rem 4rem 3rem 4rem;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
 `;
 
 export const CreateContainer = styled.div`
@@ -140,26 +161,6 @@ export const UserList = styled.div`
   padding: 1rem 4rem 1rem 4rem;
 `;
 
-
-
-export const ContainerSingle = styled.div`
-  max-width: 1200px;
-  padding: 1rem;
-  display: flex;
-`;
-
-export const LeftColumnSingle = styled.div`
-  width: 60%;
-  position: relative;
-  padding: 1rem;
-`;
-
-export const RightColumnSingle = styled.div`
-  width: 40%;
-  margin-top: 3rem;
-  padding: 3rem;
-`;
-
 export const Wrapper = styled.div`
   & {
     position: relative;
@@ -195,7 +196,7 @@ export const BoldText = styled.span`
 `;
 
 export const Text = styled.span`
-  font-family: "Bebas Neue", sans-serif;
+  font-family: Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1rem;

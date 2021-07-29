@@ -25,16 +25,35 @@ form div {
   width: 100%;
   height: 40px;
   padding: 1px 0px 1px 55px;
-  margin: -15px 0 0 -15px;
+  margin: -15px 0 0 -5px;
 }
 /* App.js*/
 hr {
   border-top: 1px solid rgb(209, 208, 208);
 }
+/* CheckoutCart.js*/
+.edit-cart {
+  display: flex;
+}
+.cart-input {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.delete-item {
+  margin-left: 5px;
+  margin-top: 17px;
+}
 
+.shopping-bag {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  align-items: center;
+}
+/* singleProduct page */
+.single-product img {
+}
 
-
-
+/**********/
 .product {
   display: flex;
   flex-wrap: wrap;
@@ -103,10 +122,4 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* singleProduct page */
-.single-product img {
-  width: 300px;
-  height: auto;
 }

@@ -4,7 +4,7 @@ import { getProducts } from "../store/allProducts";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { ShoppingBag } from "react-feather";
+import { ShoppingBag, Trash2 } from "react-feather";
 import {
   CartContainer,
   List,
@@ -33,7 +33,7 @@ class CheckoutCart extends Component {
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
-    //this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
+    this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
     //this.handleTotal = this.handleTotal.bind(this);
   }
 
@@ -67,7 +67,7 @@ class CheckoutCart extends Component {
   }
 
   handleAdd(productId, currQty, product) {
-     this.props.updatedQuantity(productId, 1, product);
+    this.props.updatedQuantity(productId, 1, product);
   }
 
   handleSubtract(productId, currQty, product) {
@@ -75,18 +75,18 @@ class CheckoutCart extends Component {
   }
 
   // //TODO: handleUpdate
-  // handleQuantityUpdate(event) {
-  //   event.preventDefault();
-  //   let newItems = this.state.items.map((item) => {
-  //     if (item.productId == event.target.name) {
-  //       item.quantity = Number(event.target.value);
-  //       return item;
-  //     }
-  //     return item;
-  //   });
-  //   this.setState({ items: newItems });
-  //   //this.handleTotal(this.state.total);
-  // }
+  handleQuantityUpdate(event) {
+    event.preventDefault();
+    let newItems = this.state.items.map((item) => {
+      if (item.productId == event.target.name) {
+        item.quantity = Number(event.target.value);
+        return item;
+      }
+      return item;
+    });
+    this.setState({ items: newItems });
+    //this.handleTotal(this.state.total);
+  }
 
   handleDelete(id, orderId, productId) {
     //Deletes an item from the cart
@@ -126,26 +126,6 @@ class CheckoutCart extends Component {
     }
   }
 
-  /*
-  handleTotal(prevTotal) {
-    let total = 0;
-    if (this.props.isLoggedIn) {
-      if (this.state.items) {
-        total = this.state.items.reduce((total, value) => {
-          return value.currentPrice * value.quantity + total;
-        }, 0);
-      }
-    } else {
-      if (this.state.items)
-        total = this.state.items.reduce((total, value) => {
-          return value.price * value.quantity + total;
-        }, 0);
-    }
-
-    return total / 100;
-  }
-*/
-
   findProduct(productId) {
     if (this.props.isLoggedIn) {
       return this.state.products.filter(
@@ -162,16 +142,7 @@ class CheckoutCart extends Component {
     let { items, products } = this.state;
     const { findProduct } = this;
     let total = 0;
-    // this.state.total = total;
     let subtotal = {};
-
-    // {
-    //   items &&
-    //     items.map((item) => {
-    //       subtotal[item.id] = Number(item.price * item.CartItem?.quantity);
-    //       total += Number(item.price * item.CartItem?.quantity);
-    //     });
-    // }
 
     if (!this.props.isLoggedIn) {
       products = this.props.products || [];
@@ -179,8 +150,8 @@ class CheckoutCart extends Component {
     console.log("items-->", items);
     return (
       <div>
-        {/* <h1 className="title">Shopping items</h1> */}
         <CartContainer>
+          <h1 className="shopping-bag">Shopping bag</h1>
           {items &&
             items.map((item) => {
               console.log("item!!!-->", item);
@@ -190,9 +161,7 @@ class CheckoutCart extends Component {
               subtotal[productDisplay.id] = Number(
                 (productDisplay.price * item.quantity) / 100
               );
-              total += parseInt(
-                Number(productDisplay.price * item.quantity) / 100
-              );
+              total += Number(productDisplay.price * item.quantity) / 100;
 
               return (
                 <div className="cartItem" key={item.id}>
@@ -200,56 +169,31 @@ class CheckoutCart extends Component {
                     <Link to={`/products/${item.id}`}>
                       <LeftColumn>
                         <img
-                          width="200"
-                          height="200"
+                          width="160"
+                          height="160"
                           src={productDisplay.imageUrl}
                           alt={productDisplay.name}
                         />
                       </LeftColumn>
                     </Link>
                     <RightColumn>
-                      <LargeText>{item.name}</LargeText>
-                      <h3>
-                        ${price} x{" "}
-                        {/* <Input
-                          type="number"
-                          name={item.productId}
-                          value={item.quantity}
-                          onChange={this.handleQuantityUpdate}
-                        /> */}
-                        {this.state.edit && item.quantity > 0 && (
-                          <QuantityButton
-                            type="button"
-                            onClick={() =>
-                              this.handleSubtract(item.id, 1, item)
-                            }
-                          >
-                            -
-                          </QuantityButton>
-                        )}
-                        {item.quantity}
-                        {this.state.edit && item.quantity <= 10 && (
-                          <QuantityButton
-                            type="button"
-                            onClick={() => this.handleAdd(item.id, 1, item)}
-                          >
-                            +
-                          </QuantityButton>
-                        )}
-                      </h3>
-                      <div className="subtotal">
-                        <h3>Subtotal: ${subtotal[productDisplay.id]}</h3>
-
-                        <Button
-                          onClick={() =>
-                            this.setState((prevState) => ({
-                              edit: !prevState.edit,
-                            }))
-                          }
-                        >
-                          Edit
-                        </Button>
-                        <Button
+                      <LargeText>{productDisplay.name}</LargeText>
+                      <div className="edit-cart">
+                        <h3>${price} </h3>
+                        <div className="cart-input">
+                          <form>
+                            <input
+                              length="2"
+                              size="2"
+                              type="number"
+                              name={item.productId}
+                              value={item.quantity}
+                              onChange={this.handleQuantityUpdate}
+                            />
+                          </form>
+                        </div>
+                        <Trash2
+                          className="delete-item"
                           onClick={() =>
                             this.handleDelete(
                               this.props.userId,
@@ -257,9 +201,7 @@ class CheckoutCart extends Component {
                               item.productId
                             )
                           }
-                        >
-                          Delete
-                        </Button>
+                        />
                       </div>
                     </RightColumn>
                   </List>
@@ -273,11 +215,12 @@ class CheckoutCart extends Component {
                 <LargeText>Total: ${items && total}</LargeText>
               </ButtonContainer>
               <br />
-              <Link to="/confirmation">
-                <ButtonContainer>
-                  <Button onClick={this.handleCheckout}>Checkout</Button>
-                </ButtonContainer>
-              </Link>
+
+              <ButtonContainer>
+                <Link to="/confirmation">
+                  <Button onClick={this.handleCheckout}>CHECKOUT</Button>
+                </Link>
+              </ButtonContainer>
             </div>
           ) : (
             <CartContainer>
@@ -303,8 +246,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadCart: (id, isLoggedIn) => dispatch(getCart(id, isLoggedIn)),
 
-    updatedQuantity: (productId, quantity, product)=>dispatch(updateQuantity(productId, quantity, product)),
-    
+    updatedQuantity: (productId, quantity, product) =>
+      dispatch(updateQuantity(productId, quantity, product)),
+
     loadAllProducts: (productId, quantity, product) => dispatch(getProducts()),
     deleteItem: (id, orderId, productId) =>
       dispatch(removeItem(id, orderId, productId)),
