@@ -5,13 +5,6 @@ const GOT_CART = "GOT_CART";
 const REMOVED_ITEM = "REMOVED_ITEM";
 const UPDATED_CART_ITEM = "UPDATED_CART_ITEM";
 
-//ACTION CREATORS
-// const gotCart = (cart) => {
-//   return {
-//     type: GOT_CART,
-//     cart,
-//   };
-// };
 
 const gotCart = (items, products) => {
   return {

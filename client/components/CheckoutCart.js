@@ -19,7 +19,7 @@ import {
   Input,
 } from "../style";
 
-var total = 0;
+//var total = 0;
 class CheckoutCart extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ class CheckoutCart extends Component {
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
-    this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
+    //this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
     //this.handleTotal = this.handleTotal.bind(this);
   }
 
@@ -67,26 +67,26 @@ class CheckoutCart extends Component {
   }
 
   handleAdd(productId, currQty, product) {
-    // this.props.updatedQuantity(cocktailId, 1, cocktail);
+     this.props.updatedQuantity(productId, 1, product);
   }
 
   handleSubtract(productId, currQty, product) {
-    // this.props.updatedQuantity(cocktailId, -1, cocktail);
+    this.props.updatedQuantity(productId, -1, product);
   }
 
-  //TODO: handleUpdate
-  handleQuantityUpdate(event) {
-    event.preventDefault();
-    let newItems = this.state.items.map((item) => {
-      if (item.productId == event.target.name) {
-        item.quantity = Number(event.target.value);
-        return item;
-      }
-      return item;
-    });
-    this.setState({ items: newItems });
-    //this.handleTotal(this.state.total);
-  }
+  // //TODO: handleUpdate
+  // handleQuantityUpdate(event) {
+  //   event.preventDefault();
+  //   let newItems = this.state.items.map((item) => {
+  //     if (item.productId == event.target.name) {
+  //       item.quantity = Number(event.target.value);
+  //       return item;
+  //     }
+  //     return item;
+  //   });
+  //   this.setState({ items: newItems });
+  //   //this.handleTotal(this.state.total);
+  // }
 
   handleDelete(id, orderId, productId) {
     //Deletes an item from the cart
@@ -161,7 +161,7 @@ class CheckoutCart extends Component {
   render() {
     let { items, products } = this.state;
     const { findProduct } = this;
-    // let total = 0;
+    let total = 0;
     // this.state.total = total;
     let subtotal = {};
 
@@ -210,14 +210,14 @@ class CheckoutCart extends Component {
                     <RightColumn>
                       <LargeText>{item.name}</LargeText>
                       <h3>
-                        ${price}
-                        <Input
+                        ${price} x{" "}
+                        {/* <Input
                           type="number"
                           name={item.productId}
                           value={item.quantity}
                           onChange={this.handleQuantityUpdate}
-                        />
-                        {/* {this.state.edit && item.cartItem?.quantity > 0 && (
+                        /> */}
+                        {this.state.edit && item.quantity > 0 && (
                           <QuantityButton
                             type="button"
                             onClick={() =>
@@ -227,15 +227,15 @@ class CheckoutCart extends Component {
                             -
                           </QuantityButton>
                         )}
-                        {item.cartItem?.quantity}
-                        {this.state.edit && item.cartItem?.quantity <= 10 && (
+                        {item.quantity}
+                        {this.state.edit && item.quantity <= 10 && (
                           <QuantityButton
                             type="button"
                             onClick={() => this.handleAdd(item.id, 1, item)}
                           >
                             +
                           </QuantityButton>
-                        )} */}
+                        )}
                       </h3>
                       <div className="subtotal">
                         <h3>Subtotal: ${subtotal[productDisplay.id]}</h3>
@@ -303,7 +303,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadCart: (id, isLoggedIn) => dispatch(getCart(id, isLoggedIn)),
 
-    loadAllProducts: () => dispatch(getProducts()),
+    updatedQuantity: (productId, quantity, product)=>dispatch(updateQuantity(productId, quantity, product)),
+    
+    loadAllProducts: (productId, quantity, product) => dispatch(getProducts()),
     deleteItem: (id, orderId, productId) =>
       dispatch(removeItem(id, orderId, productId)),
     // updateItem: (id, orderId, productId, quantity, currentPrice) =>
