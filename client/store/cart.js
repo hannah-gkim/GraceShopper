@@ -6,12 +6,21 @@ const REMOVED_ITEM = "REMOVED_ITEM";
 const UPDATED_CART_ITEM = "UPDATED_CART_ITEM";
 
 //ACTION CREATORS
-const gotCart = (cart) => {
+// const gotCart = (cart) => {
+//   return {
+//     type: GOT_CART,
+//     cart,
+//   };
+// };
+
+const gotCart = (items, products) => {
   return {
     type: GOT_CART,
-    cart,
+    items,
+    products,
   };
 };
+
 const removedItem = (items, products) => {
   return {
     type: REMOVED_ITEM,
@@ -36,31 +45,36 @@ export const getCart = (id, auth) => {
     try {
       //auth meaning isLoggedin user
       if (auth) {
-        const { data: cart } = await axios.get(`/api/users/${id}/viewCart`, {
+        const { data } = await axios.get(`/api/users/${id}/viewCart`, {
           headers: {
             authorization: token,
           },
         });
-        if (cart != null && cart != "null") {
-          dispatch(gotCart(cart));
-        } else {
-          dispatch(gotCart({ order: {}, items: [] }));
-        }
-      }
-      //what is this?? if user is not loggedIn?
-      else {
-        let cart = window.localStorage.getItem("cart");
-        if (cart != null && cart != "null") {
-          cart = JSON.parse(cart);
-        } else {
-          cart = {
-            order: {},
-            items: [],
-          };
-        }
-        dispatch(gotCart(cart));
+        dispatch(gotCart(data.items, data.products));
+
+        // if (cart != null && cart != "null") {
+        //   dispatch(gotCart(cart));
+        // } else {
+        //   dispatch(gotCart({ order: {}, items: [] }));
+        // }
+      } else {
+        const { data } = await axios.get(`/api/products`);
+        const items = JSON.parse(window.localStorage.getItem("cart"));
+        console.log("this is the items --->", items);
+        dispatch(gotCart(items, data));
+        // let cart = window.localStorage.getItem("cart");
+        // if (cart != null && cart != "null") {
+        //   cart = JSON.parse(cart);
+        // } else {
+        //   cart = {
+        //     order: {},
+        //     items: [],
+        //   };
+        // }
+        // dispatch(gotCart(cart));
       }
     } catch (error) {
+      // return error
       console.error(error);
     }
   };
@@ -80,7 +94,6 @@ export const removeItem = (id, orderId, productId) => {
           productId,
         },
       });
-      console.log("axios.delete DATA--->", data);
       dispatch(removedItem(data.items, data.products));
     } catch (error) {
       // return error
@@ -132,7 +145,7 @@ const intialState = { order: {}, items: [] };
 export default function cartReducer(state = intialState, action) {
   switch (action.type) {
     case GOT_CART:
-      return action.cart;
+      return { ...state, items: action.items, products: action.products };
     case REMOVED_ITEM:
       return { ...state };
     case UPDATED_CART_ITEM:

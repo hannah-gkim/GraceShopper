@@ -19,16 +19,27 @@ router.get("/:id/viewCart", requireToken, async (req, res, next) => {
           userId: id,
           isFulfilled: false,
         },
-        include: Product,
+        include: [
+          {
+            model: Product,
+          },
+        ],
       });
 
-      const items = order.products;
-      res.json({ order, items });
+      const items = await CartItem.findAll({
+        where: {
+          orderId: order.id,
+        },
+      });
+
+      // res.json({ order, items });
+      res.json({ items: items, products: order.products });
     } else {
-      res.json({ order: {}, items: [] });
+      // res.json({ order: {}, items: [] });
+      res.json("incorrect id");
     }
   } catch (error) {
-    res.json({ order: {}, items: [] });
+    res.json({ items: [], products: [] });
   }
 });
 
@@ -144,7 +155,10 @@ router.put("/:id/confirmation", requireToken, async (req, res, next) => {
 
       if (order) {
         await Order.update(
-          { isFulfilled: true, total: req.body.total },
+          {
+            isFulfilled: true,
+            total: req.body.total,
+          },
 
           {
             where: {

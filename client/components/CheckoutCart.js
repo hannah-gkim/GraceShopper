@@ -16,18 +16,22 @@ import {
   Text,
   QuantityButton,
   SmallText,
+  Input,
 } from "../style";
+
+var total = 0;
 class CheckoutCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: "",
-      total: 0,
+      items: [],
+      products: [],
       edit: false,
+      //total: 0,
     };
-    //this.findProduct = this.findProduct.bind(this);
+    this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.calculateTaxes = this.calculateTaxes.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
     this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
     //this.handleTotal = this.handleTotal.bind(this);
@@ -47,9 +51,10 @@ class CheckoutCart extends Component {
     if (this.props.isLoggedIn) {
       const id = this.state.userId;
       const token = window.localStorage.getItem("token");
+
       await axios.put(
         `/api/users/${id}/confirmation`,
-        { total: this.state.total },
+        { total: total },
         {
           headers: {
             authorization: token,
@@ -61,190 +66,218 @@ class CheckoutCart extends Component {
     }
   }
 
+  handleAdd(productId, currQty, product) {
+    // this.props.updatedQuantity(cocktailId, 1, cocktail);
+  }
+
+  handleSubtract(productId, currQty, product) {
+    // this.props.updatedQuantity(cocktailId, -1, cocktail);
+  }
+
   //TODO: handleUpdate
   handleQuantityUpdate(event) {
     event.preventDefault();
-    // let newItems = this.state.items.map((item) => {
-    //   if (item.productId == event.target.name) {
-    //     item.quantity = Number(event.target.value);
-    //     return item;
-    //   }
-    //   return item;
-    // });
-    // this.setState({ items: newItems });
-    // this.handleTotal(this.state.total);
+    let newItems = this.state.items.map((item) => {
+      if (item.productId == event.target.name) {
+        item.quantity = Number(event.target.value);
+        return item;
+      }
+      return item;
+    });
+    this.setState({ items: newItems });
+    //this.handleTotal(this.state.total);
   }
 
-  //TODO: delete here
   handleDelete(id, orderId, productId) {
     //Deletes an item from the cart
     if (this.props.isLoggedIn) {
       this.props.deleteItem(id, orderId, productId);
+      //generate new array to store into state
+      const updatedItemsList = this.state.items.filter((item) => {
+        if (item.productId !== productId) {
+          return item;
+        }
+      });
+      const updatedProductsList = this.state.products.filter((product) => {
+        if (product.id !== productId) {
+          return product;
+        }
+      });
 
+      //set state
       this.setState({
         ...this.state,
+        items: updatedItemsList,
+        products: updatedProductsList,
       });
+
+      let cart = JSON.parse(window.localStorage.getItem("cart"));
+      console.log("what is cart-->", cart);
     } else {
-      let cart = JSON.parse(window.localStorage.getItem("cart")).filter(
-        (item) => {
-          if (item.productId !== productId) return item;
-        }
-      );
-      window.localStorage.setItem("cart", JSON.stringify(cart));
-      console.log("cart in handleDelete->", cart);
+      // let cart = JSON.parse(window.localStorage.getItem("cart")).filter(
+      //   (item) => {
+      //     if (item.productId !== productId) return item;
+      //   }
+      // );
+      // window.localStorage.setItem("cart", JSON.stringify(cart));
+      // console.log(this.state.items);
+      // console.log(cart);
+      // this.setState({ items: cart });
     }
   }
 
-  // handleTotal(prevTotal) {
-  //   let total = 0;
-  //   if (this.props.isLoggedIn) {
-  //     if (this.state.items) {
-  //       total = this.state.items.reduce((total, value) => {
-  //         return value.currentPrice * value.quantity + total;
-  //       }, 0);
-  //     }
-  //   } else {
-  //     if (this.state.items)
-  //       total = this.state.items.reduce((total, value) => {
-  //         return value.price * value.quantity + total;
-  //       }, 0);
-  //   }
+  /*
+  handleTotal(prevTotal) {
+    let total = 0;
+    if (this.props.isLoggedIn) {
+      if (this.state.items) {
+        total = this.state.items.reduce((total, value) => {
+          return value.currentPrice * value.quantity + total;
+        }, 0);
+      }
+    } else {
+      if (this.state.items)
+        total = this.state.items.reduce((total, value) => {
+          return value.price * value.quantity + total;
+        }, 0);
+    }
 
-  //   return total / 100;
-  // }
-
-  // findProduct(productId) {
-  //   if (this.props.isLoggedIn) {
-  //     return this.state.products.filter(
-  //       (item) => item.id == parseInt(productId)
-  //     )[0];
-  //   } else {
-  //     return this.props.products.filter((item) => {
-  //       return item.id == parseInt(productId);
-  //     })[0];
-  //   }
-  // }
-
-  calculateTaxes(subtotal) {
-    let displayTotal = (subtotal * 0.04) / 100;
-
-    return displayTotal;
+    return total / 100;
   }
+*/
+
+  findProduct(productId) {
+    if (this.props.isLoggedIn) {
+      return this.state.products.filter(
+        (item) => item.id == parseInt(productId)
+      )[0];
+    } else {
+      return this.props.products.filter((item) => {
+        return item.id == parseInt(productId);
+      })[0];
+    }
+  }
+
   render() {
-    let { total } = this.state;
-    const { calculateTaxes } = this;
-    const { cart } = this.props;
-    //let total = 0;
+    let { items, products } = this.state;
+    const { findProduct } = this;
+    // let total = 0;
+    // this.state.total = total;
     let subtotal = {};
-    var formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
 
-    //let formattedSubtotal = formatter.format(subtotal);
-    //let taxes = calculateTaxes(subtotal);
-    //let formattedTaxes = formatter.format(taxes);
-    //let formattedTotal = formatter.format(subtotal + taxes);
-
-    let isShippingFree = false;
-
-    // if (subtotal > 100) {
-    //   isShippingFree = true;
+    // {
+    //   items &&
+    //     items.map((item) => {
+    //       subtotal[item.id] = Number(item.price * item.CartItem?.quantity);
+    //       total += Number(item.price * item.CartItem?.quantity);
+    //     });
     // }
-    //console.log(isShippingFree);
-    //console.log(subtotal);
 
-    {
-      cart.items &&
-        cart.items.map((item) => {
-          subtotal[item.id] = Number(item.price * item.cartItem?.quantity);
-          total += Number(item.price * item.cartItem?.quantity);
-        });
+    if (!this.props.isLoggedIn) {
+      products = this.props.products || [];
     }
-
+    console.log("items-->", items);
     return (
       <div>
         {/* <h1 className="title">Shopping items</h1> */}
         <CartContainer>
-          {cart.items &&
-            cart.order &&
-            cart.items.map((item) => (
-              <div className="cartItem" key={item.id}>
-                <List>
-                  <Link to={`/products/${item.id}`}>
-                    <LeftColumn>
-                      <img
-                        width="200"
-                        height="200"
-                        src={item.imageUrl}
-                        alt={item.name}
-                      />
-                    </LeftColumn>
-                  </Link>
-                  <RightColumn>
-                    <LargeText>{item.name}</LargeText>
-                    <h3>
-                      ${item.price} x{" "}
-                      {/* {this.state.edit && item.cartItem?.quantity > 0 && (
-                        <QuantityButton
-                          type="button"
+          {items &&
+            items.map((item) => {
+              console.log("item!!!-->", item);
+              let productDisplay = findProduct(item.productId);
+              let price = (productDisplay.price * item.quantity) / 100;
+
+              subtotal[productDisplay.id] = Number(
+                (productDisplay.price * item.quantity) / 100
+              );
+              total += parseInt(
+                Number(productDisplay.price * item.quantity) / 100
+              );
+
+              return (
+                <div className="cartItem" key={item.id}>
+                  <List>
+                    <Link to={`/products/${item.id}`}>
+                      <LeftColumn>
+                        <img
+                          width="200"
+                          height="200"
+                          src={productDisplay.imageUrl}
+                          alt={productDisplay.name}
+                        />
+                      </LeftColumn>
+                    </Link>
+                    <RightColumn>
+                      <LargeText>{item.name}</LargeText>
+                      <h3>
+                        ${price}
+                        <Input
+                          type="number"
+                          name={item.productId}
+                          value={item.quantity}
+                          onChange={this.handleQuantityUpdate}
+                        />
+                        {/* {this.state.edit && item.cartItem?.quantity > 0 && (
+                          <QuantityButton
+                            type="button"
+                            onClick={() =>
+                              this.handleSubtract(item.id, 1, item)
+                            }
+                          >
+                            -
+                          </QuantityButton>
+                        )}
+                        {item.cartItem?.quantity}
+                        {this.state.edit && item.cartItem?.quantity <= 10 && (
+                          <QuantityButton
+                            type="button"
+                            onClick={() => this.handleAdd(item.id, 1, item)}
+                          >
+                            +
+                          </QuantityButton>
+                        )} */}
+                      </h3>
+                      <div className="subtotal">
+                        <h3>Subtotal: ${subtotal[productDisplay.id]}</h3>
+
+                        <Button
                           onClick={() =>
-                            this.handleSubtract(cocktail.id, 1, cocktail)
+                            this.setState((prevState) => ({
+                              edit: !prevState.edit,
+                            }))
                           }
                         >
-                          -
-                        </QuantityButton>
-                      )} */}
-                      {item.cartItem?.quantity}
-                      {/* {this.state.edit && cocktail.order_items?.quantity <= 10 && (
-                        <QuantityButton
-                          type="button"
+                          Edit
+                        </Button>
+                        <Button
                           onClick={() =>
-                            this.handleAdd(cocktail.id, 1, cocktail)
+                            this.handleDelete(
+                              this.props.userId,
+                              item.orderId,
+                              item.productId
+                            )
                           }
                         >
-                          +
-                        </QuantityButton>
-                      )} */}
-                    </h3>
-                    <div className="subtotal">
-                      <h3>Subtotal: ${subtotal[item.id]}</h3>
+                          Delete
+                        </Button>
+                      </div>
+                    </RightColumn>
+                  </List>
+                </div>
+              );
+            })}
 
-                      <Button
-                        onClick={() =>
-                          this.setState((prevState) => ({
-                            edit: !prevState.edit,
-                          }))
-                        }
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        onClick={() =>
-                          this.handleDelete(
-                            this.props.userId,
-                            cart.order.id,
-                            item.id
-                          )
-                        }
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </RightColumn>
-                </List>
-              </div>
-            ))}
-
-          {cart.items && cart.items.length > 0 ? (
+          {items && items.length > 0 ? (
             <div>
               <ButtonContainer>
-                <LargeText>Total: ${cart.items && total}</LargeText>
+                <LargeText>Total: ${items && total}</LargeText>
               </ButtonContainer>
               <br />
-              <ButtonContainer>
-                <Button onClick={this.handleCheckout}>Checkout</Button>
-              </ButtonContainer>
+              <Link to="/confirmation">
+                <ButtonContainer>
+                  <Button onClick={this.handleCheckout}>Checkout</Button>
+                </ButtonContainer>
+              </Link>
             </div>
           ) : (
             <CartContainer>
@@ -282,7 +315,9 @@ const mapState = (state) => {
   return {
     userId: state.auth.id,
     isLoggedIn: !!state.auth.id,
-    cart: state.cart,
+    items: state.cart.items,
+    products: state.cart.products,
+    edit: false,
   };
 };
 
