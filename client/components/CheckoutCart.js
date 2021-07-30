@@ -19,7 +19,7 @@ import {
   Input,
 } from "../style";
 
-//var total = 0;
+let finalTotal = 0;
 class CheckoutCart extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +55,7 @@ class CheckoutCart extends Component {
       await axios.put(
         `/api/users/${id}/confirmation`,
         { total: total },
+
         {
           headers: {
             authorization: token,
@@ -142,6 +143,7 @@ class CheckoutCart extends Component {
     let { items, products } = this.state;
     const { findProduct } = this;
     let total = 0;
+    finalTotal = total;
     let subtotal = {};
 
     if (!this.props.isLoggedIn) {

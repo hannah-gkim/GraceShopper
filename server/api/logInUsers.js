@@ -145,6 +145,7 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
 router.put("/:id/confirmation", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
+
     if (req.user.id == id) {
       const order = await Order.findOne({
         where: {
