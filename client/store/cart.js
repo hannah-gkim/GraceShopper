@@ -21,11 +21,20 @@ const removedItem = (items, products) => {
   };
 };
 
-export const updatedCartItem = (currentPrice, quantity) => {
+export const updatedCartItem = (
+  id,
+  currentPrice,
+  quantity,
+  orderId,
+  productId
+) => {
   return {
-    type: GOT_NEW_CART_ITEM,
+    type: UPDATED_CART_ITEM,
+    id,
     currentPrice,
     quantity,
+    orderId,
+    productId,
   };
 };
 
@@ -106,17 +115,15 @@ export const updateCartItem = (
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
     try {
-      const { data } = await axios.put(`/api/users/${id}/updateCart`, {
-        headers: {
-          authorization: token,
-        },
-        data: {
-          currentPrice,
-          quantity,
-          orderId,
-          productId,
-        },
-      });
+      const { data } = await axios.put(
+        `/api/users/${id}/updateCart`,
+        { currentPrice, quantity, orderId, productId },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       dispatch(
         updatedCartItem(
           data.currentPrice,

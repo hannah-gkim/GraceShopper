@@ -120,6 +120,7 @@ router.delete("/:id/deleteItem", requireToken, async (req, res, next) => {
 router.put("/:id/updateCart", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log("req.body--->", req.body);
     if (req.user.id == id) {
       await CartItem.update(
         {

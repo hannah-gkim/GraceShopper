@@ -31,7 +31,7 @@ class CheckoutCart extends Component {
     };
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleUpdate = this.handleUpdate.bind(this);
+    // this.handleUpdate = this.handleUpdate.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
     this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
     //this.handleTotal = this.handleTotal.bind(this);
@@ -67,13 +67,13 @@ class CheckoutCart extends Component {
     }
   }
 
-  handleAdd(productId, currQty, product) {
-    this.props.updatedQuantity(productId, 1, product);
-  }
+  // handleAdd(productId, currQty, product) {
+  //   this.props.updatedQuantity(productId, 1, product);
+  // }
 
-  handleSubtract(productId, currQty, product) {
-    this.props.updatedQuantity(productId, -1, product);
-  }
+  // handleSubtract(productId, currQty, product) {
+  //   this.props.updatedQuantity(productId, -1, product);
+  // }
 
   // //TODO: handleUpdate
   handleQuantityUpdate(event) {
