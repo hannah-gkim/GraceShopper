@@ -28,10 +28,10 @@ class CheckoutCart extends Component {
       items: [],
       products: [],
       edit: false,
-      //total: 0,
     };
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleCheckout = this.handleCheckout.bind(this);
     this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
     //this.handleTotal = this.handleTotal.bind(this);
@@ -54,7 +54,7 @@ class CheckoutCart extends Component {
 
       await axios.put(
         `/api/users/${id}/confirmation`,
-        { total: total },
+        { total: finalTotal },
 
         {
           headers: {
@@ -78,15 +78,48 @@ class CheckoutCart extends Component {
   // //TODO: handleUpdate
   handleQuantityUpdate(event) {
     event.preventDefault();
+    let orderId;
+    let productId;
+
     let newItems = this.state.items.map((item) => {
+      orderId = item.orderId;
+      productId = item.productId;
       if (item.productId == event.target.name) {
         item.quantity = Number(event.target.value);
+        let productDisplay = this.findProduct(item.productId);
+        let price = (productDisplay.price * item.quantity) / 100;
+        item.currentPrice = Number(price);
         return item;
       }
       return item;
     });
-    this.setState({ items: newItems });
-    //this.handleTotal(this.state.total);
+
+    console.log("newitem-->", this.state.items);
+    this.setState({ ...this.state, items: newItems });
+    this.handleUpdate(
+      this.props.userId,
+      this.state.items.currentPrice,
+      this.state.items.quantity,
+      orderId,
+      productId
+    );
+  }
+
+  //************************** */
+  handleUpdate(id, currentPrice, quantity, orderId, productId) {
+    if (this.props.isLoggedIn) {
+      this.state.items.map((item) => {
+        this.props.updatedQuantity(
+          id,
+          currentPrice,
+          quantity,
+          orderId,
+          productId
+        );
+      });
+      let cart = JSON.parse(window.localStorage.getItem("cart"));
+      console.log("what is cart-->", cart);
+    }
   }
 
   handleDelete(id, orderId, productId) {
@@ -99,6 +132,7 @@ class CheckoutCart extends Component {
           return item;
         }
       });
+
       const updatedProductsList = this.state.products.filter((product) => {
         if (product.id !== productId) {
           return product;
@@ -143,6 +177,7 @@ class CheckoutCart extends Component {
     let { items, products } = this.state;
     const { findProduct } = this;
     let total = 0;
+
     finalTotal = total;
     let subtotal = {};
 
@@ -185,8 +220,6 @@ class CheckoutCart extends Component {
                         <div className="cart-input">
                           <form>
                             <input
-                              length="2"
-                              size="2"
                               type="number"
                               name={item.productId}
                               value={item.quantity}
@@ -214,7 +247,10 @@ class CheckoutCart extends Component {
           {items && items.length > 0 ? (
             <div>
               <ButtonContainer>
-                <LargeText>Total: ${items && total}</LargeText>
+                <LargeText>
+                  Total: $
+                  {items && Math.round((total + Number.EPSILON) * 100) / 100}
+                </LargeText>
               </ButtonContainer>
               <br />
 
@@ -248,14 +284,12 @@ const mapDispatch = (dispatch) => {
   return {
     loadCart: (id, isLoggedIn) => dispatch(getCart(id, isLoggedIn)),
 
-    updatedQuantity: (productId, quantity, product) =>
-      dispatch(updateQuantity(productId, quantity, product)),
+    updatedQuantity: (id, currentPrice, quantity, orderId, productId) =>
+      dispatch(updateCartItem(id, currentPrice, quantity, orderId, productId)),
 
     loadAllProducts: (productId, quantity, product) => dispatch(getProducts()),
     deleteItem: (id, orderId, productId) =>
       dispatch(removeItem(id, orderId, productId)),
-    // updateItem: (id, orderId, productId, quantity, currentPrice) =>
-    //   dispatch(updateCartItem(id, orderId, productId, quantity, currentPrice)),
   };
 };
 

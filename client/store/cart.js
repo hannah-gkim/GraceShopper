@@ -5,7 +5,6 @@ const GOT_CART = "GOT_CART";
 const REMOVED_ITEM = "REMOVED_ITEM";
 const UPDATED_CART_ITEM = "UPDATED_CART_ITEM";
 
-
 const gotCart = (items, products) => {
   return {
     type: GOT_CART,
@@ -22,11 +21,11 @@ const removedItem = (items, products) => {
   };
 };
 
-export const updatedCartItem = (items, products) => {
+export const updatedCartItem = (currentPrice, quantity) => {
   return {
     type: GOT_NEW_CART_ITEM,
-    items,
-    products,
+    currentPrice,
+    quantity,
   };
 };
 
@@ -99,10 +98,10 @@ export const removeItem = (id, orderId, productId) => {
 //TODO: fix the update
 export const updateCartItem = (
   id,
-  orderId,
-  productId,
+  currentPrice,
   quantity,
-  currentPrice
+  orderId,
+  productId
 ) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
@@ -112,18 +111,18 @@ export const updateCartItem = (
           authorization: token,
         },
         data: {
-          orderId,
-          productId,
           currentPrice,
           quantity,
+          orderId,
+          productId,
         },
       });
       dispatch(
         updatedCartItem(
-          data.items,
-          data.products,
           data.currentPrice,
-          data.quantity
+          data.quantity,
+          data.orderId,
+          data.productId
         )
       );
     } catch (error) {
@@ -142,7 +141,7 @@ export default function cartReducer(state = intialState, action) {
     case REMOVED_ITEM:
       return { ...state };
     case UPDATED_CART_ITEM:
-      return action.updatedCartItem;
+      return { ...state };
     default:
       return state;
   }

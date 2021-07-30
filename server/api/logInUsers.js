@@ -6,43 +6,6 @@ const {
 const { requireToken } = require("./gatekeepingMiddleware");
 module.exports = router;
 
-/*************** GET loggedIn users Cart *************/
-// GET /api/users/:id/viewCart
-router.get("/:id/viewCart", requireToken, async (req, res, next) => {
-  try {
-    //userId
-    //we can only get id from /users...?
-    const { id } = req.params;
-    if (req.user.id == id) {
-      const order = await Order.findOne({
-        where: {
-          userId: id,
-          isFulfilled: false,
-        },
-        include: [
-          {
-            model: Product,
-          },
-        ],
-      });
-
-      const items = await CartItem.findAll({
-        where: {
-          orderId: order.id,
-        },
-      });
-
-      // res.json({ order, items });
-      res.json({ items: items, products: order.products });
-    } else {
-      // res.json({ order: {}, items: [] });
-      res.json("incorrect id");
-    }
-  } catch (error) {
-    res.json({ items: [], products: [] });
-  }
-});
-
 /************************* ADD to Cart ************************/
 //api/users/:id/addToCart
 // needs req.body -> productId,  quantity,  userId
@@ -96,6 +59,43 @@ router.post("/:id/addToCart", requireToken, async (req, res, next) => {
   }
 });
 
+/*************** GET loggedIn users Cart *************/
+// GET /api/users/:id/viewCart
+router.get("/:id/viewCart", requireToken, async (req, res, next) => {
+  try {
+    //userId
+    //we can only get id from /users...?
+    const { id } = req.params;
+    if (req.user.id == id) {
+      const order = await Order.findOne({
+        where: {
+          userId: id,
+          isFulfilled: false,
+        },
+        include: [
+          {
+            model: Product,
+          },
+        ],
+      });
+
+      const items = await CartItem.findAll({
+        where: {
+          orderId: order.id,
+        },
+      });
+
+      // res.json({ order, items });
+      res.json({ items: items, products: order.products });
+    } else {
+      // res.json({ order: {}, items: [] });
+      res.json("incorrect id");
+    }
+  } catch (error) {
+    res.json({ items: [], products: [] });
+  }
+});
+
 /***** DELETE products from loggedIn users Cart ******/
 // DELETE /api/users/:id/deleteItem
 router.delete("/:id/deleteItem", requireToken, async (req, res, next) => {
@@ -140,6 +140,56 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
   }
 });
 
+// router.put("/:id/updateCart", requireToken, async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     if (req.user.id == id) {
+//       const product = await Product.findOne({
+//         where: {
+//           id: req.body.newCartItem.productId,
+//         },
+//       });
+//       let order = await Order.findOne({
+//         where: { userId: id, isFulfilled: false },
+//       });
+
+//       let item = await CartItem.findOne({
+//         where: {
+//           orderId: order.id,
+//           productId: req.body.newCartItem.productId,
+//         },
+//       });
+//       if (item) {
+//         const newQuantity =
+//           parseInt(item.quantity, 10) +
+//           parseInt(req.body.newCartItem.quantity, 10);
+
+//         const updatedItem = await CartItem.update(
+//           { quantity: newQuantity },
+//           {
+//             where: {
+//               productId: product.id,
+//               orderId: order.id,
+//             },
+//           }
+//         );
+//         res.status(200).json(updatedItem);
+//       } else {
+//         console.log("first item in cart!");
+//         const cartItem = await CartItem.create({
+//           quantity: req.body.newCartItem.quantity,
+//           currentPrice: product.price,
+//           orderId: order.id,
+//           productId: product.id,
+//         });
+//         res.status(200).json(cartItem);
+//       }
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 /*************  once checkout, new cart created for loggedIn user  **************/
 //api/users/:id/confirmation
 router.put("/:id/confirmation", requireToken, async (req, res, next) => {
@@ -168,6 +218,10 @@ router.put("/:id/confirmation", requireToken, async (req, res, next) => {
             },
           }
         );
+
+        await CartItem.destroy({
+          where: {},
+        });
 
         await Order.create({
           isFulfilled: false,
