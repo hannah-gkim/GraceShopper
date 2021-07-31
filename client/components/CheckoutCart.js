@@ -24,14 +24,20 @@ class CheckoutCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
-      items: [],
-      products: [],
-      edit: false,
+      id: this.props.userId,
+      items: this.props.items,
+      products: this.props.products,
+
+      /*
+       userId: state.auth.id,
+    isLoggedIn: !!state.auth.id,
+    items: state.cart.items,
+    products: state.cart.products,
+      */
     };
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    // this.handleUpdate = this.handleUpdate.bind(this);
+
     this.handleCheckout = this.handleCheckout.bind(this);
     this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
     //this.handleTotal = this.handleTotal.bind(this);
@@ -68,19 +74,19 @@ class CheckoutCart extends Component {
   }
 
   // handleAdd(productId, currQty, product) {
-  //   this.props.updatedQuantity(productId, 1, product);
+  //   this.propsdQuantity(productId, 1, product);
   // }
 
   // handleSubtract(productId, currQty, product) {
   //   this.props.updatedQuantity(productId, -1, product);
   // }
 
-  // //TODO: handleUpdate
   handleQuantityUpdate(event) {
     event.preventDefault();
     let orderId;
     let productId;
-
+    let currentPrice;
+    let quantity;
     let newItems = this.state.items.map((item) => {
       orderId = item.orderId;
       productId = item.productId;
@@ -89,6 +95,8 @@ class CheckoutCart extends Component {
         let productDisplay = this.findProduct(item.productId);
         let price = (productDisplay.price * item.quantity) / 100;
         item.currentPrice = Number(price);
+        currentPrice = parseInt(Number(price));
+        quantity = Number(event.target.value);
         return item;
       }
       return item;
@@ -96,10 +104,11 @@ class CheckoutCart extends Component {
 
     console.log("newitem-->", this.state.items);
     this.setState({ ...this.state, items: newItems });
+
     this.handleUpdate(
       this.props.userId,
-      this.state.items.currentPrice,
-      this.state.items.quantity,
+      currentPrice,
+      quantity,
       orderId,
       productId
     );
@@ -117,8 +126,8 @@ class CheckoutCart extends Component {
           productId
         );
       });
-      let cart = JSON.parse(window.localStorage.getItem("cart"));
-      console.log("what is cart-->", cart);
+      // let cart = JSON.parse(window.localStorage.getItem("cart"));
+      // console.log("what is cart-->", cart);
     }
   }
 
@@ -174,22 +183,22 @@ class CheckoutCart extends Component {
   }
 
   render() {
-    let { items, products } = this.state;
+    let { items } = this.state;
     const { findProduct } = this;
     let total = 0;
 
     finalTotal = total;
     let subtotal = {};
 
-    if (!this.props.isLoggedIn) {
-      products = this.props.products || [];
-    }
-    console.log("items-->", items);
+    // if (!this.props.isLoggedIn) {
+    //   products = this.props.products || [];
+    // }
+    // console.log("items-->", items);
     return (
       <div>
         <CartContainer>
           <h1 className="shopping-bag">Shopping bag</h1>
-          {items &&
+          {items.lenght !== 0 &&
             items.map((item) => {
               console.log("item!!!-->", item);
               let productDisplay = findProduct(item.productId);
@@ -299,7 +308,6 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
     items: state.cart.items,
     products: state.cart.products,
-    edit: false,
   };
 };
 

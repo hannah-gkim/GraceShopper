@@ -42,6 +42,7 @@ router.post("/:id/addToCart", requireToken, async (req, res, next) => {
             },
           }
         );
+
         res.status(200).json(updatedItem);
       } else {
         console.log("first item in cart!");
@@ -120,13 +121,16 @@ router.delete("/:id/deleteItem", requireToken, async (req, res, next) => {
 router.put("/:id/updateCart", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
+    let updatedCart;
     console.log("req.body--->", req.body);
     if (req.user.id == id) {
-      await CartItem.update(
+      console.log(req.user.id, "---->", id);
+      updatedCart = await CartItem.update(
         {
-          currentPrice: req.body.currentPrice,
           quantity: req.body.quantity,
+          currentPrice: req.body.currentPrice,
         },
+
         {
           where: {
             orderId: req.body.orderId,
@@ -134,7 +138,8 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
           },
         }
       );
-      res.sendStatus(200);
+      console.log("updatedCart-->", updatedCart);
+      res.send(updatedCart);
     }
   } catch (error) {
     next(error);
