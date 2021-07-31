@@ -7,7 +7,8 @@ export const Img = styled.div`
   justify-content: center;
   margin: 2rem;
 `;
-/* App.js */
+/* App.js 
+
 export const FixedHeightContainer = styled.div`
   height: 100vh;
   min-width: 500px;
@@ -18,13 +19,32 @@ export const Content = styled.div`
 
   overflow: auto;
 `;
+*/
+
 /* Navbar.js */
 export const Logo = styled.span`
   font-family: Arial, sans-serif;
   letter-spacing: 3px;
   font-size: 2rem;
   color: black;
-  padding: 0.5rem 5rem 0.5rem 1.5rem;
+  padding: 0.5rem 5rem 0.5rem 2.5rem;
+`;
+export const Nav = styled.div`
+  font-size: small;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-around;
+  margin: 1rem;
+`;
+
+export const NavItems = styled.span`
+  padding: 0.5rem;
+  padding-right: 3rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 `;
 
 /* CheckoutCart.js */
@@ -82,23 +102,6 @@ export const RightColumnSingle = styled.div`
   padding: 1rem;
 `;
 /******** */
-
-export const Nav = styled.div`
-  font-size: small;
-  color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: space-around;
-  margin: 1rem;
-`;
-
-export const NavItems = styled.span`
-  padding: 0.5rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-`;
 
 export const NavItemsRed = styled.span`
   padding: 0.5rem;

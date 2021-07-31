@@ -4,19 +4,20 @@ import Routes from "./Routes";
 import { FixedHeightContainer, Content } from "./style";
 const App = () => {
   return (
-    <FixedHeightContainer>
+    <div className="main-div">
       <div className="navbar-top">
-        <p>
+        <div className="p-div"> <p>
           FREE shipping on orders $75+ | Register for FREE Shipping on Your 1st
           Order
-        </p>
+        </p></div>
+       
       </div>
       <Navbar />
       <hr></hr>
-      <Content>
+      <div className="content-div">
         <Routes />
-      </Content>
-    </FixedHeightContainer>
+      </div>
+    </div>
   );
 };
 
