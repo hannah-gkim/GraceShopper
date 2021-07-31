@@ -150,3 +150,13 @@ hr {
 .signle-product-wrap {
   margin-top: 1rem;
 }
+
+/* AllProduct.js */
+.grid-box {
+  display: flex;
+  justify-content: space-between;
+  padding-right: max(15px, 10%);
+  padding-left: max(15px, 10%);
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

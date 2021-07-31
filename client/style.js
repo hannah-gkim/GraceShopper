@@ -120,11 +120,9 @@ export const Grid = styled.div`
   display: grid;
   grid-auto-columns: max-content;
   grid-auto-flow: dense;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(50px, auto);
   grid-gap: 40px;
   grid-template-columns: repeat(4, 1fr);
-  margin: 60px auto;
-  max-width: 1000px;
 `;
 
 /* AuthFrom.js */

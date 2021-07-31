@@ -45,7 +45,7 @@ class AllProducts extends React.Component {
     };
 
     return (
-      <div>
+      <div className="grid-box">
         <Grid>
           {products
             ? products.map((product) => {
