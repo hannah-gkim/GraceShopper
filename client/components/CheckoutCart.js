@@ -24,9 +24,9 @@ class CheckoutCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.userId,
-      items: this.props.items,
-      products: this.props.products,
+      id: "",
+      items: [],
+      products: [],
 
       /*
        userId: state.auth.id,
@@ -210,7 +210,7 @@ class CheckoutCart extends Component {
               total += Number(productDisplay.price * item.quantity) / 100;
 
               return (
-                <div className="cartItem" key={item.id}>
+                <div className="cartItem" key={item.productId}>
                   <List>
                     <Link to={`/products/${item.id}`}>
                       <LeftColumn>
