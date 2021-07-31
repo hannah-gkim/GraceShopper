@@ -196,8 +196,8 @@ class CheckoutCart extends Component {
     // console.log("items-->", items);
     return (
       <div>
+        <h1 className="shopping-bag">Shopping Bag</h1>
         <CartContainer>
-          <h1 className="shopping-bag">Shopping bag</h1>
           {items.lenght !== 0 &&
             items.map((item) => {
               console.log("item!!!-->", item);
@@ -212,7 +212,7 @@ class CheckoutCart extends Component {
               return (
                 <div className="cartItem" key={item.productId}>
                   <List>
-                    <Link to={`/products/${item.id}`}>
+                    <Link to={`/products/${item.productId}`}>
                       <LeftColumn>
                         <img
                           width="160"
@@ -223,7 +223,9 @@ class CheckoutCart extends Component {
                       </LeftColumn>
                     </Link>
                     <RightColumn>
-                      <LargeText>{productDisplay.name}</LargeText>
+                      <div>
+                        <h2>{productDisplay.name}</h2>
+                      </div>
                       <div className="edit-cart">
                         <h3>${price} </h3>
                         <div className="cart-input">
@@ -256,10 +258,12 @@ class CheckoutCart extends Component {
           {items && items.length > 0 ? (
             <div>
               <ButtonContainer>
-                <LargeText>
-                  Total: $
-                  {items && Math.round((total + Number.EPSILON) * 100) / 100}
-                </LargeText>
+                <div className="cart-total-div">
+                  <h2>
+                    Total: $
+                    {items && Math.round((total + Number.EPSILON) * 100) / 100}
+                  </h2>
+                </div>
               </ButtonContainer>
               <br />
 
@@ -271,15 +275,16 @@ class CheckoutCart extends Component {
             </div>
           ) : (
             <CartContainer>
-              <Link to="/products">
-                <SmallText>
-                  <ShoppingBag /> Back to Shopping
-                </SmallText>
-              </Link>
-              <br />
               <LargeText>
-                Oh no! Your cart is empty!
-                <br />
+                <Link to="/products">
+                  <br />
+                  Oh no! Your cart is empty!
+                  <br />
+                  <br />
+                  <br />
+                  <ShoppingBag /> Back to Shopping
+                  <br />
+                </Link>
               </LargeText>
             </CartContainer>
           )}

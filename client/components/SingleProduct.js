@@ -17,6 +17,9 @@ import {
   CenterContainer,
   Container,
 } from "../style";
+
+import { ShoppingBag, Trash2 } from "react-feather";
+
 class SingleProduct extends Component {
   constructor(props) {
     super(props);
@@ -81,9 +84,13 @@ class SingleProduct extends Component {
     });
     price = formatter.format(price);
     return (
-      // <div className="single-product">
-      <div className="single-product">
-        <ContainerSingle>
+      <div className="signle-product-wrap">
+        <LargeText>
+          <Link to="/products">
+            <ShoppingBag /> Back to Shopping
+          </Link>
+        </LargeText>
+        <div className="single-product">
           <LeftColumnSingle>
             <img width="300" height="300" src={product.imageUrl} />
           </LeftColumnSingle>
@@ -104,16 +111,17 @@ class SingleProduct extends Component {
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
+
             <Link to="/addedToCart">
-              <button type="button" onClick={this.handleAddToCart}>
-                add to cart
-              </button>
+              <div className="single-page-button-div">
+                <Button type="button" onClick={this.handleAddToCart}>
+                  add to cart
+                </Button>
+              </div>
             </Link>
           </RightColumnSingle>
-        </ContainerSingle>
+        </div>
       </div>
-
-      // </div>
     );
   }
 }

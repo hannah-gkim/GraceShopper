@@ -7,19 +7,6 @@ export const Img = styled.div`
   justify-content: center;
   margin: 2rem;
 `;
-/* App.js 
-
-export const FixedHeightContainer = styled.div`
-  height: 100vh;
-  min-width: 500px;
-  box-sizing: border-box;
-`;
-export const Content = styled.div`
-  height: 90vh;
-
-  overflow: auto;
-`;
-*/
 
 /* Navbar.js */
 export const Logo = styled.span`
@@ -50,16 +37,21 @@ export const NavItems = styled.span`
 /* CheckoutCart.js */
 export const CartContainer = styled.div`
   width: 100%;
-  padding: 1rem 4rem 3rem 4rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 3rem;
 `;
 export const LargeText = styled.span`
   font-family: Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1.5rem;
+  margin: 3rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
+
 export const List = styled.div`
   padding: 1rem;
   margin-left: 3rem;
@@ -76,7 +68,23 @@ export const RightColumn = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 9rem;
+  margin-right: 3rem;
+`;
+export const Button = styled.button`
+  background-color: black;
+  border: 2px solid black;
+  color: white;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1em;
+  margin-right: 1rem;
+  &:hover {
+    background-color: transparent;
+    border: 2px solid black;
+    color: black;
+  }
 `;
 
 /* SingleProduct.js */
@@ -101,16 +109,31 @@ export const RightColumnSingle = styled.div`
   margin-right: 3rem
   padding: 1rem;
 `;
-/******** */
 
-export const NavItemsRed = styled.span`
-  padding: 0.5rem;
+/* AllProducts.js */
+export const GridContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0 4px 0;
+`;
+export const Grid = styled.div`
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-auto-flow: dense;
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 60px auto;
+  max-width: 1000px;
+`;
+
+/* AuthFrom.js */
+export const SmallText = styled.span`
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: darkred;
+  font-size: 0.75em;
 `;
-
 export const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -118,11 +141,14 @@ export const Container = styled.div`
   margin-top: 2rem;
   margin: 5rem;
 `;
+/********************** */
 
-export const GridContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0 5px 0;
+export const NavItemsRed = styled.span`
+  padding: 0.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: darkred;
 `;
 
 export const CreateContainer = styled.div`
@@ -138,17 +164,6 @@ export const CenterContainer = styled.div`
   justify-content: center;
   align-content: center;
   align-items: center;
-`;
-
-export const Grid = styled.div`
-  display: grid;
-  grid-auto-columns: max-content;
-  grid-auto-flow: dense;
-  grid-auto-rows: minmax(100px, auto);
-  grid-gap: 40px;
-  grid-template-columns: repeat(4, 1fr);
-  margin: 60px auto;
-  max-width: 1000px;
 `;
 
 export const ContainerUser = styled.div`
@@ -185,13 +200,6 @@ export const AdminControls = styled.div`
   margin-right: 1rem;
 `;
 
-export const SmallText = styled.span`
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.75em;
-`;
-
 export const BoldText = styled.span`
   text-transform: uppercase;
   font-weight: 700;
@@ -210,23 +218,6 @@ export const Input = styled.input`
   color: black;
   margin-bottom: 0;
   border-color: 2px solid black;
-`;
-
-export const Button = styled.button`
-  background-color: black;
-  border: 2px solid black;
-  color: white;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 1em;
-  margin-right: 1rem;
-  &:hover {
-    background-color: transparent;
-    border: 2px solid black;
-    color: black;
-  }
 `;
 
 export const AdminButton = styled.button`

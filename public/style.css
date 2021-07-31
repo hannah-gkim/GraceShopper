@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
 }
 a:link,
 a:visited,
@@ -47,7 +47,6 @@ hr {
   padding-left: 50px;
 }
 
-
 /* CheckoutCart.js*/
 .edit-cart {
   display: flex;
@@ -64,6 +63,8 @@ hr {
   text-align: center;
   font-family: Arial, sans-serif;
   align-items: center;
+  margin-right: 6rem;
+  margin-left: 6rem;
 }
 /* CheckoutCart style */
 .title {
@@ -111,6 +112,9 @@ hr {
   justify-content: center;
   min-width: 70%;
 }
+.cart-total-div {
+  padding-right: 25px;
+}
 
 /* confirmation page */
 .confirmation-div {
@@ -131,4 +135,18 @@ hr {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+/* SingleProduc.js */
+.single-page-button-div {
+  margin-top: 1rem;
+}
+.single-product {
+  max-width: 100%;
+  padding: 4rem;
+
+  display: flex;
+  justify-content: space-around;
+}
+.signle-product-wrap {
+  margin-top: 1rem;
 }

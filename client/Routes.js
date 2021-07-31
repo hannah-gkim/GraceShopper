@@ -41,7 +41,13 @@ class Routes extends Component {
             render={() => (isLoggedIn ? <CheckoutCart /> : <NotLoggedIn />)}
           />
           <Route exact path="/confirmation" component={Confirmation} />
-          <AddedToCart path="/addedToCart" />
+
+          <Route
+            exact
+            path="/addedToCart"
+            render={() => (isLoggedIn ? <AddedToCart /> : <NotLoggedIn />)}
+          />
+          {/* <AddedToCart path="/addedToCart" /> */}
           <Redirect to="/home" />
         </Switch>
       </div>
