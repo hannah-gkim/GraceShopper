@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
-import { getNewCartItem } from "../store/cartitem";
+import { getNewCartItem } from "../store/addToCart";
 import { Link } from "react-router-dom";
+import {
+  SmallText,
+  LargeText,
+  Button,
+  Input,
+  QuantityButton,
+  ContainerSingle,
+  LeftColumnSingle,
+  RightColumnSingle,
+  AdminButton,
+  CartContainer,
+  CenterContainer,
+  Container,
+} from "../style";
+
+import { ShoppingBag, Trash2 } from "react-feather";
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -68,30 +84,43 @@ class SingleProduct extends Component {
     });
     price = formatter.format(price);
     return (
-      <div className="single-product">
-        <h1>Single Product Page</h1>
-        <img src={product.imageUrl} />
-        <h3>name: {product.name}</h3>
-        <h3>price: {`${price}`}</h3>
-        <h3>description: {product.description}</h3>
+      <div className="signle-product-wrap">
+        <LargeText>
+          <Link to="/products">
+            <ShoppingBag /> Back to Shopping
+          </Link>
+        </LargeText>
+        <div className="single-product">
+          <LeftColumnSingle>
+            <img width="300" height="300" src={product.imageUrl} />
+          </LeftColumnSingle>
+          <RightColumnSingle>
+            <h3>name: {product.name}</h3>
+            <h3>price: {`${price}`}</h3>
+            <h3>description: {product.description}</h3>
 
-        <select id="quantity" onChange={this.handleChange}>
-          <option value="1">Qty:1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-        <Link to="/addedToCart">
-          <button type="button" onClick={this.handleAddToCart}>
-            add to cart
-          </button>
-        </Link>
+            <select id="quantity" onChange={this.handleChange}>
+              <option value="1">Qty:1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+
+            <Link to="/addedToCart">
+              <div className="single-page-button-div">
+                <Button type="button" onClick={this.handleAddToCart}>
+                  add to cart
+                </Button>
+              </div>
+            </Link>
+          </RightColumnSingle>
+        </div>
       </div>
     );
   }

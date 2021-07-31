@@ -9,7 +9,7 @@ import AllProducts from "./components/AllProducts";
 import CheckoutCart from "./components/CheckoutCart";
 import Confirmation from "./components/Confirmation";
 import AddedToCart from "./components/AddedToCart";
-
+import NotLoggedIn from "./components/NotLoggedIn";
 /**
  * COMPONENT
  */
@@ -35,9 +35,19 @@ class Routes extends Component {
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/products" component={AllProducts} />
           {/* <Route exact path="/viewCart" component={CheckoutCart} /> */}
-          <Route exact path="/viewCart" render={() => <CheckoutCart />} />
+          <Route
+            exact
+            path="/viewCart"
+            render={() => (isLoggedIn ? <CheckoutCart /> : <NotLoggedIn />)}
+          />
           <Route exact path="/confirmation" component={Confirmation} />
-          <AddedToCart path="/addedToCart" />
+
+          <Route
+            exact
+            path="/addedToCart"
+            render={() => (isLoggedIn ? <AddedToCart /> : <NotLoggedIn />)}
+          />
+          {/* <AddedToCart path="/addedToCart" /> */}
           <Redirect to="/home" />
         </Switch>
       </div>

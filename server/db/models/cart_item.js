@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 //both product and order has access to this table through
+//carItem has orderId and productId
 const CartItem = db.define("CartItem", {
   quantity: {
     type: Sequelize.INTEGER,
