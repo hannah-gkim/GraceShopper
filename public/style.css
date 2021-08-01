@@ -226,17 +226,21 @@ hr {
 }
 
 /* AllProduct.js */
+.grid-main-div {
+  padding: 5rem 10rem 5rem 10rem;
+}
 .grid-box {
   display: flex;
   width: 100%;
   height: auto;
-  justify-content: space-between;
-  /* padding-right: max(15px, 10%);
-  padding-left: max(15px, 10%); */
-  padding-right: 5%;
-  padding-left: 5%;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  justify-content: space-around;
+
+  /* padding-right: 5%;
+  padding-left: 5%; */
+  /* margin-right: 5%;
+  margin-left: 5%; */
+  /* margin-top: 50px; */
+  margin-bottom: 20px;
 }
 .each-grid {
   margin: 20px auto;
@@ -251,14 +255,8 @@ hr {
   padding: 4px 0 4px 0;
 }
 .all-product-img {
-  /* min-width: 50px !important;
-  max-width: 230 !important;
-  min-height: 50px !important;
-  max-height: 250 !important; */
-  max-width: 250px !important;
-  max-height: 250px !important;
-  min-width: 50px !important;
-  min-height: 50px !important;
+  width: 250px !important;
+  height: 250px !important;
 }
 .grid-wrap img {
   /* min-width: 20px;
