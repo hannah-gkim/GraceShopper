@@ -5,19 +5,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ShoppingBag, Trash2 } from "react-feather";
-import {
-  CartContainer,
-  List,
-  LeftColumn,
-  RightColumn,
-  ButtonContainer,
-  Button,
-  LargeText,
-  Text,
-  QuantityButton,
-  SmallText,
-  Input,
-} from "../style";
+import { Button } from "../style";
 
 let finalTotal = 0;
 class CheckoutCart extends Component {
@@ -195,9 +183,9 @@ class CheckoutCart extends Component {
     // }
     // console.log("items-->", items);
     return (
-      <div>
+      <div className="checkout-main-div">
         <h1 className="shopping-bag">Shopping Bag</h1>
-        <CartContainer>
+        <div className="checkout-div">
           {items.lenght !== 0 &&
             items.map((item) => {
               console.log("item!!!-->", item);
@@ -211,18 +199,17 @@ class CheckoutCart extends Component {
 
               return (
                 <div className="cartItem" key={item.productId}>
-                  <List>
+                  <div className="item-list">
                     <Link to={`/products/${item.productId}`}>
-                      <LeftColumn>
+                      <div className="checkout-left">
                         <img
-                          width="160"
-                          height="160"
+                          className="product-image"
                           src={productDisplay.imageUrl}
                           alt={productDisplay.name}
                         />
-                      </LeftColumn>
+                      </div>
                     </Link>
-                    <RightColumn>
+                    <div className="checkout-right">
                       <div>
                         <h2>{productDisplay.name}</h2>
                       </div>
@@ -249,46 +236,45 @@ class CheckoutCart extends Component {
                           }
                         />
                       </div>
-                    </RightColumn>
-                  </List>
+                    </div>
+                  </div>
                 </div>
               );
             })}
 
           {items && items.length > 0 ? (
             <div>
-              <ButtonContainer>
+              <div className="button-container">
                 <div className="cart-total-div">
                   <h2>
                     Total: $
                     {items && Math.round((total + Number.EPSILON) * 100) / 100}
                   </h2>
                 </div>
-              </ButtonContainer>
+              </div>
               <br />
 
-              <ButtonContainer>
+              <div className="button-container">
                 <Link to="/confirmation">
                   <Button onClick={this.handleCheckout}>CHECKOUT</Button>
                 </Link>
-              </ButtonContainer>
+              </div>
             </div>
           ) : (
-            <CartContainer>
-              <LargeText>
+            <div className="checkout-div">
+              <div className="back-to-shopping">
                 <Link to="/products">
                   <br />
                   Oh no! Your cart is empty!
                   <br />
                   <br />
-                  <br />
                   <ShoppingBag /> Back to Shopping
                   <br />
                 </Link>
-              </LargeText>
-            </CartContainer>
+              </div>
+            </div>
           )}
-        </CartContainer>
+        </div>
       </div>
     );
   }

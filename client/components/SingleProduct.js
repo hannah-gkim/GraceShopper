@@ -100,7 +100,7 @@ class SingleProduct extends Component {
             </select>
 
             <Link to="/addedToCart">
-              <div className="single-page-button-div">
+              <div className="vsingle-page-button-di">
                 <Button type="button" onClick={this.handleAddToCart}>
                   add to cart
                 </Button>
