@@ -3,20 +3,7 @@ import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { getNewCartItem } from "../store/addToCart";
 import { Link } from "react-router-dom";
-import {
-  SmallText,
-  LargeText,
-  Button,
-  Input,
-  QuantityButton,
-  ContainerSingle,
-  LeftColumnSingle,
-  RightColumnSingle,
-  AdminButton,
-  CartContainer,
-  CenterContainer,
-  Container,
-} from "../style";
+import { Button } from "../style";
 
 import { ShoppingBag, Trash2 } from "react-feather";
 
@@ -84,17 +71,17 @@ class SingleProduct extends Component {
     });
     price = formatter.format(price);
     return (
-      <div className="signle-product-wrap">
-        <LargeText>
+      <div className="single-product-main-div">
+        <div className="back-to-shopping">
           <Link to="/products">
             <ShoppingBag /> Back to Shopping
           </Link>
-        </LargeText>
-        <div className="single-product">
-          <LeftColumnSingle>
+        </div>
+        <div className="signle-product-wrap">
+          <div className="product-img">
             <img width="300" height="300" src={product.imageUrl} />
-          </LeftColumnSingle>
-          <RightColumnSingle>
+          </div>
+          <div className="product-detail">
             <h3>name: {product.name}</h3>
             <h3>price: {`${price}`}</h3>
             <h3>description: {product.description}</h3>
@@ -119,7 +106,7 @@ class SingleProduct extends Component {
                 </Button>
               </div>
             </Link>
-          </RightColumnSingle>
+          </div>
         </div>
       </div>
     );
