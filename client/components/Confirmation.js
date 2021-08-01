@@ -4,16 +4,16 @@ class Confirmation extends Component {
   render() {
     return (
       <div>
-        <h1 style={{ textAlign: "center", marginTop: "150px" }}>
+        <h3 style={{ textAlign: "center", marginTop: "80px" }}>
           Thank you for your order!
-        </h1>
+        </h3>
         <div className="confirmation-div">
           <div
             style={{
               backgroundColor: "black",
               color: "white",
               textAlign: "center",
-              width: "70%",
+              width: "60%",
             }}
           >
             <h1>YOUR ORDER WAS PLACED SUCCESSFULLY.</h1>

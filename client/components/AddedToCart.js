@@ -1,38 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import {
-  CartContainer,
-
-  LargeText,
- 
-} from "../style";
-import { ShoppingBag, Trash2 } from "react-feather";
+import { ShoppingBag } from "react-feather";
 class AddedToCart extends Component {
   render() {
     return (
-      <div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: "150px",
-            marginLeft: "200px",
-            marginRight: "200px",
-            padding: "70px",
-            background: "black",
-            color: "white",
-            border: "3px solid grey",
-            justifyContent: "center",
-            fontSize: "35px",
-          }}
-        >
-          <div>Added to Cart</div>
+      <div className="addedToCart-main-div">
+        <div className="added-to-cart-wrap">
+          <div className="added-to-cart">
+            <div>Added to Cart</div>
+          </div>
+        </div>
+
+        <div className="cart-button">
           <Link to="/viewCart">
-            <div
-              style={{
-                marginLeft: "50px",
-              }}
-            >
+            <div>
               <button
                 style={{
                   fontSize: "30px",
@@ -43,13 +24,14 @@ class AddedToCart extends Component {
             </div>
           </Link>
         </div>
-        <CartContainer>
-          <LargeText>
+
+        <div className="cart-button">
+          <div className="back-to-shopping">
             <Link to="/products">
               <ShoppingBag /> Back to Shopping
             </Link>
-          </LargeText>
-        </CartContainer>
+          </div>
+        </div>
       </div>
     );
   }

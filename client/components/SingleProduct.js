@@ -5,7 +5,7 @@ import { getNewCartItem } from "../store/addToCart";
 import { Link } from "react-router-dom";
 import { Button } from "../style";
 
-import { ShoppingBag, Trash2 } from "react-feather";
+import { ShoppingBag } from "react-feather";
 
 class SingleProduct extends Component {
   constructor(props) {
