@@ -1,38 +1,6 @@
 import styled from "styled-components";
 
-/* Home.js */
-export const Img = styled.div`
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 2rem;
-`;
-
 /* Navbar.js */
-export const Logo = styled.span`
-  font-family: Arial, sans-serif;
-  letter-spacing: 3px;
-  font-size: 2rem;
-  color: black;
-  padding: 0.5rem 5rem 0.5rem 2.5rem;
-`;
-export const Nav = styled.div`
-  font-size: small;
-  color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: space-around;
-  margin: 1rem;
-`;
-
-export const NavItems = styled.span`
-  padding: 0.5rem;
-  padding-right: 3rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-`;
 
 /* CheckoutCart.js */
 export const CartContainer = styled.div`

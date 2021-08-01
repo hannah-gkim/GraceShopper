@@ -2,46 +2,35 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import { Nav, Logo, NavItems, NavItemsRed } from "../style";
 
 //  state,  thunk
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <Nav>
-    <Logo>
-      <Link to="/">Les Choses de La Vie</Link>
-    </Logo>
-    {isLoggedIn ? (
-      <div className="nav-items">
-        <NavItems>
+  <nav className="nav">
+    <div className="nav-wrap">
+      <div className="nav-logo">
+        <Link to="/">Les Choses de La Vie</Link>
+      </div>
+      {isLoggedIn ? (
+        <div className="nav-items">
           <Link to="/products">Shop</Link>
-        </NavItems>
-        <NavItems>
           <Link to={`/viewCart`}>Cart</Link>
-        </NavItems>
-        <NavItems>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
-        </NavItems>
-      </div>
-    ) : (
-      <div>
-        {/*if not loggedIn*/}
-        <NavItems>
-          <Link to="/products">Shop</Link>
-        </NavItems>
-        <NavItems>
-          <Link to={`/viewCart`}>Cart</Link>
-        </NavItems>
-        <NavItems>
-          <Link to="/login">Login</Link>
-        </NavItems>
-        <NavItems>
-          <Link to="/signup">Sign Up</Link>
-        </NavItems>
-      </div>
-    )}
-  </Nav>
+        </div>
+      ) : (
+        <div>
+          {/*if not loggedIn*/}
+          <div className="nav-items">
+            <Link to="/products">Shop</Link>
+            <Link to={`/viewCart`}>Cart</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        </div>
+      )}
+    </div>
+  </nav>
 );
 
 /* CONTAINER */
