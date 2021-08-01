@@ -227,42 +227,36 @@ hr {
 
 /* AllProduct.js */
 .grid-main-div {
-  padding: 5rem 10rem 5rem 10rem;
+  /* padding: 5rem 5rem 5rem 5rem; */
+  display: flex;
+  flex-wrap: wrap;
 }
 .grid-box {
   display: flex;
-  width: 100%;
-  height: auto;
+  flex-wrap: wrap;
   justify-content: space-around;
-
-  /* padding-right: 5%;
-  padding-left: 5%; */
-  /* margin-right: 5%;
-  margin-left: 5%; */
-  /* margin-top: 50px; */
-  margin-bottom: 20px;
+  /* width: 100%; */
+  /* height: auto; */
+  /* justify-content: space-around; */
+  /* margin-bottom: 20px; */
 }
 .each-grid {
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 40px;
-  /* flex-wrap: wrap; */
-}
-.grid-text-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 4px 0 4px 0;
+  /* width: 100%;
+  height: 100%; */
+
+  justify-content: center;
 }
 .all-product-img {
   width: 250px !important;
   height: 250px !important;
+  justify-content: center;
 }
-.grid-wrap img {
-  /* min-width: 20px;
-  min-height: 20px;
-  max-width: 230px;
-  max-height: 230px; */
+.grid-text-container {
+  /* justify-content: space-between;
+  padding: 4px 0 4px 0; */
+  width: 250px;
+  height: 250px;
+  flex-wrap: wrap;
 }
 .text {
   font-family: Arial, sans-serif;

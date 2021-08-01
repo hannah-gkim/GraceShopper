@@ -37,31 +37,29 @@ class AllProducts extends React.Component {
     return (
       <div className="grid-main-div">
         <div className="grid-box">
-          <div className="each-grid">
-            {products
-              ? products.map((product) => {
-                  return (
-                    <div className="grid-wrap" key={product.id}>
-                      <Link to={`/products/${product.id}`}>
-                        <img
-                          className="all-product-img"
-                          src={product.imageUrl}
-                          alt={product.name}
-                          // width="230"
-                          // height="230"
-                        />
-                      </Link>
-                      <Link to={`/products/${product.id}`}>
-                        <div className="grid-text-container">
-                          <p className="text"> {product.name}</p>
-                          <p className="text">{convert(product.price)} </p>
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                })
-              : "no products"}
-          </div>
+          {products
+            ? products.map((product) => {
+                return (
+                  <div className="each-grid" key={product.id}>
+                    <Link to={`/products/${product.id}`}>
+                      <img
+                        className="all-product-img"
+                        src={product.imageUrl}
+                        alt={product.name}
+                        // width="230"
+                        // height="230"
+                      />
+                    </Link>
+                    <Link to={`/products/${product.id}`}>
+                      <div className="grid-text-container">
+                        <p className="text"> {product.name}</p>
+                        <p className="text">{convert(product.price)} </p>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })
+            : "no products"}
         </div>
       </div>
     );
