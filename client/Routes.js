@@ -23,7 +23,7 @@ class Routes extends Component {
     return (
       <div>
         <Switch>
-          <Route path="/home" component={Home} />
+          <Route exact path="/" component={Home} />
           <Route
             path="/login"
             render={() => (isLoggedIn ? <Redirect to="/" /> : <Login />)}
@@ -48,7 +48,7 @@ class Routes extends Component {
             render={() => (isLoggedIn ? <AddedToCart /> : <NotLoggedIn />)}
           />
           {/* <AddedToCart path="/addedToCart" /> */}
-          <Redirect to="/home" />
+          <Redirect to="/" />
         </Switch>
       </div>
     );
