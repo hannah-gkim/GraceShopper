@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Collection from "./Collection";
 import FeaturedProduct from "./FeaturedProduct";
+import Offer from "./Offer";
+import NewArrivals from "./NewArrivals";
+// import NewsLetter from "./NewsLetter";
+// import Sponsors from "./Sponsors";
+// import Footer from "./Footer";
 
 export const Home = (props) => {
   const { username } = props;
@@ -16,10 +21,9 @@ export const Home = (props) => {
               <span>ARRIVALS</span>
             </h1>
 
-            <Link to="/products">
-              <a href="#featured" className="button">
-                GO SHOPPING
-              </a>
+  
+            <Link to="/products" className="button">
+              GO SHOPPING
             </Link>
           </div>
 
@@ -28,6 +32,11 @@ export const Home = (props) => {
       </div>
       <Collection />
       <FeaturedProduct />
+      <Offer />
+      <NewArrivals />
+      {/* <NewsLetter />
+      <Sponsors /> */}
+      {/* <Footer /> */}
     </>
   );
 };

@@ -51,6 +51,16 @@ class Navbar extends React.Component {
                 <ul className="nav__list">
                   <li className="nav__item">
                     <Link
+                      to="/"
+                      className="nav__link"
+                      onClick={this.hideMenu.bind(this)}
+                    >
+                      Home
+                    </Link>
+                  </li>
+
+                  <li className="nav__item">
+                    <Link
                       to="/products"
                       className="nav__link"
                       onClick={this.hideMenu.bind(this)}
@@ -58,18 +68,19 @@ class Navbar extends React.Component {
                       Shop
                     </Link>
                   </li>
+
                   {this.props.isLoggedIn ? (
                     <li
                       className="nav__item"
                       onClick={this.hideMenu.bind(this)}
                     >
-                      <a
-                        href="#"
+                      <Link
+                        to="/"
                         onClick={this.props.handleClick}
                         className="nav__link"
                       >
                         Logout
-                      </a>
+                      </Link>
                     </li>
                   ) : (
                     <>

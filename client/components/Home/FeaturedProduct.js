@@ -1,12 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function FeaturedProduct() {
   return (
     <section className="featured section">
       <h2 className="section-title">FEATURED PRODUCTS</h2>
-      <a href="#" className="section-all">
+      <Link to="/products" className="section-all">
         View All
-      </a>
+      </Link>
+
       <div className="featured__container bd-grid">
         {/* product 1 */}
         <div className="featured__product">
@@ -52,7 +54,7 @@ export default function FeaturedProduct() {
             <span className="featured__preci">$99</span>
           </div>
         </div>
-           {/* product 5 */}
+        {/* product 5 */}
       </div>
     </section>
   );
