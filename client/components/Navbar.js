@@ -42,23 +42,23 @@ class Navbar extends React.Component {
             </Link>
 
             <box-icon
-            onClick={this.toggleHidden.bind(this)}
+              onClick={this.toggleHidden.bind(this)}
               className="nav__toggle"
               name="menu"
             ></box-icon>
-            {!this.state.isHidden &&
-              (this.props.isLoggedIn ? (
-                <div className="nav__menu">
-                  <ul className="nav__list">
-                    <li className="nav__item">
-                      <Link
-                        to="/products"
-                        className="nav__link"
-                        onClick={this.hideMenu.bind(this)}
-                      >
-                        Shop
-                      </Link>
-                    </li>
+            {!this.state.isHidden && (
+              <div className="nav__menu">
+                <ul className="nav__list">
+                  <li className="nav__item">
+                    <Link
+                      to="/products"
+                      className="nav__link"
+                      onClick={this.hideMenu.bind(this)}
+                    >
+                      Shop
+                    </Link>
+                  </li>
+                  {this.props.isLoggedIn ? (
                     <li
                       className="nav__item"
                       onClick={this.hideMenu.bind(this)}
@@ -71,90 +71,37 @@ class Navbar extends React.Component {
                         Logout
                       </a>
                     </li>
-                  </ul>
-                </div>
-              ) : (
-                <div className="nav__menu">
-                  {/*if not loggedIn*/}
-                  <ul className="nav__list">
-                    <li className="nav__item">
-                      <Link
-                        to="/products"
-                        className="nav__link"
-                        onClick={this.hideMenu.bind(this)}
-                      >
-                        Shop
-                      </Link>
-                    </li>
-
-                    <li className="nav__item">
-                      <Link
-                        to="/login"
-                        className="nav__link"
-                        onClick={this.hideMenu.bind(this)}
-                      >
-                        Login
-                      </Link>
-                    </li>
-                    <li className="nav__item">
-                      <Link
-                        to="/signup"
-                        className="nav__link"
-                        onClick={this.hideMenu.bind(this)}
-                      >
-                        Sign Up
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              ))}
+                  ) : (
+                    <>
+                      <li className="nav__item active">
+                        <Link
+                          to="/login"
+                          className="nav__link"
+                          onClick={this.hideMenu.bind(this)}
+                        >
+                          Login
+                        </Link>
+                      </li>
+                      <li className="nav__item active">
+                        <Link
+                          to="/signup"
+                          className="nav__link"
+                          onClick={this.hideMenu.bind(this)}
+                        >
+                          Sign Up
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
         </nav>
       </header>
     );
   }
 }
-
-// const Child = ({ isLoggedIn, handleClick }) => {
-//   return isLoggedIn ? (
-//     <div className="nav__menu">
-//       <ul className="nav__list">
-//         <li className="nav__item">
-//           <Link to="/products" className="nav__link">
-//             Shop
-//           </Link>
-//         </li>
-//         <li className="nav__item">
-//           <a href="#" onClick={handleClick} className="nav__link">
-//             Logout
-//           </a>
-//         </li>
-//       </ul>
-//     </div>
-//   ) : (
-//     <div className="nav__menu">
-//       {/*if not loggedIn*/}
-//       <ul className="nav__list">
-//         <li className="nav__item">
-//           <Link to="/products" className="nav__link">
-//             Shop
-//           </Link>
-//         </li>
-
-//         <li className="nav__item">
-//           <Link to="/login" className="nav__link">
-//             Login
-//           </Link>
-//         </li>
-//         <li className="nav__item">
-//           <Link to="/signup" className="nav__link">
-//             Sign Up
-//           </Link>
-//         </li>
-//       </ul>
-//     </div>
-//   );
-// };
 
 /* CONTAINER */
 const mapState = (state) => {

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
 import AllProducts from "./components/AllProducts";
@@ -33,6 +33,7 @@ class Routes extends Component {
             render={() => (isLoggedIn ? <Redirect to="/" /> : <Signup />)}
           />
           <Route exact path="/products/:id" component={SingleProduct} />
+
           <Route exact path="/products" component={AllProducts} />
           {/* <Route exact path="/viewCart" component={CheckoutCart} /> */}
           <Route
