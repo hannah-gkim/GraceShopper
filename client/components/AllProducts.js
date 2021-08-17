@@ -35,33 +35,41 @@ class AllProducts extends React.Component {
     };
 
     return (
-      <div className="grid-main-div">
-        <div className="grid-box">
+      <section className="featured section">
+        <h2 className="section-title">VIEW ALL</h2>
+
+        <div className="featured__container bd-grid">
           {products
             ? products.map((product) => {
                 return (
-                  <div className="each-grid" key={product.id}>
-                    <Link to={`/products/${product.id}`}>
-                      <img
-                        className="all-product-img"
-                        src={product.imageUrl}
-                        alt={product.name}
-                        // width="230"
-                        // height="230"
-                      />
-                    </Link>
-                    <Link to={`/products/${product.id}`}>
-                      <div className="grid-text-container">
-                        <p className="text"> {product.name}</p>
-                        <p className="text">{convert(product.price)} </p>
-                      </div>
-                    </Link>
+                  <div className="featured__product" key={product.id}>
+                    <div className="featured__box">
+                      <Link to={`/products/${product.id}`}>
+                        <img
+                          src={product.imageUrl}
+                          alt={product.name}
+                          width="300"
+                          height="300"
+                          className="allProduct__img"
+                        />
+                      </Link>
+                    </div>
+
+                    <div className="featured__data">
+                      <Link to={`/products/${product.id}`}>
+                        <h3 className="featured__name">{product.name}</h3>
+
+                        <span className="featured__preci">
+                          {convert(product.price)}{" "}
+                        </span>
+                      </Link>
+                    </div>
                   </div>
                 );
               })
             : "no products"}
         </div>
-      </div>
+      </section>
     );
   }
 }

@@ -1,118 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 import "boxicons";
 
 //  state,  thunk
-class Navbar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isHidden: true,
-    };
-    this.toggleHidden.bind(this);
-  }
+function Navbar({ isLoggedIn, handleClick }) {
+  const [isActive, setIsActive] = useState("false");
 
-  toggleHidden() {
-    this.setState({
-      isHidden: !this.state.isHidden,
-    });
-  }
+  const toggleMenu = () => {
+    setIsActive(!isActive);
+  };
 
-  hideMenu() {
-    this.setState({
-      isHidden: true,
-    });
-  }
+  const hideMenu = () => {
+    setIsActive("false");
+  };
 
-  render() {
-    return (
-      <header className="header1">
-        <nav className="nav bd-grid">
-          <div onClick={this.hideMenu.bind(this)}>
-            <Link to="/" className="nav__logo">
-              Les Choses de La Vie
-            </Link>
-          </div>
+  return (
+    <header className="header1">
+      <nav className="nav bd-grid">
+        <div>
+          <Link to="/" className="nav__logo" onClick={hideMenu}>
+            Les Choses de La Vie
+          </Link>
+        </div>
 
-          <div>
-            <Link to={`/viewCart`} onClick={this.hideMenu.bind(this)}>
-              <box-icon name="cart" className="nav__cart"></box-icon>
-            </Link>
+        <div className={isActive ? "nav__menu" : "show"}>
+          <ul className="nav__list">
+            <li className="nav__item">
+              <Link to="/" className="nav__link" onClick={hideMenu}>
+                Home
+              </Link>
+            </li>
 
-            <box-icon
-              onClick={this.toggleHidden.bind(this)}
-              className="nav__toggle"
-              name="menu"
-            ></box-icon>
-            {!this.state.isHidden && (
-              <div className="nav__menu">
-                <ul className="nav__list">
-                  <li className="nav__item">
-                    <Link
-                      to="/"
-                      className="nav__link"
-                      onClick={this.hideMenu.bind(this)}
-                    >
-                      Home
-                    </Link>
-                  </li>
+            <li className="nav__item">
+              <Link to="/products" className="nav__link" onClick={hideMenu}>
+                Shop
+              </Link>
+            </li>
 
-                  <li className="nav__item">
-                    <Link
-                      to="/products"
-                      className="nav__link"
-                      onClick={this.hideMenu.bind(this)}
-                    >
-                      Shop
-                    </Link>
-                  </li>
-
-                  {this.props.isLoggedIn ? (
-                    <li
-                      className="nav__item"
-                      onClick={this.hideMenu.bind(this)}
-                    >
-                      <Link
-                        to="/"
-                        onClick={this.props.handleClick}
-                        className="nav__link"
-                      >
-                        Logout
-                      </Link>
-                    </li>
-                  ) : (
-                    <>
-                      <li className="nav__item active">
-                        <Link
-                          to="/login"
-                          className="nav__link"
-                          onClick={this.hideMenu.bind(this)}
-                        >
-                          Login
-                        </Link>
-                      </li>
-                      <li className="nav__item active">
-                        <Link
-                          to="/signup"
-                          className="nav__link"
-                          onClick={this.hideMenu.bind(this)}
-                        >
-                          Sign Up
-                        </Link>
-                      </li>
-                    </>
-                  )}
-                </ul>
-              </div>
+            {isLoggedIn ? (
+              <li className="nav__item" onClick={hideMenu}>
+                <Link to="/" onClick={handleClick} className="nav__link">
+                  Logout
+                </Link>
+              </li>
+            ) : (
+              <>
+                <li className="nav__item active">
+                  <Link to="/login" className="nav__link" onClick={hideMenu}>
+                    Login
+                  </Link>
+                </li>
+                <li className="nav__item active">
+                  <Link to="/signup" className="nav__link" onClick={hideMenu}>
+                    Sign Up
+                  </Link>
+                </li>
+              </>
             )}
+          </ul>
+        </div>
+
+        <div className="cart-menu-icon">
+          <Link to={`/viewCart`} onClick={hideMenu}>
+            <box-icon name="cart" className="nav__cart"></box-icon>
+          </Link>
+          <div className="nav__toggle " onClick={toggleMenu}>
+            <box-icon name="menu"></box-icon>
           </div>
-          
-        </nav>
-      </header>
-    );
-  }
+        </div>
+      </nav>
+    </header>
+  );
 }
 
 /* CONTAINER */
