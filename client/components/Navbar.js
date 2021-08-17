@@ -108,6 +108,7 @@ class Navbar extends React.Component {
               </div>
             )}
           </div>
+          
         </nav>
       </header>
     );
