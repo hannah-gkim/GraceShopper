@@ -259,7 +259,7 @@ class CheckoutCart extends Component {
               </div>
             </div>
           ) : (
-            <div>
+            <div className="addedToCart section">
               <div className="back-to-shopping">
                 <Link to="/products">
                   <br />
