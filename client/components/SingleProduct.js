@@ -36,28 +36,26 @@ class SingleProduct extends Component {
       const userId = this.props.user.id;
       this.props.createCartItem(userId, cartitem);
     } else {
-      const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-      console.log(cartData);
-      const index = cartData.findIndex(
-        (item) => item.productId == this.props.match.params.id
-      );
-      if (index == -1) {
-        const itemToAdd = {
-          productId: this.props.match.params.id,
-          name: this.props.singleProduct.name,
-          price: this.props.singleProduct.price,
-          quantity: this.state.quantity,
-          imageUrl: this.props.singleProduct.imageUrl,
-        };
-        cartData.push(itemToAdd);
-      } else {
-        cartData[index].quantity += parseInt(this.state.quantity);
-        console.log("item exists");
-      }
-      window.localStorage.setItem("cart", JSON.stringify(cartData));
-
-      //   console.log(JSON.parse(localStorage.getItem("cart")));
-      //   console.log(JSON.stringify(window.localStorage.getItem("cart")));
+      return <h2>Please Login to Shopp</h2>;
+      // const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+      // console.log(cartData);
+      // const index = cartData.findIndex(
+      //   (item) => item.productId == this.props.match.params.id
+      // );
+      // if (index == -1) {
+      //   const itemToAdd = {
+      //     productId: this.props.match.params.id,
+      //     name: this.props.singleProduct.name,
+      //     price: this.props.singleProduct.price,
+      //     quantity: this.state.quantity,
+      //     imageUrl: this.props.singleProduct.imageUrl,
+      //   };
+      //   cartData.push(itemToAdd);
+      // } else {
+      //   cartData[index].quantity += parseInt(this.state.quantity);
+      //   console.log("item exists");
+      // }
+      // window.localStorage.setItem("cart", JSON.stringify(cartData));
     }
   }
   render() {
