@@ -10,10 +10,11 @@
 
 /*===== Colores =====*/
 :root {
-  --first-color: #e55947;
-  --first-color-alt: #d2321e;
+  --first-color: #ffa2b9;
+  --first-color-alt: #ff688e;
   --white-color: #fafaff;
   --dark-color: #101010;
+  --footer-color: #d8d8d8;
   --dark-color-light: #606060;
   --gray-color: #f0f1f3;
 }
@@ -38,7 +39,7 @@
   }
 }
 
-/*===== Margenes =====*/
+/*===== Margins =====*/
 :root {
   --mb-1: 0.5rem;
   --mb-2: 1rem;
@@ -143,26 +144,6 @@ img {
 .cart-menu-icon {
   display: flex;
 }
-/* small screen like a phone */
-@media screen and (max-width: 768px) {
-  .nav__menu {
-    position: fixed;
-    top: var(--header-height);
-    right: -100%;
-    width: 80%;
-    height: 100%;
-    padding: 2rem;
-    background-color: var(--white-color);
-    transition: 0.5s;
-  }
-  .nav__link:hover,
-  .nav__link:active {
-    color: var(--first-color);
-  }
-  .collection {
-    margin-top: 70%;
-  }
-}
 
 .nav__item {
   margin-bottom: var(--mb-4);
@@ -242,9 +223,7 @@ img {
   background-color: var(--first-color-alt);
 }
 /*===== COLLECTION =====*/
-.collection {
-  /* margin-top: 70%; */
-}
+
 .collection__container {
   row-gap: 2rem;
 }
@@ -402,8 +381,8 @@ img {
 }
 /*===== FOOTER =====*/
 .footer {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+  background-color: var(--footer-color);
+  color: var(--dark-color-light);
 }
 .footer__container {
   row-gap: 1.5rem;
@@ -438,17 +417,81 @@ img {
   font-size: var(--small-font-size);
 }
 
-/*===== All Products =====*/
-.allProduct__img img {
-  width: 1000 !important;
-  height: 100 !important;
+/*===== AllProducts =====*/
+.allProduct__img {
+  width: 200px !important;
+  height: 200px !important;
 }
-.featured__box img {
-  width: 300;
-  height: 300;
+.allProduct__box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* background-color: var(--gray-color); */
 }
+.allProduct__data {
+  text-align: center;
+}
+.allProduct__product {
+  transition: 0.3s;
+}
+.allProduct__product:hover {
+  transform: translateY(-0.5rem);
+}
+
 /* ===== MEDIA QUERIES=====*/
-/* small screen like a phone */
+
+/* iphone 5/SE */
+@media screen and (max-height: 568px) {
+  .collection {
+    margin-top: 0;
+  }
+  .home__img {
+    padding-top: 55%;
+    padding-left: 10%;
+  }
+}
+/* average phone */
+@media screen and (max-width: 767px) {
+  .nav__menu {
+    position: fixed;
+    top: var(--header-height);
+    right: -100%;
+    width: 80%;
+    height: 100%;
+    padding: 2rem;
+    background-color: var(--white-color);
+    transition: 0.5s;
+  }
+  .nav__link:hover,
+  .nav__link:active {
+    color: var(--first-color);
+  }
+  .home__img {
+    top: 35%;
+  }
+  .home {
+    padding-bottom: 75%;
+  }
+  .collection {
+    margin-top: 25%;
+  }
+  .allProduct__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* average phone X */
+/* @media screen and (max-width: 815px) {
+  .collection {
+    margin-top: 70%;
+  }
+  .home__img {
+    top: 39%;
+    left: 26%;
+  }
+} */
+
+/* like Ipad */
 @media screen and (min-width: 768px) {
   body {
     margin: 0;
@@ -488,6 +531,9 @@ img {
   .home__img {
     width: 370px;
   }
+  .collection {
+    margin-top: 10%;
+  }
   .collection__container {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -498,13 +544,38 @@ img {
   .collection__img {
     width: 130px;
   }
-  .featured__container {
+  .featured__container,
+  .sponsors__container {
     grid-template-columns: repeat(4, 1fr);
   }
   .offer__data {
     padding: 5rem 0;
   }
-  /* .collection {
-    margin-top: 70%;
-  } */
+  .new__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .newsletter__form {
+    width: 400px;
+    margin: 0 auto;
+  }
+  .footer__container {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* computer */
+@media screen and (min-width: 1024px) {
+  .bd-grid {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .home__data {
+    padding-left: 7rem;
+  }
+  .home__img {
+    right: 15%;
+  }
 }

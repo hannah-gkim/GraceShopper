@@ -38,24 +38,22 @@ class AllProducts extends React.Component {
       <section className="featured section">
         <h2 className="section-title">VIEW ALL</h2>
 
-        <div className="featured__container bd-grid">
+        <div className="featured__container bd-grid allProduct__container">
           {products
             ? products.map((product) => {
                 return (
-                  <div className="featured__product" key={product.id}>
-                    <div className="featured__box">
+                  <div className="allProduct__product" key={product.id}>
+                    <div className="allProduct__box">
                       <Link to={`/products/${product.id}`}>
                         <img
+                          className="allProduct__img"
                           src={product.imageUrl}
                           alt={product.name}
-                          width="300"
-                          height="300"
-                          className="allProduct__img"
                         />
                       </Link>
                     </div>
 
-                    <div className="featured__data">
+                    <div className="allProduct__data">
                       <Link to={`/products/${product.id}`}>
                         <h3 className="featured__name">{product.name}</h3>
 

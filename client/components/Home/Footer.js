@@ -10,7 +10,7 @@ function Footer({ isLoggedIn, handleClick }) {
       <div className="footer__container bd-grid">
         <div className="footer__box">
           <h3 className="footer__title">Les Choses de La Vie</h3>
-          <p className="footer__deal">Products store</p>
+          {/* <p className="footer__deal">Products store</p> */}
 
           <a href="#">
             <img src="/img/footerstore1.png" alt="" className="footer__store" />
