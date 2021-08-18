@@ -1,24 +1,17 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Routes from "./Routes";
+import Footer from "./components/Home/Footer";
+import Sponsors from "./components/Home/Sponsors";
+import NewsLetter from "./components/Home/NewsLetter";
 
 const App = () => {
   return (
-    <div className="main-div">
-      <div className="navbar-top">
-        <div className="p-div">
-          <p>
-            FREE shipping on orders $75+ | Register for FREE Shipping on Your
-            1st Order
-          </p>
-        </div>
-      </div>
-
+    <div>
       <Navbar />
-      <hr></hr>
-      <div className="content-div">
-        <Routes />
-      </div>
+      <Routes />
+      
+      <Footer />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import SingleProduct from "./components/SingleProduct";
 import { me } from "./store";
 import AllProducts from "./components/AllProducts";
@@ -10,9 +10,8 @@ import CheckoutCart from "./components/CheckoutCart";
 import Confirmation from "./components/Confirmation";
 import AddedToCart from "./components/AddedToCart";
 import NotLoggedIn from "./components/NotLoggedIn";
-/**
- * COMPONENT
- */
+// import FeaturedProduct from "./components/Home/FeaturedProduct";
+
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -32,7 +31,9 @@ class Routes extends Component {
             path="/signup"
             render={() => (isLoggedIn ? <Redirect to="/" /> : <Signup />)}
           />
+          {/* <Route path="/featured" component={FeaturedProduct} /> */}
           <Route exact path="/products/:id" component={SingleProduct} />
+
           <Route exact path="/products" component={AllProducts} />
           {/* <Route exact path="/viewCart" component={CheckoutCart} /> */}
           <Route
