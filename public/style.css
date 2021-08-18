@@ -263,6 +263,7 @@ img {
 .featured__container {
   row-gap: 2rem;
 }
+
 .featured__product {
   transition: 0.3s;
 }
@@ -418,9 +419,10 @@ img {
 }
 
 /*===== AllProducts =====*/
+
 .allProduct__img {
   width: 200px !important;
-  height: 200px !important;
+  height: 250px !important;
 }
 .allProduct__box {
   position: relative;
@@ -437,7 +439,65 @@ img {
 .allProduct__product:hover {
   transform: translateY(-0.5rem);
 }
+.allProduct {
+  margin: 3rem;
+}
+/*===== CheckoutCart =====*/
+.checkout__box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  /* background-color: var(--gray-color); */
+}
+.product__img {
+  width: 200px !important;
+  height: 250px !important;
+}
+.addOrDel__data {
+  text-align: center;
+}
 
+.checkout__container {
+  row-gap: 2rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+.checkout__name {
+  margin-bottom: var(--mb-1);
+  text-transform: uppercase;
+  font-size: var(--normal-font-size);
+  width: 200px;
+}
+.checkout__product {
+  transition: 0.3s;
+  display: flex;
+}
+.checkout__product:hover {
+  transform: translateY(-0.5rem);
+}
+.checkout__chekcout {
+  text-align: right;
+}
+.checkout {
+  margin: 3rem;
+}
+.back-to-shopping {
+  text-align: center;
+}
+
+/* ===== AuthForm=====*/
+
+.authForm {
+  text-align: center;
+}
+
+/* ===== Single product=====*/
+.single-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 /* ===== MEDIA QUERIES=====*/
 
 /* iphone 5/SE */
@@ -448,6 +508,12 @@ img {
   .home__img {
     padding-top: 55%;
     padding-left: 10%;
+  }
+  .checkout {
+    margin: 0;
+  }
+  .allProduct {
+    margin: 0;
   }
 }
 /* average phone */
@@ -477,6 +543,12 @@ img {
   }
   .allProduct__container {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .checkout {
+    margin: 0;
+  }
+  .allProduct {
+    margin: 0;
   }
 }
 
@@ -563,6 +635,16 @@ img {
     display: flex;
     justify-content: space-around;
     grid-template-columns: repeat(3, 1fr);
+  }
+  .addedToCart {
+    margin: 7rem;
+    margin-bottom: 22rem;
+    margin-top: 23rem;
+  }
+  .authForm__container {
+    margin: 7rem;
+    margin-bottom: 20.5rem;
+    margin-top: 19rem;
   }
 }
 

@@ -39,6 +39,12 @@ function Navbar({ isLoggedIn, handleClick }) {
               </Link>
             </li>
 
+            <li className="nav__item">
+              <Link to={`/viewCart`} className="nav__link" onClick={hideMenu}>
+                Cart
+              </Link>
+            </li>
+
             {isLoggedIn ? (
               <li className="nav__item" onClick={hideMenu}>
                 <Link to="/" onClick={handleClick} className="nav__link">

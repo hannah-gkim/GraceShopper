@@ -5,8 +5,8 @@ import Collection from "./Collection";
 import FeaturedProduct from "./FeaturedProduct";
 import Offer from "./Offer";
 import NewArrivals from "./NewArrivals";
-// import NewsLetter from "./NewsLetter";
-// import Sponsors from "./Sponsors";
+import NewsLetter from "./NewsLetter";
+import Sponsors from "./Sponsors";
 // import Footer from "./Footer";
 
 export const Home = (props) => {
@@ -17,11 +17,10 @@ export const Home = (props) => {
         <div className="home__container bd-grid">
           <div className="home__data">
             <h1 className="home__title">
-              NEW <br />
-              <span>ARRIVALS</span>
+              FREE <br />
+              <span>Shipping</span>
             </h1>
 
-  
             <Link to="/products" className="button">
               GO SHOPPING
             </Link>
@@ -34,8 +33,8 @@ export const Home = (props) => {
       <FeaturedProduct />
       <Offer />
       <NewArrivals />
-      {/* <NewsLetter />
-      <Sponsors /> */}
+      <NewsLetter />
+      <Sponsors />
       {/* <Footer /> */}
     </>
   );

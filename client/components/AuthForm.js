@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-import { Container, Button, SmallText } from "../style";
+import { Button } from "../style";
 
 /**
  * COMPONENT
@@ -10,18 +10,21 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
   let login = displayName !== "Login";
   return (
-    <Container>
-      <form onSubmit={handleSubmit} name={name}>
+    <section className="authForm__container section">
+      <form onSubmit={handleSubmit} name={name} className="authForm">
         <label htmlFor="username">
-          <SmallText>Username</SmallText>
+          <p>Username</p>
         </label>
+        <br />
         <input name="username" type="text" />
         <br />
         {login ? (
           <>
             <label htmlFor="email">
-              <SmallText>Email</SmallText>
+              <br />
+              <p>Email</p>
             </label>
+            <br />
             <input name="email" type="email" />
           </>
         ) : (
@@ -29,19 +32,31 @@ const AuthForm = (props) => {
         )}
 
         <label htmlFor="password">
-          <SmallText>Password</SmallText>
+          <br />
+          <br />
+          <p>Password</p>
         </label>
+        <br />
         <input name="password" type="password" />
         <br />
         <br />
-        <Button type="submit">{displayName}</Button>
+        <button
+          style={{
+            backgroundColor: "#ffa2b9",
+            border: "none",
+            padding: "1rem",
+            color: "white",
+            borderRadius: "4px",
+          }}
+          type="submit"
+        >
+          {displayName}
+        </button>
         <br />
         <br />
-        {error && error.response && (
-          <SmallText> {error.response.data} </SmallText>
-        )}
+        {error && error.response && <p> {error.response.data} </p>}
       </form>
-    </Container>
+    </section>
   );
 };
 

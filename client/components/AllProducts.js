@@ -35,7 +35,7 @@ class AllProducts extends React.Component {
     };
 
     return (
-      <section className="featured section">
+      <section className="allProduct section">
         <h2 className="section-title">VIEW ALL</h2>
 
         <div className="featured__container bd-grid allProduct__container">

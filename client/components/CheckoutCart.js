@@ -183,12 +183,13 @@ class CheckoutCart extends Component {
     // }
     // console.log("items-->", items);
     return (
-      <div className="checkout-main-div">
-        <h1 className="shopping-bag">Shopping Bag</h1>
-        <div className="checkout-div">
+      <section className="checkout section">
+        <h2 className="section-title">Shopping Bag</h2>
+
+        <div className="checkout__container bd-grid">
           {items.lenght !== 0 &&
             items.map((item) => {
-              console.log("item!!!-->", item);
+              // console.log("item!!!-->", item);
               let productDisplay = findProduct(item.productId);
               let price = (productDisplay.price * item.quantity) / 100;
 
@@ -198,70 +199,67 @@ class CheckoutCart extends Component {
               total += Number(productDisplay.price * item.quantity) / 100;
 
               return (
-                <div className="cartItem" key={item.productId}>
-                  <div className="item-list">
+                <div className="checkout__product" key={item.productId}>
+                  <div className="checkout__box">
                     <Link to={`/products/${item.productId}`}>
-                      <div className="checkout-left">
-                        <img
-                          className="product-image"
-                          src={productDisplay.imageUrl}
-                          alt={productDisplay.name}
-                        />
-                      </div>
+                      <img
+                        className="product__img"
+                        src={productDisplay.imageUrl}
+                        alt={productDisplay.name}
+                      />
                     </Link>
-                    <div className="checkout-right">
-                      <div>
-                        <h2>{productDisplay.name}</h2>
-                      </div>
-                      <div className="edit-cart">
-                        <h3>${price} </h3>
-                        <div className="cart-input">
-                          <form>
-                            <input
-                              type="number"
-                              name={item.productId}
-                              value={item.quantity}
-                              onChange={this.handleQuantityUpdate}
-                            />
-                          </form>
-                        </div>
-                        <Trash2
-                          className="delete-item"
-                          onClick={() =>
-                            this.handleDelete(
-                              this.props.userId,
-                              item.orderId,
-                              item.productId
-                            )
-                          }
-                        />
-                      </div>
-                    </div>
+                  </div>
+
+                  {/* input and delete */}
+                  <div className="addOrDel__data">
+                    <h3 className="checkout__name">{productDisplay.name}</h3>
+                    <span className="featured__preci">${price}</span>
+                    <form>
+                      <input
+                        type="number"
+                        name={item.productId}
+                        value={item.quantity}
+                        onChange={this.handleQuantityUpdate}
+                      />
+                    </form>
+
+                    <Trash2
+                      className="delete-item"
+                      onClick={() =>
+                        this.handleDelete(
+                          this.props.userId,
+                          item.orderId,
+                          item.productId
+                        )
+                      }
+                    />
                   </div>
                 </div>
               );
             })}
 
           {items && items.length > 0 ? (
-            <div>
-              <div className="button-container">
-                <div className="cart-total-div">
-                  <h2>
-                    Total: $
-                    {items && Math.round((total + Number.EPSILON) * 100) / 100}
-                  </h2>
-                </div>
+            <div className="checkout__chekcout">
+              <div className="total__container">
+                <h2>
+                  Total: $
+                  {items && Math.round((total + Number.EPSILON) * 100) / 100}
+                </h2>
               </div>
               <br />
 
-              <div className="button-container">
-                <Link to="/confirmation">
-                  <Button onClick={this.handleCheckout}>CHECKOUT</Button>
+              <div className="checkoutButton__container">
+                <Link
+                  to="/confirmation"
+                  className="button"
+                  onClick={this.handleCheckout}
+                >
+                  CHECKOUT
                 </Link>
               </div>
             </div>
           ) : (
-            <div className="checkout-div">
+            <div>
               <div className="back-to-shopping">
                 <Link to="/products">
                   <br />
@@ -275,7 +273,7 @@ class CheckoutCart extends Component {
             </div>
           )}
         </div>
-      </div>
+      </section>
     );
   }
 }

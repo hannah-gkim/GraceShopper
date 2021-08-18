@@ -14,7 +14,7 @@ export default function NewArrivals() {
         <div className="new__box">
           <img src="/img/new1.png" alt="" className="new__img" />
           <div className="new__link">
-            <Link to="/products/1" className="button">
+            <Link to="/products/25" className="button">
               VIEW PRODUCT
             </Link>
           </div>
@@ -23,7 +23,7 @@ export default function NewArrivals() {
         <div className="new__box">
           <img src="/img/new2.png" alt="" className="new__img" />
           <div className="new__link">
-            <Link to="/products/2" className="button">
+            <Link to="/products/26" className="button">
               VIEW PRODUCT
             </Link>
           </div>
@@ -32,7 +32,7 @@ export default function NewArrivals() {
         <div className="new__box">
           <img src="/img/new3.png" alt="" className="new__img" />
           <div className="new__link">
-            <Link to="/products" className="button">
+            <Link to="/products/27" className="button">
               VIEW PRODUCT
             </Link>
           </div>
@@ -41,7 +41,7 @@ export default function NewArrivals() {
         <div className="new__box">
           <img src="/img/new4.png" alt="" className="new__img" />
           <div className="new__link">
-            <Link to="/products" className="button">
+            <Link to="/products/28" className="button">
               VIEW PRODUCT
             </Link>
           </div>
@@ -50,7 +50,7 @@ export default function NewArrivals() {
         <div className="new__box">
           <img src="/img/new5.png" alt="" className="new__img" />
           <div className="new__link">
-            <Link to="/products" className="button">
+            <Link to="/products/29" className="button">
               VIEW PRODUCT
             </Link>
           </div>
@@ -59,7 +59,7 @@ export default function NewArrivals() {
         <div className="new__box">
           <img src="/img/new6.png" alt="" className="new__img" />
           <div className="new__link">
-            <Link to="/products" className="button">
+            <Link to="/products/30" className="button">
               VIEW PRODUCT
             </Link>
           </div>

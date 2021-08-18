@@ -10,8 +10,7 @@ const App = () => {
     <div>
       <Navbar />
       <Routes />
-      <NewsLetter />
-      <Sponsors />
+      
       <Footer />
     </div>
   );

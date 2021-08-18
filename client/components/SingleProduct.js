@@ -71,21 +71,22 @@ class SingleProduct extends Component {
     });
     price = formatter.format(price);
     return (
-      <div className="single-product-main-div">
+      <section className="checkout section">
         <div className="back-to-shopping">
           <Link to="/products">
             <ShoppingBag /> Back to Shopping
           </Link>
         </div>
-        <div className="signle-product-wrap">
+        <br />
+        <br />
+        <div className="checkout__container bd-grid">
           <div className="product-img">
-            <img width="300" height="300" src={product.imageUrl} />
+            <img src={product.imageUrl} className="single-image" />
           </div>
-          <div className="product-detail">
+          <div>
             <h3>name: {product.name}</h3>
             <h3>price: {`${price}`}</h3>
             <h3>description: {product.description}</h3>
-
             <select id="quantity" onChange={this.handleChange}>
               <option value="1">Qty:1</option>
               <option value="2">2</option>
@@ -98,17 +99,17 @@ class SingleProduct extends Component {
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-
-            <Link to="/addedToCart">
-              <div className="vsingle-page-button-di">
-                <Button type="button" onClick={this.handleAddToCart}>
-                  add to cart
-                </Button>
-              </div>
+            <br />
+            <Link
+              to="/addedToCart"
+              className="button"
+              onClick={this.handleAddToCart}
+            >
+              add to cart
             </Link>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

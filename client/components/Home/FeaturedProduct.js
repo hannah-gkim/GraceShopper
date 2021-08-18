@@ -15,9 +15,7 @@ export default function FeaturedProduct() {
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature1.png" alt="" className="featured__img" />
-
           </div>
-
 
           <div className="featured__data">
             <h3 className="featured__name">Headphone OneBlack</h3>

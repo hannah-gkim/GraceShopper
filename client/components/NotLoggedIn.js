@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function NotLoggedIn() {
   return (
-    <div className="guest-cart-main">
+    <section className="addedToCart section">
       <div className="guest-cart-inner">
         <Link to="/login">
           <img
@@ -13,11 +13,11 @@ export default function NotLoggedIn() {
           />
           <br />
 
-          <div className="please-login">
+          <div className="back-to-shopping">
             <LogIn /> Please Log in to Shop! :D
           </div>
         </Link>
       </div>
-    </div>
+    </section>
   );
 }
