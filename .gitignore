@@ -7,5 +7,5 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 
-/script/data.js
-/script/ProductsSeed.js
+# /script/data.js
+# /script/ProductsSeed.js

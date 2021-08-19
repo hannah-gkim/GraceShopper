@@ -15,18 +15,28 @@ export default function FeaturedProduct() {
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature1.png" alt="" className="featured__img" />
+            <div className="featured__link">
+              <Link to="/products/21" className="button">
+                VIEW PRODUCT
+              </Link>
+            </div>
           </div>
-
           <div className="featured__data">
             <h3 className="featured__name">Headphone OneBlack</h3>
             <span className="featured__preci">$29</span>
           </div>
         </div>
+
         {/* product2 */}
         <div className="featured__product">
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature2.png" alt="" className="featured__img" />
+            <div className="featured__link">
+              <Link to="/products/22" className="button">
+                VIEW PRODUCT
+              </Link>
+            </div>
           </div>
           <div className="featured__data">
             <h3 className="featured__name">Speaker Beats Pill</h3>
@@ -38,6 +48,11 @@ export default function FeaturedProduct() {
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature3.png" alt="" className="featured__img" />
+            <div className="featured__link">
+              <Link to="/products/23" className="button">
+                VIEW PRODUCT
+              </Link>
+            </div>
           </div>
           <div className="featured__data">
             <h3 className="featured__name">Apple Air Pod</h3>
@@ -49,6 +64,11 @@ export default function FeaturedProduct() {
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature4.png" alt="" className="featured__img" />
+            <div className="featured__link">
+              <Link to="/products/24" className="button">
+                VIEW PRODUCT
+              </Link>
+            </div>
           </div>
           <div className="featured__data">
             <h3 className="featured__name">SmartWatch F9 Black</h3>

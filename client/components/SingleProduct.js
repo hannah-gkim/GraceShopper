@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { getNewCartItem } from "../store/addToCart";
 import { Link } from "react-router-dom";
-import { Button } from "../style";
-
 import { ShoppingBag } from "react-feather";
 
 class SingleProduct extends Component {

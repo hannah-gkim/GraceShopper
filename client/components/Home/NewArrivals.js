@@ -13,6 +13,7 @@ export default function NewArrivals() {
         {/* new Arrival 1 */}
         <div className="new__box">
           <img src="/img/new1.png" alt="" className="new__img" />
+         
           <div className="new__link">
             <Link to="/products/25" className="button">
               VIEW PRODUCT
@@ -65,8 +66,7 @@ export default function NewArrivals() {
           </div>
         </div>
         {/* new Arrival 7 */}
-        {/* new Arrival 8 */}
-        {/* new Arrival 9 */}
+        
       </div>
     </section>
   );

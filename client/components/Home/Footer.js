@@ -62,35 +62,31 @@ function Footer({ isLoggedIn, handleClick }) {
         <div className="footer__box">
           <h3 className="footer__title">FOLLOW</h3>
           <a
-            href="https://www.facebook.com/"
+            href="https://github.com/hannah-gkim"
             target="_blank"
             className="footer__social"
           >
-            <box-icon
-              type="logo"
-              name="facebook-square"
-              color="#606060"
-            ></box-icon>
+            <box-icon type="logo" name="github" color="#606060"></box-icon>
           </a>
 
           <a
-            href="https://www.instagram.com/"
+            href="https://www.linkedin.com/in/hannah-gkim/"
             target="_blank"
             className="footer__social"
           >
             <box-icon
-              name="instagram-alt"
+              name="linkedin-square"
               type="logo"
               color="#606060"
             ></box-icon>
           </a>
 
           <a
-            href="https://twitter.com/"
+            href="https://www.youtube.com/channel/UC_Fa6yrspcGcdNWEZnJmz1g"
             target="_blank"
             className="footer__social"
           >
-            <box-icon name="twitter" type="logo" color="#606060"></box-icon>
+            <box-icon name="youtube" type="logo" color="#606060"></box-icon>
           </a>
         </div>
       </div>

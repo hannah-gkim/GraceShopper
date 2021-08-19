@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ShoppingBag, Trash2 } from "react-feather";
-import { Button } from "../style";
 
 let finalTotal = 0;
 class CheckoutCart extends Component {

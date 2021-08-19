@@ -7,10 +7,7 @@ export default function NotLoggedIn() {
     <section className="addedToCart section">
       <div className="guest-cart-inner">
         <Link to="/login">
-          <img
-            className="cat-img"
-            src="https://images.unsplash.com/photo-1557246565-8a3d3ab5d7f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
-          />
+          <img className="cat-img" src="/img/cat.jpg" />
           <br />
 
           <div className="back-to-shopping">
