@@ -1,7 +1,6 @@
 "use strict";
 const products = require("./ProductsSeed");
 const users = require("./UserSeed");
-//const productsData = require("./data");
 // const Product = require("../server/db/models/product");
 const {
   db,

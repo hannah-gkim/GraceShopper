@@ -14,20 +14,11 @@ class CheckoutCart extends Component {
       id: "",
       items: [],
       products: [],
-
-      /*
-       userId: state.auth.id,
-    isLoggedIn: !!state.auth.id,
-    items: state.cart.items,
-    products: state.cart.products,
-      */
     };
     this.findProduct = this.findProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-
     this.handleCheckout = this.handleCheckout.bind(this);
     this.handleQuantityUpdate = this.handleQuantityUpdate.bind(this);
-    //this.handleTotal = this.handleTotal.bind(this);
   }
 
   componentDidMount() {
@@ -74,13 +65,14 @@ class CheckoutCart extends Component {
     let productId;
     let currentPrice;
     let quantity;
+
     let newItems = this.state.items.map((item) => {
       orderId = item.orderId;
       productId = item.productId;
       if (item.productId == event.target.name) {
         item.quantity = Number(event.target.value);
         let productDisplay = this.findProduct(item.productId);
-        let price = (productDisplay.price * item.quantity) / 100;
+        let price = productDisplay.price * item.quantity;
         item.currentPrice = Number(price);
         currentPrice = parseInt(Number(price));
         quantity = Number(event.target.value);
@@ -89,7 +81,7 @@ class CheckoutCart extends Component {
       return item;
     });
 
-    console.log("newitem-->", this.state.items);
+    //console.log("newitem-->", this.state.items);
     this.setState({ ...this.state, items: newItems });
 
     this.handleUpdate(
@@ -190,12 +182,12 @@ class CheckoutCart extends Component {
             items.map((item) => {
               // console.log("item!!!-->", item);
               let productDisplay = findProduct(item.productId);
-              let price = (productDisplay.price * item.quantity) / 100;
+              let price = productDisplay.price * item.quantity;
 
               subtotal[productDisplay.id] = Number(
-                (productDisplay.price * item.quantity) / 100
+                productDisplay.price * item.quantity
               );
-              total += Number(productDisplay.price * item.quantity) / 100;
+              total += Number(productDisplay.price * item.quantity);
 
               return (
                 <div className="checkout__product" key={item.productId}>
@@ -212,7 +204,7 @@ class CheckoutCart extends Component {
                   {/* input and delete */}
                   <div className="addOrDel__data">
                     <h3 className="checkout__name">{productDisplay.name}</h3>
-                    <span className="featured__preci">${price}</span>
+                    <span className="featured__preci">${price.toFixed(2)}</span>
                     <form>
                       <input
                         type="number"
@@ -240,10 +232,8 @@ class CheckoutCart extends Component {
           {items && items.length > 0 ? (
             <div className="checkout__chekcout">
               <div className="total__container">
-                <h2>
-                  Total: $
-                  {items && Math.round((total + Number.EPSILON) * 100) / 100}
-                </h2>
+                {/* <h2>Total: ${items && Math.round(total + Number.EPSILON)}</h2> */}
+                <h2>Total: ${items && total.toFixed(2)}</h2>
               </div>
               <br />
 

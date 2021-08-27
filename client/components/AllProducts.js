@@ -25,7 +25,7 @@ class AllProducts extends React.Component {
     const { products } = this.props;
 
     const convert = (pric) => {
-      let price = (pric /= 100);
+      let price = pric;
       var formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",

@@ -11,6 +11,7 @@ module.exports = router;
 // needs req.body -> productId,  quantity,  userId
 router.post("/:id/addToCart", requireToken, async (req, res, next) => {
   try {
+    //if you have the route /student/:id, then the “id” property is available as req.params.id. 
     const { id } = req.params;
     if (req.user.id == id) {
       const product = await Product.findOne({
@@ -28,6 +29,7 @@ router.post("/:id/addToCart", requireToken, async (req, res, next) => {
           productId: req.body.newCartItem.productId,
         },
       });
+      // if item is already in the cart, we want to increase quantity on the same item
       if (item) {
         const newQuantity =
           parseInt(item.quantity, 10) +

@@ -32,6 +32,7 @@ class SingleProduct extends Component {
         quantity: this.state.quantity,
       };
       const userId = this.props.user.id;
+      //req.params
       this.props.createCartItem(userId, cartitem);
     } else {
       return <h2>Please Login to Shopp</h2>;
@@ -60,7 +61,7 @@ class SingleProduct extends Component {
     const product = this.props.singleProduct || {};
     // const quantity = this.props.singleProduct.quantity;
     // does cartitem need product id only or more?
-    let price = product.price / 100;
+    let price = product.price;
     var formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
