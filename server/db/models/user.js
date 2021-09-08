@@ -34,7 +34,7 @@ module.exports = User;
   to be more efficient, only deals with one instace. one request on response
 */
 User.prototype.correctPassword = function (candidatePwd) {
-  //returns boolean?
+  //returns promise.... returns boolean?
   //compare what is input and what is in the database
   return bcrypt.compare(candidatePwd, this.password);
 };
@@ -83,4 +83,4 @@ const hashPassword = async (user) => {
 
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
-User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+//User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));

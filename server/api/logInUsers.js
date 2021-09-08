@@ -124,9 +124,9 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     let updatedCart;
-    console.log("req.body--->", req.body);
+    //console.log("req.body--->", req.body);
     if (req.user.id == id) {
-      console.log(req.user.id, "---->", id);
+      //console.log(req.user.id, "---->", id);
       updatedCart = await CartItem.update(
         {
           quantity: req.body.quantity,
@@ -140,7 +140,7 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
           },
         }
       );
-      console.log("updatedCart-->", updatedCart);
+      //console.log("updatedCart-->", updatedCart);
       res.send(updatedCart);
     }
   } catch (error) {

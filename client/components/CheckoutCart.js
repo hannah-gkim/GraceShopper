@@ -135,7 +135,7 @@ class CheckoutCart extends Component {
       });
 
       let cart = JSON.parse(window.localStorage.getItem("cart"));
-      console.log("what is cart-->", cart);
+      //console.log("what is cart-->", cart);
     } else {
       // let cart = JSON.parse(window.localStorage.getItem("cart")).filter(
       //   (item) => {

@@ -75,8 +75,8 @@ function Footer({ isLoggedIn, handleClick }) {
             className="footer__social"
           >
             <box-icon
-              name="linkedin-square"
               type="logo"
+              name="linkedin-square"
               color="#606060"
             ></box-icon>
           </a>
