@@ -1,5 +1,4 @@
 //var faker = require("faker");
-
 const products = [
   {
     name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",

@@ -35,8 +35,10 @@ module.exports = User;
 */
 User.prototype.correctPassword = function (candidatePwd) {
   //returns boolean?
+  //compare what is input and what is in the database
   return bcrypt.compare(candidatePwd, this.password);
 };
+
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
@@ -54,6 +56,7 @@ User.authenticate = async function ({ username, password }) {
   token --> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0MjQ3MDg3fQ.JaN-EGEr3JPMD6kXDrrQRqO8orzLADvyiWpZDC1St1Y
   */
 };
+
 //finds user and return user
 User.findByToken = async function (token) {
   try {
