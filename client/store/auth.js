@@ -7,10 +7,12 @@ const TOKEN = "token";
 const SET_AUTH = "SET_AUTH";
 
 /*ACTION CREATORS*/
+//auth === res.data
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 
 /* THUNK CREATORS*/
 export const me = () => async (dispatch) => {
+  //get token from front...
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
     const res = await axios.get("/auth/me", {
@@ -23,6 +25,7 @@ export const me = () => async (dispatch) => {
   }
 };
 
+//create user or login
 export const authenticate =
   (username, email, password, method) => async (dispatch) => {
     try {
@@ -33,6 +36,7 @@ export const authenticate =
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
+      
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
     }

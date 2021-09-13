@@ -32,6 +32,7 @@ class SingleProduct extends Component {
         quantity: this.state.quantity,
       };
       const userId = this.props.user.id;
+      //req.params
       this.props.createCartItem(userId, cartitem);
     } else {
       return <h2>Please Login to Shopp</h2>;
@@ -60,49 +61,45 @@ class SingleProduct extends Component {
     const product = this.props.singleProduct || {};
     // const quantity = this.props.singleProduct.quantity;
     // does cartitem need product id only or more?
-    let price = product.price / 100;
-    var formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-    price = formatter.format(price);
+    let price = product.price;
     return (
-      <section className="checkout section">
+      <section className="single section">
         <div className="back-to-shopping">
           <Link to="/products">
             <ShoppingBag /> Back to Shopping
           </Link>
         </div>
         <br />
-        <br />
-        <div className="checkout__container bd-grid">
+
+        <div className="singleProduct__container">
           <div className="product-img">
             <img src={product.imageUrl} className="single-image" />
           </div>
-          <div>
-            <h3>name: {product.name}</h3>
-            <h3>price: {`${price}`}</h3>
-            <h3>description: {product.description}</h3>
-            <select id="quantity" onChange={this.handleChange}>
-              <option value="1">Qty:1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-            <br />
-            <Link
-              to="/addedToCart"
-              className="button"
-              onClick={this.handleAddToCart}
-            >
-              add to cart
-            </Link>
+
+          <div className="singleProduct__description">
+          <h3>name: {product.name}</h3>
+          <h3>price: ${`${price}`}</h3>
+          <h3>description: {product.description}</h3>
+          <select id="quantity" onChange={this.handleChange}>
+            <option value="1">Qty:1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          <br />
+          <Link
+            to="/addedToCart"
+            className="button"
+            onClick={this.handleAddToCart}
+          >
+            add to cart
+          </Link>
           </div>
         </div>
       </section>

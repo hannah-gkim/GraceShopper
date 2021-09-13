@@ -9,8 +9,8 @@ const CartItem = db.define("CartItem", {
     defaultValue: 1,
   },
   currentPrice: {
-    type: Sequelize.INTEGER,
-    //  type: Sequelize.DECIMAL(10, 2),
+    //type: Sequelize.DECIMAL,
+    type: Sequelize.DECIMAL(10, 2),
   },
 });
 

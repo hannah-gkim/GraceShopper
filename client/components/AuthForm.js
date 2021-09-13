@@ -1,20 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../store";
+import { authenticate } from "../store/auth";
 
-/**
- * COMPONENT
- */
 const AuthForm = (props) => {
+  //from below mapped state
   const { name, displayName, handleSubmit, error } = props;
-  let login = displayName !== "Login";
+  let login = displayName !== "Login"; //false ?
   return (
     <section className="authForm__container section">
       <form onSubmit={handleSubmit} name={name} className="authForm">
         <label htmlFor="username">
           <p>Username</p>
         </label>
-        <br />
+
         <input name="username" type="text" />
         <br />
         {login ? (
@@ -23,19 +21,17 @@ const AuthForm = (props) => {
               <br />
               <p>Email</p>
             </label>
-            <br />
             <input name="email" type="email" />
           </>
         ) : (
           <></>
         )}
-
         <label htmlFor="password">
           <br />
           <br />
           <p>Password</p>
         </label>
-        <br />
+
         <input name="password" type="password" />
         <br />
         <br />
@@ -66,7 +62,16 @@ const AuthForm = (props) => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
+
+/* state->
+auth: {}
+cart: {order: {…}, items: Array(0)}
+cartitem: {}
+products: []
+singleProduct: {}
+*/
 const mapLogin = (state) => {
+  //these will be used a props
   return {
     name: "login",
     displayName: "Login",
@@ -86,11 +91,13 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
+      //form name={name} signup or login from props
       const formName = evt.target.name;
       const username = evt.target.username.value;
       let email = "";
       if (evt.target.email) email = evt.target.email.value;
       const password = evt.target.password.value;
+      //thunk for creating or login, formanme = signup or login
       dispatch(authenticate(username, email, password, formName));
     },
   };

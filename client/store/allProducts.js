@@ -11,23 +11,6 @@ const gotProducts = (products) => {
     products,
   };
 };
-// const updatedQuantity=(products)=>{
-//     return {
-//         type: UPDATED_QUANTITY,
-//         products
-//     }
-// }
-//THUNK ACTIONS
-// export const updateQuantity=()=>{
-//     return async (dispatch) => {
-//         try {
-//             const { data } = await axios.get("/api/products");
-//             dispatch(gotProducts(data));
-//         } catch (error) {
-//             // return error
-//         }
-//     };
-// }
 
 export const getProducts = () => {
   return async (dispatch) => {
@@ -35,13 +18,14 @@ export const getProducts = () => {
       const { data } = await axios.get("/api/products");
       dispatch(gotProducts(data));
     } catch (error) {
-      // return error
+      return error;
     }
   };
 };
 
 const intialState = [];
-//REDUCER
+
+//Reducer
 export default function allProductsReducer(state = intialState, action) {
   switch (action.type) {
     case GOT_PRODUCTS:

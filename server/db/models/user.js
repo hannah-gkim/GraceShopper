@@ -34,9 +34,11 @@ module.exports = User;
   to be more efficient, only deals with one instace. one request on response
 */
 User.prototype.correctPassword = function (candidatePwd) {
-  //returns boolean?
+  //returns promise.... returns boolean?
+  //compare what is input and what is in the database
   return bcrypt.compare(candidatePwd, this.password);
 };
+
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
@@ -54,6 +56,7 @@ User.authenticate = async function ({ username, password }) {
   token --> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI0MjQ3MDg3fQ.JaN-EGEr3JPMD6kXDrrQRqO8orzLADvyiWpZDC1St1Y
   */
 };
+
 //finds user and return user
 User.findByToken = async function (token) {
   try {
@@ -80,4 +83,4 @@ const hashPassword = async (user) => {
 
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);
-User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+//User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));

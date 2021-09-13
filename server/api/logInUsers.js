@@ -11,6 +11,7 @@ module.exports = router;
 // needs req.body -> productId,  quantity,  userId
 router.post("/:id/addToCart", requireToken, async (req, res, next) => {
   try {
+    //if you have the route /student/:id, then the “id” property is available as req.params.id. 
     const { id } = req.params;
     if (req.user.id == id) {
       const product = await Product.findOne({
@@ -28,6 +29,7 @@ router.post("/:id/addToCart", requireToken, async (req, res, next) => {
           productId: req.body.newCartItem.productId,
         },
       });
+      // if item is already in the cart, we want to increase quantity on the same item
       if (item) {
         const newQuantity =
           parseInt(item.quantity, 10) +
@@ -122,9 +124,9 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
   try {
     const { id } = req.params;
     let updatedCart;
-    console.log("req.body--->", req.body);
+    //console.log("req.body--->", req.body);
     if (req.user.id == id) {
-      console.log(req.user.id, "---->", id);
+      //console.log(req.user.id, "---->", id);
       updatedCart = await CartItem.update(
         {
           quantity: req.body.quantity,
@@ -138,7 +140,7 @@ router.put("/:id/updateCart", requireToken, async (req, res, next) => {
           },
         }
       );
-      console.log("updatedCart-->", updatedCart);
+      //console.log("updatedCart-->", updatedCart);
       res.send(updatedCart);
     }
   } catch (error) {

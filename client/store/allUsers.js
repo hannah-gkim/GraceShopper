@@ -24,7 +24,7 @@ export const getUsers = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("/api/products");
-      console.log("this is the data --->", data);
+      //console.log("this is the data --->", data);
       dispatch(getUsers(data));
     } catch (error) {
       // return error

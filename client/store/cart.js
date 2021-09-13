@@ -61,7 +61,7 @@ export const getCart = (id, auth) => {
       } else {
         const { data } = await axios.get(`/api/products`);
         const items = JSON.parse(window.localStorage.getItem("cart"));
-        console.log("this is the items --->", items);
+        //console.log("this is the items --->", items);
         dispatch(gotCart(items, data));
         // let cart = window.localStorage.getItem("cart");
         // if (cart != null && cart != "null") {

@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// GET /products/:id
+// GET /products/:id  <- this /id is req.params
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -27,6 +27,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST api/products/
+//TODO: adding products to shopt
 router.post("/", requireToken, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
@@ -41,6 +42,7 @@ router.post("/", requireToken, async (req, res, next) => {
 });
 
 // DELETE /products/id
+//TODO: delete products from shop
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
@@ -57,6 +59,7 @@ router.delete("/:id", requireToken, async (req, res, next) => {
 });
 
 // PUT /products/id
+//TODO: edit prodcuts as a admin
 router.put("/:id", requireToken, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {

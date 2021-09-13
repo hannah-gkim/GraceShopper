@@ -10,8 +10,6 @@ function Footer({ isLoggedIn, handleClick }) {
       <div className="footer__container bd-grid">
         <div className="footer__box">
           <h3 className="footer__title">Les Choses de La Vie</h3>
-          {/* <p className="footer__deal">Products store</p> */}
-
           <a href="#">
             <img src="/img/footerstore1.png" alt="" className="footer__store" />
           </a>
@@ -19,7 +17,6 @@ function Footer({ isLoggedIn, handleClick }) {
             <img src="/img/footerstore2.png" alt="" className="footer__store" />
           </a>
         </div>
-
         {/* Explore */}
         <div className="footer__box">
           <h3 className="footer__title">EXPLORE</h3>
@@ -57,7 +54,6 @@ function Footer({ isLoggedIn, handleClick }) {
             )}
           </ul>
         </div>
-
         {/* Follow */}
         <div className="footer__box">
           <h3 className="footer__title">FOLLOW</h3>
@@ -75,8 +71,8 @@ function Footer({ isLoggedIn, handleClick }) {
             className="footer__social"
           >
             <box-icon
-              name="linkedin-square"
               type="logo"
+              name="linkedin-square"
               color="#606060"
             ></box-icon>
           </a>
