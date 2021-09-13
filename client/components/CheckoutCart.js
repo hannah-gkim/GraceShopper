@@ -210,8 +210,14 @@ class CheckoutCart extends Component {
                         type="number"
                         name={item.productId}
                         value={
-                          
-                          item.quantity}
+                          item.quantity === 0
+                            ? this.handleDelete(
+                                this.props.userId,
+                                item.orderId,
+                                item.productId
+                              )
+                            : item.quantity
+                        }
                         onChange={this.handleQuantityUpdate}
                       />
                     </form>

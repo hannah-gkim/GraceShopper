@@ -705,6 +705,7 @@ img {
   .singleProduct__container {
     display: flex;
     align-items: center;
+    margin: 0rem 7rem;
   }
   .single-image {
     display: block;
