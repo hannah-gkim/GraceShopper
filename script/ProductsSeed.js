@@ -1,4 +1,5 @@
 //var faker = require("faker");
+
 const products = [
   {
     name: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -9,7 +10,7 @@ const products = [
   },
   {
     name: "Mens Casual Premium Slim Fit T-Shirts ",
-    price: 22.30,
+    price: 22.3,
     description:
       "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
     imageUrl:
