@@ -47,6 +47,7 @@ class CheckoutCart extends Component {
         }
       );
     } else {
+      //TODO: if not logged in go to login page?
       window.localStorage.setItem("cart", JSON.stringify([]));
     }
   }
@@ -73,8 +74,8 @@ class CheckoutCart extends Component {
         item.quantity = Number(event.target.value);
         let productDisplay = this.findProduct(item.productId);
         let price = productDisplay.price * item.quantity;
-        item.currentPrice = Number(price);
-        currentPrice = parseInt(Number(price));
+        item.currentPrice = price;
+        currentPrice = price;
         quantity = Number(event.target.value);
         return item;
       }
@@ -176,7 +177,12 @@ class CheckoutCart extends Component {
     return (
       <section className="checkout section">
         <h2 className="section-title">Shopping Bag</h2>
-
+        <div className="back-to-shopping">
+          <Link to="/products">
+            <ShoppingBag /> Back to Shopping
+          </Link>
+        </div>
+        <br />
         <div className="checkout__container bd-grid">
           {items.lenght !== 0 &&
             items.map((item) => {
