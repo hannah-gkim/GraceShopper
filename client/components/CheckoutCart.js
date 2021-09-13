@@ -209,7 +209,9 @@ class CheckoutCart extends Component {
                       <input
                         type="number"
                         name={item.productId}
-                        value={item.quantity}
+                        value={
+                          
+                          item.quantity}
                         onChange={this.handleQuantityUpdate}
                       />
                     </form>

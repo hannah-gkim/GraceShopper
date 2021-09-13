@@ -672,7 +672,7 @@ img {
     margin-top: 19rem;
   }
   /*single product*/
-  .singleProduct__container {
+  /* .singleProduct__container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -685,9 +685,9 @@ img {
     width: 100%;
   }
   .singleProduct__description {
-    width: 50%;
+    width: 70%;
     padding: 0rem 3rem;
-  }
+  } */
 }
 /* computer */
 @media screen and (min-width: 1024px) {
