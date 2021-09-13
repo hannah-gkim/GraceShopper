@@ -30,6 +30,7 @@ class Routes extends Component {
             path="/signup"
             render={() => (isLoggedIn ? <Redirect to="/" /> : <Signup />)}
           />
+          {/* this is where req.params is decided? product id */}
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/products" component={AllProducts} />
           <Route
