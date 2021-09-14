@@ -177,11 +177,15 @@ class CheckoutCart extends Component {
     return (
       <section className="checkout section">
         <h2 className="section-title">Shopping Bag</h2>
-        <div className="back-to-shopping">
-          <Link to="/products">
-            <ShoppingBag /> Back to Shopping
-          </Link>
-        </div>
+        {items.length == 0 ? (
+          ""
+        ) : (
+          <div className="back-to-shopping">
+            <Link to="/products">
+              <ShoppingBag /> Back to Shopping
+            </Link>
+          </div>
+        )}
         <br />
         <div className="checkout__container bd-grid">
           {items.lenght !== 0 &&

@@ -530,6 +530,15 @@ img {
   grid-template-columns: repeat(1, 1fr);
   text-align: center;
 }
+/* =====NotLoggedIn=====*/
+.guest-cart-inner {
+  display: flex;
+  justify-content: center;
+}
+.cat-img {
+  width: 600px !important;
+  height: auto !important;
+}
 
 /* ===== MEDIA QUERIES=====*/
 
@@ -664,7 +673,7 @@ img {
   .addedToCart {
     margin: 7rem;
     margin-bottom: 22rem;
-    margin-top: 23rem;
+    /* margin-top: 23rem; */
   }
   .authForm__container {
     margin: 7rem;
