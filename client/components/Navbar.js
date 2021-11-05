@@ -6,7 +6,7 @@ import "boxicons";
 
 //  state,  thunk
 function Navbar({ isLoggedIn, handleClick }) {
-  const [isActive, setIsActive] = useState("false");
+  const [isActive, setIsActive] = useState("true");
 
   const toggleMenu = () => {
     setIsActive(!isActive);
@@ -24,7 +24,7 @@ function Navbar({ isLoggedIn, handleClick }) {
             Les Choses de La Vie
           </Link>
         </div>
-
+        {/* when active==='false' mobile side menu disappears*/}
         <div className={isActive ? "nav__menu" : "show"}>
           <ul className="nav__list">
             <li className="nav__item">
@@ -38,12 +38,12 @@ function Navbar({ isLoggedIn, handleClick }) {
                 Shop
               </Link>
             </li>
-
-            <li className="nav__item">
+            {/***************** cart *****************/}
+            {/* <li className="nav__item">
               <Link to={`/viewCart`} className="nav__link" onClick={hideMenu}>
                 Cart
               </Link>
-            </li>
+            </li> */}
 
             {isLoggedIn ? (
               <li className="nav__item" onClick={hideMenu}>
@@ -84,7 +84,7 @@ function Navbar({ isLoggedIn, handleClick }) {
 /* CONTAINER */
 const mapState = (state) => {
   return {
-    userId: state.auth.id,
+    // userId: state.auth.id,
     isLoggedIn: !!state.auth.id,
   };
 };
