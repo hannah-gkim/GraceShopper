@@ -92,7 +92,7 @@ function Navbar({ isLoggedIn, handleClick }) {
 /* CONTAINER */
 const mapState = (state) => {
   return {
-    // userId: state.auth.id,
+    userId: state.auth.id,
     isLoggedIn: !!state.auth.id,
   };
 };
