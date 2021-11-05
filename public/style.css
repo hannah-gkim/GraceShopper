@@ -142,6 +142,9 @@ img {
   justify-content: space-between;
   align-items: center;
 }
+.nav__logo {
+  font-weight: var(--font-bold);
+}
 .cart-menu-icon {
   display: flex;
 }
@@ -157,9 +160,6 @@ img {
 .nav__link:active {
   color: var(--first-color);
 }
-.nav__logo {
-  font-weight: var(--font-bold);
-}
 .nav__cart {
   font-size: 1.5rem;
   margin-right: var(--mb-2);
@@ -173,6 +173,8 @@ img {
 .active {
   color: var(--first-color);
 }
+/* when isActive=false
+when click mobile menu icon shows icon */
 .show {
   position: fixed;
   top: var(--header-height);
@@ -181,7 +183,6 @@ img {
   height: 100%;
   padding: 2rem;
   background-color: var(--white-color);
-
   transition: 0.5s;
 }
 
@@ -562,6 +563,7 @@ img {
 }
 /* average phone */
 @media screen and (max-width: 767px) {
+  /* this style hides horizontal navBar*/
   .nav__menu {
     position: fixed;
     top: var(--header-height);
