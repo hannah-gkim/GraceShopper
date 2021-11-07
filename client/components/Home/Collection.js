@@ -4,9 +4,9 @@ export default function Collection() {
   return (
     <section className="collection section">
       <div className="collection__container bd-grid">
+        {/********** Men's collection **********/}
         <div className="collection__box">
           <img src="/img/backpackMan.png" alt="" className="collection__img" />
-
           <div className="collection__data">
             <h2 className="collection__title">
               <span className="collection__subtitle">Men</span>
@@ -18,7 +18,7 @@ export default function Collection() {
             </a>
           </div>
         </div>
-
+        {/********** Women's collection **********/}
         <div className="collection__box">
           <div className="collection__data">
             <h2 className="collection__title">

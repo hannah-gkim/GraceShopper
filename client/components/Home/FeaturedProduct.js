@@ -12,6 +12,7 @@ export default function FeaturedProduct() {
       <div className="featured__container bd-grid">
         {/* product 1 */}
         <div className="featured__product">
+          {/* box */}
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature1.png" alt="" className="featured__img" />
@@ -29,6 +30,7 @@ export default function FeaturedProduct() {
 
         {/* product2 */}
         <div className="featured__product">
+          {/* box */}
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature2.png" alt="" className="featured__img" />
@@ -45,6 +47,7 @@ export default function FeaturedProduct() {
         </div>
         {/* product3 */}
         <div className="featured__product">
+          {/* box */}
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature3.png" alt="" className="featured__img" />
@@ -61,6 +64,7 @@ export default function FeaturedProduct() {
         </div>
         {/* product 4 */}
         <div className="featured__product">
+          {/* box */}
           <div className="featured__box">
             <div className="featured__new">NEW</div>
             <img src="/img/feature4.png" alt="" className="featured__img" />

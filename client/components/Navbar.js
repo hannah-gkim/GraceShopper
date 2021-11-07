@@ -32,7 +32,6 @@ function Navbar({ isLoggedIn, handleClick }) {
           </div>
           {/* onClick of menu, isActive=false */}
           <div className={isActive ? "nav__menu" : "show"}>
-            {console.log(isActive)}
             <ul className="nav__list">
               <li className="nav__item">
                 <Link to="/" className="nav__link" onClick={hideMenu}>

@@ -189,6 +189,13 @@ when click mobile menu icon shows icon */
 /*===== HOME =====*/
 .home {
   background-color: var(--gray-color);
+  height: auto;
+}
+.home__img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 260px;
 }
 .home__container {
   height: calc(100vh --header-height);
@@ -206,12 +213,7 @@ when click mobile menu icon shows icon */
 .home__title span {
   font-size: var(--h1-font-size);
 }
-.home__img {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 260px;
-}
+
 /*BUTTONS*/
 .button {
   display: inline-block;
@@ -226,7 +228,6 @@ when click mobile menu icon shows icon */
   background-color: var(--first-color-alt);
 }
 /*===== COLLECTION =====*/
-
 .collection__container {
   row-gap: 2rem;
 }
@@ -280,7 +281,15 @@ when click mobile menu icon shows icon */
   background-color: var(--gray-color);
   overflow: hidden;
 }
-
+.featured__new {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--first-color);
+  color: var(--white-color);
+  padding: 0.3rem 0.75rem;
+  font-size: var(--small-font-size);
+}
 .featured__link {
   position: absolute;
   bottom: -100%;
@@ -292,19 +301,8 @@ when click mobile menu icon shows icon */
   background: rgba(229, 89, 71, 0.2);
   transition: 0.3s;
 }
-
 .featured__box:hover .featured__link {
   bottom: 0;
-}
-
-.featured__new {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: var(--first-color);
-  color: var(--white-color);
-  padding: 0.3rem 0.75rem;
-  font-size: var(--small-font-size);
 }
 .featured__data {
   text-align: center;
@@ -349,10 +347,6 @@ when click mobile menu icon shows icon */
   background-color: var(--gray-color);
   overflow: hidden;
 }
-.new__box:hover .new__link {
-  bottom: 0;
-}
-
 .new__link {
   position: absolute;
   bottom: -100%;
@@ -363,6 +357,9 @@ when click mobile menu icon shows icon */
   align-items: center;
   background: rgba(229, 89, 71, 0.2);
   transition: 0.3s;
+}
+.new__box:hover .new__link {
+  bottom: 0;
 }
 /*===== NEWSLETTER =====*/
 .newsletter {
@@ -549,7 +546,8 @@ when click mobile menu icon shows icon */
     margin-top: 0;
   }
   .home__img {
-    padding-top: 42%;
+    /* padding-top: 42%; */
+    padding-top: 29%;
     padding-left: 10%;
     width: 70%;
   }
@@ -580,6 +578,7 @@ when click mobile menu icon shows icon */
   }
   .home__img {
     top: 42.5%;
+    /* top: 45%; */
   }
 
   .home {
@@ -641,6 +640,9 @@ when click mobile menu icon shows icon */
   }
   .collection {
     margin-top: 10%;
+  }
+  .collection__title {
+    font-size: 20px;
   }
   .collection__container {
     grid-template-columns: repeat(2, 1fr);

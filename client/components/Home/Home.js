@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Collection from "./Collection";
 import FeaturedProduct from "./FeaturedProduct";
@@ -7,10 +7,9 @@ import Offer from "./Offer";
 import NewArrivals from "./NewArrivals";
 import NewsLetter from "./NewsLetter";
 import Sponsors from "./Sponsors";
-// import Footer from "./Footer";
 
-export const Home = (props) => {
-  const { username } = props;
+export const Home = () => {
+  // const { username } = props;
   return (
     <>
       <div className="home">
@@ -20,30 +19,30 @@ export const Home = (props) => {
               FREE <br />
               <span>Shipping</span>
             </h1>
-
             <Link to="/products" className="button">
               GO SHOPPING
             </Link>
           </div>
-
-          <img src="/img/home.png" alt="" className="home__img" />
         </div>
+        <img src="/img/home.png" alt="" className="home__img" />
       </div>
+
       <Collection />
       <FeaturedProduct />
       <Offer />
       <NewArrivals />
       <NewsLetter />
       <Sponsors />
-      {/* <Footer /> */}
     </>
   );
 };
 
-const mapState = (state) => {
-  return {
-    username: state.auth.username,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     username: state.auth.username,
+//   };
+// };
 
-export default connect(mapState)(Home);
+// export default connect(mapState)(Home);
+
+export default Home;
