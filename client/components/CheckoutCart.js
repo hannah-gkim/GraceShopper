@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useEffect } from "react";
+import { GlobalContext } from "../store/GlobalState";
 import { getCart, removeItem, updateCartItem } from "../store/cart";
 import { getProducts } from "../store/allProducts";
 import { connect } from "react-redux";

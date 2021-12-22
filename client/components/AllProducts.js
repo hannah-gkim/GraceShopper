@@ -1,17 +1,16 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext, allProducts } from "../store/GlobalState";
+import { GlobalContext } from "../store/GlobalState";
 import { Link } from "react-router-dom";
 
 export default function AllProducts() {
-  const { products, allProducts } = useContext(GlobalContext);
+  const { products, getAllProducts } = useContext(GlobalContext);
 
   useEffect(() => {
-    allProducts();
+    getAllProducts();
   }, []);
 
   return (
     <section className="allProduct section">
-      {console.log("getTransactions--->", products)}
       <h2 className="section-title">VIEW ALL</h2>
       <div className="featured__container bd-grid allProduct__container">
         {products
