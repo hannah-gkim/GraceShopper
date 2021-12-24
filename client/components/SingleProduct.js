@@ -5,7 +5,7 @@ import { ShoppingBag } from "react-feather";
 
 export default function SingleProduct() {
   const [quantity, setQuantity] = useState(1);
-  const { getNewCartItem, auth, singleProduct, getSingleProduct, me } =
+  const { getNewCartItem, auth, singleProduct, getSingleProduct, me, getCart } =
     useContext(GlobalContext);
   const { id } = useParams();
 
@@ -16,6 +16,10 @@ export default function SingleProduct() {
   useEffect(() => {
     getSingleProduct(id);
   }, [id]);
+
+  // useEffect(() => {
+  //   getCart(auth.id, !!auth.id);
+  // }, []);
 
   function handleChange(event) {
     event.preventDefault();

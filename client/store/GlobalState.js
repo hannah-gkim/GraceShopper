@@ -8,7 +8,7 @@ const initialState = {
   singleProduct: {},
   products: [],
   cartitem: {},
-  cart: { order: {}, items: [] },
+  cart: {},
 };
 
 export const GlobalContext = createContext(initialState);
@@ -39,6 +39,7 @@ export const GlobalProvider = ({ children }) => {
   async function getAllProducts() {
     try {
       const { data } = await axios.get("/api/products");
+
       dispatch({
         type: "GOT_PRODUCTS",
         payload: data,
@@ -82,6 +83,27 @@ export const GlobalProvider = ({ children }) => {
       console.log(error);
     }
   }
+  //(userId, isLoggedIn)
+  async function getCart(id, auth) {
+    try {
+      const token = window.localStorage.getItem("token");
+      if (auth) {
+        const { data } = await axios.get(`/api/users/${id}/viewCart`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        // console.log("itmes-->", data.items);
+        // console.log("products->", data.products);
+        dispatch({
+          type: "GOT_CART",
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <GlobalContext.Provider
@@ -95,6 +117,7 @@ export const GlobalProvider = ({ children }) => {
         getNewCartItem,
         getSingleProduct,
         me,
+        getCart,
       }}
     >
       {children}
