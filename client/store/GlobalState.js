@@ -4,7 +4,7 @@ import axios from "axios";
 import auth from "./auth";
 
 const initialState = {
-  auth,
+  auth: {},
   singleProduct: {},
   products: [],
   cartitem: {},
@@ -17,12 +17,31 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //actions / thunks
+  async function me() {
+    const token = window.localStorage.getItem("token");
+    try {
+      if (token) {
+        const { data } = await axios.get("/auth/me", {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch({
+          type: "SET_AUTH",
+          payload: data,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function getAllProducts() {
     try {
-      const res = await axios.get("/api/products");
+      const { data } = await axios.get("/api/products");
       dispatch({
         type: "GOT_PRODUCTS",
-        payload: res.data,
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -32,7 +51,7 @@ export const GlobalProvider = ({ children }) => {
   async function getNewCartItem(userId, newCartItem) {
     try {
       const token = window.localStorage.getItem("token");
-      const res = await axios.post(
+      const { data } = await axios.post(
         `/api/users/${userId}/addToCart`,
         {
           newCartItem,
@@ -45,19 +64,19 @@ export const GlobalProvider = ({ children }) => {
       );
       dispatch({
         type: "GOT_NEW_CART_ITEM",
-        payload: res.data,
+        payload: data,
       });
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function fetchSingleProduct(id) {
+  async function getSingleProduct(id) {
     try {
-      const res = await axios.get(`/api/products/${id}`);
+      const { data } = await axios.get(`/api/products/${id}`);
       dispatch({
         type: "GET_SINGLE_PRODUCT",
-        payload: res.data,
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -74,7 +93,8 @@ export const GlobalProvider = ({ children }) => {
         cart: state.cart,
         getAllProducts,
         getNewCartItem,
-        fetchSingleProduct,
+        getSingleProduct,
+        me,
       }}
     >
       {children}

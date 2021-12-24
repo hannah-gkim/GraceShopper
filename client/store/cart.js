@@ -52,12 +52,6 @@ export const getCart = (id, auth) => {
           },
         });
         dispatch(gotCart(data.items, data.products));
-
-        // if (cart != null && cart != "null") {
-        //   dispatch(gotCart(cart));
-        // } else {
-        //   dispatch(gotCart({ order: {}, items: [] }));
-        // }
       } else {
         const { data } = await axios.get(`/api/products`);
         const items = JSON.parse(window.localStorage.getItem("cart"));

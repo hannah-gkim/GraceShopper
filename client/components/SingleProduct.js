@@ -5,17 +5,20 @@ import { ShoppingBag } from "react-feather";
 
 export default function SingleProduct() {
   const [quantity, setQuantity] = useState(1);
-  const { getNewCartItem, auth, singleProduct, fetchSingleProduct } =
+  const { getNewCartItem, auth, singleProduct, getSingleProduct, me } =
     useContext(GlobalContext);
   const { id } = useParams();
 
   useEffect(() => {
-    fetchSingleProduct(id);
+    me();
+  }, []);
+
+  useEffect(() => {
+    getSingleProduct(id);
   }, [id]);
 
   function handleChange(event) {
     event.preventDefault();
-    // console.log("this is quantity", event.target.value);
     const quantity = event.target.value || 1;
     setQuantity(quantity);
   }
@@ -26,8 +29,8 @@ export default function SingleProduct() {
         productId: id, //productID
         quantity: quantity,
       };
-      const userId = auth.user.id;
-      //req.params
+      const userId = auth.id;
+      // console.log("userId:", userId, "cartItem:", cartitem);
       getNewCartItem(userId, cartitem);
     } else {
       return <h2>Please Login to Shop</h2>;
